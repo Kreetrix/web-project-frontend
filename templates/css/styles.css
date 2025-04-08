@@ -1,0 +1,91 @@
+.burger-bg {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1899&q=80') center/cover no-repeat;
+    color: white;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+header {
+    background-color: #e67e22;
+}
+
+.text-yellow-600 {
+    color: #e67e22;
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.animate-fadeIn {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.custom-card {
+    transition: all 0.3s ease;
+    border: none;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bg-red-600 {
+    background-color: #e74c3c;
+}
+
+.bg-red-600:hover {
+    background-color: #c0392b;
+}
+
+.border-yellow-200 {
+    border-color: #fde68a;
+}
+
+footer {
+    background-color: #2c3e50;
+}
+
+@media (max-width: 768px) {
+    .burger-bg {
+        padding: 4rem 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+.text-gray-600 {
+    color: #4a5568;
+}
+
+.text-green-600 {
+    color: #27ae60;
+}

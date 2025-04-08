@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hallinta - Burger Palace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body class="bg-gray-50">
+    <header class="bg-yellow-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold">🍔 Burger Palace - Hallinta</h1>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="index.html" class="hover:text-yellow-200">Etusivu</a></li>
+                        <li><a href="menu.html" class="hover:text-yellow-200">Menu</a></li>
+                        <li><a href="order.html" class="hover:text-yellow-200">Tilaus</a></li>
+                        <li><a href="login.html" class="hover:text-yellow-200">Kirjaudu</a></li>
+                        <li><a href="#" class="font-bold text-yellow-200 border-b-2 border-yellow-200">Hallinta</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <section class="bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-3xl font-bold mb-6 text-yellow-600">Hallintapaneeli</h2>
+
+            <div class="border-b border-gray-200 mb-6">
+                <nav class="flex space-x-8">
+                    <button data-tab="menu"
+                        class="tab-btn py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                        Ruokalista
+                    </button>
+                    <button data-tab="orders"
+                        class="tab-btn py-4 px-1 border-b-2 font-medium text-sm active border-yellow-500 text-yellow-600">
+                        Tilaukset
+                    </button>
+                    <button data-tab="users"
+                        class="tab-btn py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                        Käyttäjät
+                    </button>
+                    <button data-tab="stats"
+                        class="tab-btn py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                        Tilastot
+                    </button>
+                </nav>
+            </div>
+
+            <div id="menu-tab" class="tab-content hidden">
+                <!-- Ruokalistan hallinta (sama kuin aiemmin) -->
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-semibold text-gray-800">Muokkaa ruokalistaa</h3>
+                    <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center">
+                        <i class="fas fa-plus mr-1"></i>
+                        Lisää uusi tuote
+                    </button>
+                </div>
+
+                <div id="menu-editor" class="space-y-4">
+                    <!-- Ruokalistan muokkauslomake -->
+                </div>
+            </div>
+
+            <div id="orders-tab" class="tab-content active">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-semibold text-gray-800">Hallitse tilauksia</h3>
+                    <div class="flex space-x-4">
+                        <div class="relative">
+                            <select id="order-filter"
+                                class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8">
+                                <option value="all">Kaikki tilaukset</option>
+                                <option value="new">Uudet tilaukset</option>
+                                <option value="preparing">Valmistumassa</option>
+                                <option value="ready">Valmiit noudettavaksi</option>
+                                <option value="delivering">Toimitettavana</option>
+                                <option value="completed">Suoritetut</option>
+                                <option value="cancelled">Peruutetut</option>
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center">
+                            <i class="fas fa-sync-alt mr-1"></i>
+                            Päivitä
+                        </button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Tilausnro
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Aika
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Asiakas
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Sisältö
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Summa
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Tila
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Toiminnot
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-list" class="bg-white divide-y divide-gray-200">
+                            <!-- Tilaus 1 -->
+                            <tr class="order-row" data-status="new">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    #12345
+                                    <span class="block text-xs text-gray-500">Nouto</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    15.11.2023 18:30
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full" src="https://i.pravatar.cc/150?img=5"
+                                                alt="">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Matti Meikäläinen</div>
+                                            <div class="text-sm text-gray-500">+358 40 123 4567</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="bg-gray-100 px-2 py-1 rounded text-xs">Classic Burger x2</span>
+                                        <span class="bg-gray-100 px-2 py-1 rounded text-xs">Coca-Cola x1</span>
+                                        <span class="bg-gray-100 px-2 py-1 rounded text-xs">Ranskalaiset x1</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    24,90€
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="relative">
+                                        <select
+                                            class="status-select block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm rounded-md"
+                                            data-order-id="12345">
+                                            <option value="new" selected>Uusi tilaus</option>
+                                            <option value="preparing">Valmistumassa</option>
+                                            <option value="ready">Valmis noudettavaksi</option>
+                                            <option value="completed">Noudettu</option>
+                                            <option value="cancelled">Peruutettu</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                                    <button class="text-yellow-600 hover:text-yellow-900" title="Muokkaa">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-blue-600 hover:text-blue-900" title="Lähetä ilmoitus">
+                                        <i class="fas fa-bell"></i>
+                                    </button>
+                                    <button class="text-red-600 hover:text-red-900" title="Poista">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <!-- Tilaus 2 -->
+                            <tr class="order-row" data-status="preparing">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    #12344
+                                    <span class="block text-xs text-gray-500">Kotiinkuljetus</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    15.11.2023 18:15
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full" src="https://i.pravatar.cc/150?img=6"
+                                                alt="">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Liisa Järvinen</div>
+                                            <div class="text-sm text-gray-500">+358 40 765 4321</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="bg-gray-100 px-2 py-1 rounded text-xs">Chicken Burger x1</span>
+                                        <span class="bg-gray-100 px-2 py-1 rounded text-xs">Veggie Burger x1</span>
+                                        <span class="bg-gray-100 px-2 py-1 rounded text-xs">Fanta x2</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    32,50€
+                                    <span class="block text-xs text-yellow-600">+3,50€ toimitus</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="relative">
+                                        <select
+                                            class="status-select block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm rounded-md"
+                                            data-order-id="12344">
+                                            <option value="new">Uusi tilaus</option>
+                                            <option value="preparing" selected>Valmistumassa</option>
+                                            <option value="ready">Valmis toimitettavaksi</option>
+                                            <option value="delivering">Toimitettavana</option>
+                                            <option value="completed">Toimitettu</option>
+                                            <option value="cancelled">Peruutettu</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                                    <button class="text-yellow-600 hover:text-yellow-900" title="Muokkaa">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-blue-600 hover:text-blue-900" title="Lähetä ilmoitus">
+                                        <i class="fas fa-bell"></i>
+                                    </button>
+                                    <button class="text-red-600 hover:text-red-900" title="Poista">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <!-- Tilaus 3 -->
+                            <tr class="order-row" data-status="ready">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    #12343
+                                    <span class="block text-xs text-gray-500">Nouto</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    15.11.2023 17:45
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full" src="https://i.pravatar.cc/150?img=7"
+                                                alt="">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Antti Virtanen</div>
+                                            <div class="text-sm text-gray-500">+358 40 987 6543</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="bg-gray-100 px-2 py-1 rounded text-xs">Double Cheese Burger
+                                            x1</span>
+                                        <span class="bg-gray-100 px-2 py-1 rounded text-xs">Coca-Cola Zero x1</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    18,90€
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="relative">
+                                        <select
+                                            class="status-select block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm rounded-md"
+                                            data-order-id="12343">
+                                            <option value="new">Uusi tilaus</option>
+                                            <option value="preparing">Valmistumassa</option>
+                                            <option value="ready" selected>Valmis noudettavaksi</option>
+                                            <option value="completed">Noudettu</option>
+                                            <option value="cancelled">Peruutettu</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                                    <button class="text-yellow-600 hover:text-yellow-900" title="Muokkaa">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-blue-600 hover:text-blue-900" title="Lähetä ilmoitus">
+                                        <i class="fas fa-bell"></i>
+                                    </button>
+                                    <button class="text-red-600 hover:text-red-900" title="Poista">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="status-modal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+                    <div
+                        class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                        </div>
+                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                            aria-hidden="true">&#8203;</span>
+                        <div
+                            class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4" id="modal-title">
+                                    Vahvista tilauksen tilan muutos
+                                </h3>
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500">
+                                        Olet muuttamassa tilauksen <span id="order-id" class="font-bold"></span> tilaa
+                                        <span id="from-status" class="font-bold text-yellow-600"></span> →
+                                        <span id="to-status" class="font-bold text-green-600"></span>.
+                                    </p>
+                                    <div class="mt-4">
+                                        <label for="status-message"
+                                            class="block text-sm font-medium text-gray-700">Viesti asiakkaalle
+                                            (valinnainen):</label>
+                                        <textarea id="status-message" rows="3"
+                                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                <button type="button" id="confirm-status-change"
+                                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                    Vahvista muutos
+                                </button>
+                                <button type="button" id="cancel-status-change"
+                                    class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                    Peruuta
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="users-tab" class="tab-content hidden">
+            </div>
+
+            <div id="stats-tab" class="tab-content hidden">
+                <h3 class="text-2xl font-semibold mb-6 text-gray-800">Myyntitilastot</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow border-l-4 border-yellow-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Tänään myyty</p>
+                                <p class="text-2xl font-semibold text-gray-900">24</p>
+                            </div>
+                            <div class="bg-yellow-100 p-3 rounded-full">
+                                <i class="fas fa-shopping-bag text-yellow-600"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Tämän viikon myynti</p>
+                                <p class="text-2xl font-semibold text-gray-900">876,50€</p>
+                            </div>
+                            <div class="bg-green-100 p-3 rounded-full">
+                                <i class="fas fa-euro-sign text-green-600"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow border-l-4 border-blue-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Keskimääräinen tilaus</p>
+                                <p class="text-2xl font-semibold text-gray-900">23,80€</p>
+                            </div>
+                            <div class="bg-blue-100 p-3 rounded-full">
+                                <i class="fas fa-receipt text-blue-600"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h4 class="text-lg font-medium text-gray-900 mb-4">Suosituimmat tuotteet</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-700">Classic Burger</span>
+                                <span class="text-sm font-medium text-gray-700">42 kpl</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-yellow-600 h-2.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-700">Chicken Burger</span>
+                                <span class="text-sm font-medium text-gray-700">28 kpl</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-yellow-600 h-2.5 rounded-full" style="width: 50%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-700">Coca-Cola</span>
+                                <span class="text-sm font-medium text-gray-700">35 kpl</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-yellow-600 h-2.5 rounded-full" style="width: 62%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h4 class="text-lg font-medium text-gray-900 mb-4">Tilaukset viimeisen 7 päivän aikana</h4>
+                    <div class="h-64">
+                        <!-- Tähän kaavio (käytä Chart.js:tä tai vastaavaa) -->
+                        <div class="flex items-center justify-center h-full bg-gray-100 rounded">
+                            <p class="text-gray-500">Myyntikaavio tulee tähän</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2025 Burger Palace - Hallintapaneeli</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active classes from all tabs and buttons
+                document.querySelectorAll('.tab-btn').forEach(b => {
+                    b.classList.remove('active', 'border-yellow-500', 'text-yellow-600');
+                    b.classList.add('border-transparent', 'text-gray-500');
+                });
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+
+                // Add active classes to clicked tab
+                btn.classList.add('active', 'border-yellow-500', 'text-yellow-600');
+                btn.classList.remove('border-transparent', 'text-gray-500');
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(`${tabId}-tab`).classList.remove('hidden');
+            });
+        });
+
+        // Tilauksen tilan muutoslogiikka
+        document.querySelectorAll('.status-select').forEach(select => {
+            select.addEventListener('change', function () {
+                const orderId = this.getAttribute('data-order-id');
+                const fromStatus = this.previousValue || this.options[this.selectedIndex].text;
+                const toStatus = this.options[this.selectedIndex].text;
+                const toValue = this.value;
+
+                // Päivitä modal
+                document.getElementById('order-id').textContent = '#' + orderId;
+                document.getElementById('from-status').textContent = fromStatus;
+                document.getElementById('to-status').textContent = toStatus;
+
+                // Tallenna nykyinen arvo, jotta voidaan palauttaa jos peruutetaan
+                this.previousValue = toStatus;
+
+                // Näytä modal
+                document.getElementById('status-modal').classList.remove('hidden');
+
+                // Vahvistuspainikkeen toiminta
+                document.getElementById('confirm-status-change').onclick = () => {
+                    // Tässä voisi olla AJAX-kutsu backendiin
+                    const message = document.getElementById('status-message').value;
+                    console.log(`Tilauksen ${orderId} tila muutettu: ${fromStatus} → ${toStatus}. Viesti: ${message}`);
+
+                    // Päivitä taulukon rivi uuden tilan mukaan
+                    const row = this.closest('tr');
+                    row.setAttribute('data-status', toValue);
+
+                    // Sulje modal
+                    document.getElementById('status-modal').classList.add('hidden');
+                    document.getElementById('status-message').value = '';
+                };
+
+                // Peruutuspainikkeen toiminta
+                document.getElementById('cancel-status-change').onclick = () => {
+                    // Palauta alkuperäinen arvo
+                    for (let i = 0; i < this.options.length; i++) {
+                        if (this.options[i].text === fromStatus) {
+                            this.selectedIndex = i;
+                            break;
+                        }
+                    }
+
+                    // Sulje modal
+                    document.getElementById('status-modal').classList.add('hidden');
+                    document.getElementById('status-message').value = '';
+                };
+            });
+        });
+
+        // Suodatuslogiikka
+        document.getElementById('order-filter').addEventListener('change', function () {
+            const filterValue = this.value;
+            const rows = document.querySelectorAll('.order-row');
+
+            rows.forEach(row => {
+                if (filterValue === 'all' || row.getAttribute('data-status') === filterValue) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
