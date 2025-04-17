@@ -1,4 +1,4 @@
-import InfoCard from '../components/InfoCards';
+import InfoCard from './InfoCards';
 
 const InfoSection = () => {
     const cardsData = [
