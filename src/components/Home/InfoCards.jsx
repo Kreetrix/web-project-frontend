@@ -5,8 +5,7 @@ const InfoCard = ({ title, lines }) => {
                 <h3 className="text-xl font-bold mb-3 text-yellow-600">{title}</h3>
                 {lines.map((line, index) => (
                     <p key={index} className="mb-1">{line}</p>
-                ))};
-
+                ))}
             </div>
 
         </>
