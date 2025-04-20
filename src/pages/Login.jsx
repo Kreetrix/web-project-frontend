@@ -26,12 +26,12 @@ export default function LoginPage() {
 
     return (
         <div className="min-h-screen relative bg-gray-800">
-            <div className="absolute inset-0 bg-cover bg-center bg-opacity-70"
+            <div
+                className="absolute inset-0 bg-cover bg-center"
                 style={{
-                    backgroundImage: "url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1899&q=80')",
-                    backgroundSize: '75%',
-                    backgroundRepeat: "no-repeat"
-                }}></div>
+                    backgroundImage: "url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1899&q=80')"
+                }}
+            ></div>
 
             <div className="flex items-center justify-center min-h-screen relative z-10">
                 <div className="bg-white bg-opacity-90 p-8 rounded-2xl shadow-2xl w-full max-w-md animate-fadeIn">

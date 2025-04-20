@@ -7,7 +7,7 @@ export default function Header() {
             <div className="container mx-auto px-5 py-4 flex flex-col md:flex-row items-center justify-between">
                 <h1 className="text-2xl font-bold">🍔 Burger Palace</h1>
 
-                <nav className="ml-auto">
+                <nav className="ml-auto py-2">
 
                     <div className="navbar-strip inline-flex">
 

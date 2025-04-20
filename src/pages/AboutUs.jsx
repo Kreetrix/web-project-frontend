@@ -6,7 +6,7 @@ export default function AboutUs() {
             <main className="px-6 py-12 max-w-5xl mx-auto space-y-12">
                 {/* Historia */}
                 <section>
-                    <h2 className="text-3xl font-semibold mb-4">Meidän tarina</h2>
+                    <h2 className="text-3xl font-semibold mb-4 ">Meidän tarina</h2>
                     <p className="text-lg leading-relaxed">
                         Burger Palace perustettiin vuonna 2020 intohimosta laadukkaisiin burgereihin. Alussa olimme pieni katukeittiö, mutta rakkautemme ruokaan ja asiakaspalveluun kasvatti meistä yhden Suomen rakastetuimmista burgeribrändeistä.
                         Tänään meillä on ravintoloita ympäri Suomea, ja jokainen niistä tarjoaa käsintehtyjä, mehukkaita burgereita parhaista raaka-aineista.
