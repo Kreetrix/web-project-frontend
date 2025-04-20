@@ -39,7 +39,7 @@ const Cart = ({ cartItems, removeFromCart }) => {
                     <span>{calculateTotal()}€</span>
                 </div>
 
-                <button className="w-full bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-bold py-3 px-4 rounded-lg mt-6 shadow-md transition-all duration-300">
+                <button className="w-full bg-gradient-to-r from-orange-300 via-orange-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-700 text-white font-bold py-3 px-4 rounded-lg mt-6 shadow-md transition-all duration-300">
                     Maksa tilaus
                 </button>
             </div>

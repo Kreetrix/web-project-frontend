@@ -3,6 +3,9 @@ import Home from './pages/Home';
 import Layout from "./components/Layout";
 import Menu from "./pages/Menu";
 import Order from "./pages/Order";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
@@ -11,6 +14,10 @@ function App() {
         <Route index element={<Home />} />
         <Route path="menu" element={<Menu />} />
         <Route path="order" element={<Order />} />
+        <Route path="login" element={<Login />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="about" element={<AboutUs />} />
+
       </Route>
     </Routes>
   );

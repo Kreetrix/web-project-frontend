@@ -11,7 +11,7 @@ const Menu = () => {
         { id: 4, name: 'Lemonade', category: 'drinks', description: 'Freshly squeezed lemonade', price: '3,50€', image: 'https://via.placeholder.com/150' },
     ];
 
-    const categories = ['burgers', 'starters', 'desserts', 'drinks'];
+    const categories = ['burgers', 'starters', 'desserts', 'drinks', 'sets', 'coupons', 'vege', 'salad'];
 
     const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 

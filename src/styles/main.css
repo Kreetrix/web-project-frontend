@@ -41,6 +41,7 @@
     color: white;
     position: relative;
     transition: all 0.3s ease;
+    pointer-events: none;
 }
 
 header {
@@ -96,7 +97,7 @@ a:hover {
 
 
 h1 {
-    font-size: 2.2em;
+    font-size: 2em;
     line-height: 1.1;
 }
 
@@ -150,7 +151,7 @@ button:focus-visible {
     background-color: rgba(0, 0, 0, 0.926);
     color: #ffffff;
     font-weight: bold;
-    padding: 0.5rem 1rem;
+    padding: 0.3rem 0.8rem;
     border-radius: 8px;
     transition: all 0.3s ease;
     border: 2px solid transparent;
