@@ -30,7 +30,7 @@ const Palaute = () => {
 
             <div className="mb-6">
                 <label htmlFor="category" className="block text-lg font-medium text-gray-700 mb-2">
-                    Mitä asinne koskee :
+                    Mitä asianne koskee :
                 </label>
                 <select
                     id="category"
@@ -50,8 +50,8 @@ const Palaute = () => {
                     <button
                         key={value}
                         className={`text-4xl transition-transform duration-200 transform hover:scale-110 ${rating >= value
-                                ? 'text-yellow-500'
-                                : 'text-gray-300'
+                            ? 'text-yellow-500'
+                            : 'text-gray-300'
                             }`}
                         onClick={() => handleRatingChange(value)}
                     >

@@ -53,12 +53,15 @@ const DeliveryForm = ({ firstName, setFirstName, lastName, setLastName, address,
             </div>
             <div>
                 <label className="block text-gray-700 mb-2">Toimitusaika</label>
-                <input
-                    type="text"
+                <select
                     value={deliveryTime}
                     onChange={(e) => setDeliveryTime(e.target.value)}
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                />
+                >
+                    <option value="ASAP">Mahdollisimman pian</option>
+                    <option value="30min">30 minuutin päästä</option>
+                    <option value="1h">1 tunnin päästä</option>
+                </select>
             </div>
 
 
