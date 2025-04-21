@@ -41,7 +41,8 @@
     color: white;
     position: relative;
     transition: all 0.3s ease;
-    pointer-events: none;
+    pointer-events: auto;
+
 }
 
 header {
