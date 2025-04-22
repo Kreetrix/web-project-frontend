@@ -8,6 +8,7 @@ const Sidebar = () => {
                 <Link to="/admin/admindashboard" className="hover:text-yellow-600">Dashboard</Link>
                 <Link to="/admin/products" className="hover:text-yellow-600">Tuotteet</Link>
                 <Link to="/admin/orders" className="hover:text-yellow-600">Tilaukset</Link>
+                <Link to="/admin/feedbacks" className="hover:text-yellow-600">Feedbacks</Link>
             </nav>
         </aside>
     );

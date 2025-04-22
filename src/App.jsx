@@ -12,6 +12,7 @@ import AdminLayout from "./admin/AdminLayout";
 import Products from "./admin/Products";
 import AdminDashboard from "./admin/AdminDashboard";
 import OrdersPage from "./admin/OrdersPage";
+import AdminFeedbacks from "./admin/Feedbacks";
 
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="admindashboard" element={<AdminDashboard />} />
         <Route path="products" element={<Products />} />
         <Route path="orders" element={<OrdersPage />} />
+        <Route path="feedbacks" element={<AdminFeedbacks />} />
 
       </Route>
 
