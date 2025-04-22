@@ -8,6 +8,12 @@ import Dashboard from "./pages/Dashboard";
 import AboutUs from "./pages/AboutUs";
 import ProductPage from "./pages/ProductPage";
 import Palaute from "./pages/Palaute";
+import AdminLayout from "./admin/AdminLayout";
+import Products from "./admin/Products";
+import AdminDashboard from "./admin/AdminDashboard";
+import OrdersPage from "./admin/OrdersPage";
+
+
 
 function App() {
   return (
@@ -21,8 +27,16 @@ function App() {
         <Route path="about" element={<AboutUs />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="palaute" element={<Palaute />} />
+      </Route>
+
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route path="admindashboard" element={<AdminDashboard />} />
+        <Route path="products" element={<Products />} />
+        <Route path="orders" element={<OrdersPage />} />
 
       </Route>
+
+
     </Routes>
   );
 }
