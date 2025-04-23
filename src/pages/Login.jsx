@@ -9,19 +9,29 @@ export default function LoginPage() {
     const navigate = useNavigate();
 
     const fakeUser = {
+        email: "user@burger.com",
+        password: "1234",
+    };
+
+
+    const fakeAdmin = {
         email: "admin@burger.com",
         password: "1234",
     };
 
+
+
     const HandleLogin = (e) => {
         e.preventDefault();
 
-        if (email === fakeUser.email && password === fakeUser.password) {
+        if (email === fakeAdmin.email && password === fakeAdmin.password) {
+            setError("");
+            navigate("/admin");
+        } else if (email === fakeUser.email && password === fakeUser.password) {
             setError("");
             navigate("/dashboard");
-        } else {
-            setError("Virheellinen sähköposti tai salasana!");
         }
+        else { setError("Virheellinen sähköposti tai salasana!") };
     };
 
     return (

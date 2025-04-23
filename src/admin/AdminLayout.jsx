@@ -1,6 +1,5 @@
 import Sidebar from './Sidebar';
 import { Outlet } from 'react-router-dom';
-
 const AdminLayout = () => {
     return (
         <div className="flex h-screen bg-gray-100">

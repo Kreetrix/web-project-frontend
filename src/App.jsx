@@ -31,7 +31,9 @@ function App() {
       </Route>
 
       <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<AdminDashboard />} />
         <Route path="admindashboard" element={<AdminDashboard />} />
+
         <Route path="products" element={<Products />} />
         <Route path="orders" element={<OrdersPage />} />
         <Route path="feedbacks" element={<AdminFeedbacks />} />

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Home, Utensils, ShoppingCart, LogIn, Languages, MessageSquare, Info } from 'lucide-react';
+import { Home, Utensils, ShoppingCart, LogIn, Languages, MessageSquare, Info, User } from 'lucide-react';
 
 export default function Header() {
     return (
@@ -54,6 +54,12 @@ export default function Header() {
                                 <NavLink to="/about" className="nav-button flex items-center gap-1">
                                     <Info size={14} />
                                     About Us
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard" className="nav-button flex items-center gap-1">
+                                    <User size={14} />
+                                    Profile Test
                                 </NavLink>
                             </li>
                         </ul>

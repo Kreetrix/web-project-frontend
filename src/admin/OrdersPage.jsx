@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import OrderTable from './OrderTable';
-import { orders as initialOrders } from './OrdersExample';
+import OrderTable from './admin-orders/OrderTable';
+import { orders as initialOrders } from './admin-orders/OrdersExample';
 
 export default function OrdersPage() {
 
