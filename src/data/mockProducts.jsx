@@ -1,6 +1,9 @@
 // src/data/mockProducts.js
 
-export const mockProducts = [
+/*
+export const mockProducts
+
+[
     {
         id: 1,
         name: "BBQ Burger",
@@ -52,4 +55,4 @@ export const mockProducts = [
         reviews: [],
         combo: [],
     },
-];
+];*/
