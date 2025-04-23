@@ -8,8 +8,13 @@ const SpecialOffer = () => {
     const getSpecialOffers = async () => {
       const products = await fetchProducts();
 
+      const productsWithDiscount = products.map(product => ({
+        ...product,
+        discountedPrice: product.price * 0.85
+      }));
+
       // Use the current day as a seed for consistent randomization
-      const today = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
+      const today = new Date().toISOString().split("T")[0];
       const seed = today
         .split("-")
         .reduce((acc, val) => acc + parseInt(val), 0); // Sum of year, month, day
@@ -21,7 +26,7 @@ const SpecialOffer = () => {
       };
 
       // Shuffle products using the seeded random function
-      const shuffledProducts = [...products].sort(
+      const shuffledProducts = [...productsWithDiscount].sort(
         () => seededRandom(seed) - 0.5
       );
 
@@ -44,7 +49,7 @@ const SpecialOffer = () => {
       </section>
     );
   }
-
+  
   return (
     <section className="bg-white p-8 rounded-xl shadow-lg">
       <h2 className="text-2xl font-bold mb-6 text-center text-yellow-600">
@@ -64,7 +69,8 @@ const SpecialOffer = () => {
             <div className="ml-4">
               <h3 className="font-bold text-lg">{product.name}</h3>
               <p className="text-gray-600 mb-2">{product.description}</p>
-              <p className="text-red-600 font-bold">{product.price}€</p>
+              <p className="text-gray-400 line-through">{product.price.toFixed(2)}€</p>
+                <p className="text-red-600 font-bold">{product.discountedPrice.toFixed(2)}€</p>
             </div>
           </div>
         ))}
