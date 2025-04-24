@@ -1,37 +1,23 @@
-import { Mail, KeyRound, LogIn } from 'lucide-react';
+import { Mail, KeyRound, UserPlus } from 'lucide-react';
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export default function LoginPage() {
+export default function Register() {
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
-    const navigate = useNavigate();
 
-    const fakeUser = {                                      /*  JUST TEST             */
-        email: "user@burger.com",
-        password: "1234",
-    };
-
-
-    const fakeAdmin = {
-        email: "admin@burger.com",
-        password: "1234",
-    };
-
-
-
-    const HandleLogin = (e) => {
+    const handleRegister = (e) => {
         e.preventDefault();
 
-        if (email === fakeAdmin.email && password === fakeAdmin.password) {
-            setError("");
-            navigate("/admin");
-        } else if (email === fakeUser.email && password === fakeUser.password) {
-            setError("");
-            navigate("/dashboard");
+        if (password !== confirmPassword) {
+            setError("Salasanat eivät täsmää!");
+            return;
         }
-        else { setError("Virheellinen sähköposti tai salasana!") };
+
+        alert("Rekisteröinti lähetetty!");
     };
 
     return (
@@ -46,10 +32,21 @@ export default function LoginPage() {
             <div className="flex items-center justify-center min-h-screen relative z-10">
                 <div className="bg-white bg-opacity-90 p-8 rounded-2xl shadow-2xl w-full max-w-md animate-fadeIn">
                     <h2 className="text-3xl font-bold text-center mb-6 text-yellow-700">
-                        Kirjaudu sisään 🍔
+                        Rekisteröidy 🍟
                     </h2>
 
-                    <form onSubmit={HandleLogin} className="space-y-5">
+                    <form onSubmit={handleRegister} className="space-y-5">
+                        <div className="flex items-center border border-gray-300 rounded-md px-3 py-2 bg-white">
+                            <UserPlus className="text-gray-500 mr-2" size={18} />
+                            <input
+                                type="text"
+                                placeholder="Käyttäjätunnus"
+                                className="w-full outline-none bg-transparent text-sm"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                        </div>
+
                         <div className="flex items-center border border-gray-300 rounded-md px-3 py-2 bg-white">
                             <Mail className="text-gray-500 mr-2" size={18} />
                             <input
@@ -72,6 +69,17 @@ export default function LoginPage() {
                             />
                         </div>
 
+                        <div className="flex items-center border border-gray-300 rounded-md px-3 py-2 bg-white">
+                            <KeyRound className="text-gray-500 mr-2" size={18} />
+                            <input
+                                type="password"
+                                placeholder="Vahvista salasana"
+                                className="w-full outline-none bg-transparent text-sm"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                            />
+                        </div>
+
                         {error && (
                             <div className="text-red-600 text-sm text-center font-medium">
                                 {error}
@@ -82,27 +90,15 @@ export default function LoginPage() {
                             type="submit"
                             className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 rounded-md flex items-center justify-center gap-2"
                         >
-                            <LogIn size={18} />
-                            Kirjaudu
+                            <UserPlus size={18} />
+                            Rekisteröidy
                         </button>
 
                         <div className="text-sm text-center text-gray-700 mt-2">
-                            Unohtuiko salasana?
-                            <a
-                                href="/reset"
-                                className="text-yellow-600 hover:underline ml-1"
-                            >
-                                Palauta
-                            </a>
-                        </div>
-                        <div className="text-sm text-center text-gray-700 mt-2">
-                            Ei ole tiliä? Rekisteröidy tästä.
-                            <a
-                                href="/register"
-                                className="text-yellow-600 hover:underline ml-1"
-                            >
-                                rekisteröidy
-                            </a>
+                            Onko sinulla jo tili?{" "}
+                            <Link to="/login" className="text-yellow-600 hover:underline">
+                                Kirjaudu sisään
+                            </Link>
                         </div>
                     </form>
                 </div>

@@ -1,37 +1,46 @@
-import { Mail, KeyRound, LogIn } from 'lucide-react';
+// AuthPage.jsx
 import { useState } from "react";
+import { Mail, KeyRound, LogIn, UserPlus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function LoginPage() {
+export default function AuthPage() {
+    const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const fakeUser = {                                      /*  JUST TEST             */
+    const fakeUser = {
         email: "user@burger.com",
         password: "1234",
     };
-
 
     const fakeAdmin = {
         email: "admin@burger.com",
         password: "1234",
     };
 
-
-
-    const HandleLogin = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (email === fakeAdmin.email && password === fakeAdmin.password) {
-            setError("");
-            navigate("/admin");
-        } else if (email === fakeUser.email && password === fakeUser.password) {
-            setError("");
-            navigate("/dashboard");
+        if (isLogin) {
+            if (email === fakeAdmin.email && password === fakeAdmin.password) {
+                navigate("/admin");
+            } else if (email === fakeUser.email && password === fakeUser.password) {
+                navigate("/dashboard");
+            } else {
+                setError("Virheellinen sähköposti tai salasana!");
+            }
+        } else {
+            // Эмуляция регистрации
+            if (email && password) {
+                setError("");
+                alert("Rekisteröity onnistuneesti!");
+                setIsLogin(true);
+            } else {
+                setError("Täytä kaikki kentät!");
+            }
         }
-        else { setError("Virheellinen sähköposti tai salasana!") };
     };
 
     return (
@@ -39,17 +48,18 @@ export default function LoginPage() {
             <div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{
-                    backgroundImage: "url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1899&q=80')"
+                    backgroundImage:
+                        "url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1899&q=80')",
                 }}
             ></div>
 
             <div className="flex items-center justify-center min-h-screen relative z-10">
                 <div className="bg-white bg-opacity-90 p-8 rounded-2xl shadow-2xl w-full max-w-md animate-fadeIn">
                     <h2 className="text-3xl font-bold text-center mb-6 text-yellow-700">
-                        Kirjaudu sisään 🍔
+                        {isLogin ? "Kirjaudu sisään 🍔" : "Rekisteröidy 🍟"}
                     </h2>
 
-                    <form onSubmit={HandleLogin} className="space-y-5">
+                    <form onSubmit={handleSubmit} className="space-y-5">
                         <div className="flex items-center border border-gray-300 rounded-md px-3 py-2 bg-white">
                             <Mail className="text-gray-500 mr-2" size={18} />
                             <input
@@ -82,27 +92,19 @@ export default function LoginPage() {
                             type="submit"
                             className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 rounded-md flex items-center justify-center gap-2"
                         >
-                            <LogIn size={18} />
-                            Kirjaudu
+                            {isLogin ? <LogIn size={18} /> : <UserPlus size={18} />}
+                            {isLogin ? "Kirjaudu" : "Rekisteröidy"}
                         </button>
 
                         <div className="text-sm text-center text-gray-700 mt-2">
-                            Unohtuiko salasana?
-                            <a
-                                href="/reset"
+                            {isLogin ? "Ei ole tiliä?" : "Onko sinulla jo tili?"}{" "}
+                            <button
+                                type="button"
+                                onClick={() => setIsLogin(!isLogin)}
                                 className="text-yellow-600 hover:underline ml-1"
                             >
-                                Palauta
-                            </a>
-                        </div>
-                        <div className="text-sm text-center text-gray-700 mt-2">
-                            Ei ole tiliä? Rekisteröidy tästä.
-                            <a
-                                href="/register"
-                                className="text-yellow-600 hover:underline ml-1"
-                            >
-                                rekisteröidy
-                            </a>
+                                {isLogin ? "Rekisteröidy" : "Kirjaudu sisään"}
+                            </button>
                         </div>
                     </form>
                 </div>

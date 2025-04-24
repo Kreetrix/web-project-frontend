@@ -1,31 +1,101 @@
-const dummyProducts = [
-    { id: 1, name: 'BBQ Burger', price: '12,90€' },
-    { id: 2, name: 'Veggie Burger', price: '11,90€' },
-];
+import { useState } from "react";
+import { Trash2, Edit, Plus } from "lucide-react";
 
-const Products = () => {
+const AdminMenu = () => {
+    const [products, setProducts] = useState([
+        { id: 1, name: "Burgers", price: "5€", isFeatured: false },
+        { id: 2, name: "Fries", price: "2€", isFeatured: false },
+        { id: 3, name: "Salad", price: "3€", isFeatured: true },
+    ]);
+
+    const [newProduct, setNewProduct] = useState({ name: "", price: "", isFeatured: false });
+
+    const addProduct = () => {
+        setProducts([...products, { ...newProduct, id: products.length + 1 }]);
+        setNewProduct({ name: "", price: "", isFeatured: false });
+    };
+
+    const deleteProduct = (id) => {
+        setProducts(products.filter(product => product.id !== id));
+    };
+
+    const editProduct = (id) => {
+        const product = products.find(p => p.id === id);
+        setNewProduct(product);
+        deleteProduct(id);
+    };
+
+    const toggleFeatured = (id) => {
+        setProducts(products.map(product =>
+            product.id === id ? { ...product, isFeatured: !product.isFeatured } : product
+        ));
+    };
+
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-4">Tuotteet</h1>
-            <button className="mb-4 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
-                ➕ Lisää tuote
-            </button>
-            <ul className="space-y-4">
-                {dummyProducts.map((p) => (
-                    <li key={p.id} className="p-4 bg-white rounded shadow flex justify-between items-center">
-                        <div>
-                            <p className="font-semibold">{p.name}</p>
-                            <p className="text-gray-600">{p.price}</p>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Menu sisällön muokkaaminen</h2>
+
+            <div className="mb-6">
+                <div className="flex gap-4">
+                    <input
+                        type="text"
+                        className="p-2 border border-gray-300 rounded"
+                        placeholder="Tuotteen nimi"
+                        value={newProduct.name}
+                        onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+                    />
+                    <input
+                        type="text"
+                        className="p-2 border border-gray-300 rounded"
+                        placeholder="Hinta"
+                        value={newProduct.price}
+                        onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+                    />
+                    <button
+                        onClick={addProduct}
+                        className="bg-yellow-600 text-white p-2 rounded"
+                    >
+                        <Plus size={20} /> Lisää tuote
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">Tuotteet</h3>
+                <div className="space-y-4">
+                    {products.map((product) => (
+                        <div key={product.id} className="flex justify-between items-center p-4 border border-gray-300 rounded">
+                            <div>
+                                <p className="font-semibold">{product.name}</p>
+                                <p>{product.price}</p>
+                                {product.isFeatured && <span className="text-green-500 font-semibold">Tuote päivän valinta</span>}
+                            </div>
+                            <div className="flex gap-4">
+                                <button
+                                    onClick={() => editProduct(product.id)}
+                                    className="text-blue-500 hover:underline"
+                                >
+                                    <Edit size={20} />
+                                </button>
+                                <button
+                                    onClick={() => deleteProduct(product.id)}
+                                    className="text-red-500 hover:underline"
+                                >
+                                    <Trash2 size={20} />
+                                </button>
+                                <button
+                                    onClick={() => toggleFeatured(product.id)}
+                                    className="text-yellow-500 hover:underline"
+                                >
+                                    {product.isFeatured ? "Poista päivän valinta" : "Aseta päivän valinta"}
+                                </button>
+                            </div>
                         </div>
-                        <div className="flex gap-2">
-                            <button className="px-3 py-1 text-sm bg-blue-500 text-white rounded">Muokkaa</button>
-                            <button className="px-3 py-1 text-sm bg-red-500 text-white rounded">Poista</button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 };
 
-export default Products;
+export default AdminMenu;
