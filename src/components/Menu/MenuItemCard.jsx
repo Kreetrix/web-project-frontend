@@ -8,7 +8,7 @@ const MenuItemCard = ({ item }) => {
             <div className="ml-4">
                 <h3 className="font-bold text-lg">{item.name}</h3>
                 <p className="text-gray-500">{item.description}</p>
-                <p className="text-red-600 font-semibold mt-2">{item.price}</p>
+                <p className="text-red-600 font-semibold mt-2">{item.price}€</p>
             </div>
         </div>
     );
