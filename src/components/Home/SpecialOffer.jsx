@@ -49,7 +49,7 @@ const SpecialOffer = () => {
       </section>
     );
   }
-  
+
   return (
     <section className="bg-white p-8 rounded-xl shadow-lg">
       <h2 className="text-2xl font-bold mb-6 text-center text-yellow-600">
@@ -70,7 +70,7 @@ const SpecialOffer = () => {
               <h3 className="font-bold text-lg">{product.name}</h3>
               <p className="text-gray-600 mb-2">{product.description}</p>
               <p className="text-gray-400 line-through">{product.price.toFixed(2)}€</p>
-                <p className="text-red-600 font-bold">{product.discountedPrice.toFixed(2)}€</p>
+              <p className="text-red-600 font-bold">{product.discountedPrice.toFixed(2)}€</p>
             </div>
           </div>
         ))}

@@ -37,21 +37,42 @@ function ProductPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
-      {/* Product Name */}
-      <h1 className="text-4xl font-bold text-center text-yellow-700">
-        {product.name}
-      </h1>
+    <div className="max-w-4xl mx-auto p-8 space-y-8">
+      {/* Product Card Container */}
+      <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-300 space-y-6">
+        {/* Product Name */}
+        <h1 className="text-5xl font-extrabold text-center text-yellow-700">
+          {product.name}
+        </h1>
 
-      {/* Product Description */}
-      <p className="mt-2 text-lg text-gray-700 text-center">
-        {product.description}
-      </p>
+        {/* Product Image */}
+        <div className="flex justify-center">
+          <img
+            src="/placeholder.png" // Здесь можно заменить на реальное изображение
+            alt={product.name}
+            className="w-full max-w-xl h-auto object-cover rounded-xl shadow-lg mb-6"
+          />
+        </div>
 
-      {/* Product Price */}
-      <p className="mt-4 text-2xl font-semibold text-yellow-600 text-center">
-        {product.price}€
-      </p>
+        {/* Product Description */}
+        <div className="border-t border-gray-300 pt-4">
+          <p className="text-lg text-gray-700 text-center">{product.description}</p>
+        </div>
+
+        {/* Product Price */}
+        <div className="border-t border-gray-300 pt-4">
+          <p className="text-3xl font-bold text-yellow-600 text-center">
+            {product.price}€
+          </p>
+        </div>
+
+        {/* Add to Cart Button */}
+        <div className="flex justify-center mt-8">
+          <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition-colors">
+            Lisää koriin
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,9 @@
+    const fakeUser = {
+        email: "user@burger.com",
+        password: "1234",
+    };
+
+    const fakeAdmin = {
+        email: "admin@burger.com",
+        password: "1234",
+    };

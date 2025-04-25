@@ -23,13 +23,7 @@ export default function ProfileTab() {
                     className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 />
 
-                <label className="text-sm text-gray-700">Suosikkiravintola</label>
-                <input
-                    type="text"
-                    value="Ei suosikkia"
-                    readOnly
-                    className="bg-gray-200 text-gray-500 cursor-not-allowed px-3 py-2 rounded-md"
-                />
+
 
                 <button
                     type="submit"

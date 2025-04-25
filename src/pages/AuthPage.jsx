@@ -32,7 +32,6 @@ export default function AuthPage() {
                 setError("Virheellinen sähköposti tai salasana!");
             }
         } else {
-            // Эмуляция регистрации
             if (email && password) {
                 setError("");
                 alert("Rekisteröity onnistuneesti!");
