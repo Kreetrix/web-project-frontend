@@ -9,15 +9,39 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
 
-        if (password !== confirmPassword) {
-            setError("Salasanat eivät täsmää!");
-            return;
+        const formData = {
+            username: username,
+            email: email,
+            password: password,
         }
 
-        alert("Rekisteröinti lähetetty!");
+        console.log(formData)
+
+        try {
+            const response = await fetch('http://127.0.0.1:3000/api/v1/auth/register', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData),
+            });
+        
+            const data = await response.json();
+        
+            if (!response.ok) {
+              throw new Error(data.message || 'Registration failed');
+            }
+            
+            //TODO: redirect!
+            console.log('Registration successful:', data);
+            
+          } catch (error) {
+            console.error('Registration error:', error.message);
+            alert(error.message);
+          }
     };
 
     return (

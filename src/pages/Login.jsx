@@ -21,18 +21,40 @@ export default function LoginPage() {
 
 
 
-    const HandleLogin = (e) => {
+    const HandleLogin = async (e) => {
         e.preventDefault();
-
-        if (email === fakeAdmin.email && password === fakeAdmin.password) {
-            setError("");
-            navigate("/admin");
-        } else if (email === fakeUser.email && password === fakeUser.password) {
-            setError("");
-            navigate("/dashboard");
+        
+        const formData = {
+          email: email,
+          password: password,
+        };
+      
+        try {
+          const response = await fetch('http://127.0.0.1:3000/api/v1/auth/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+      
+          if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message);
+          }
+      
+          const { accessToken, user } = await response.json();
+      
+          localStorage.setItem('accessToken', accessToken);
+          console.log('Login successful! -> ', user);
+      
+          //TODO: redirect!!
+      
+        } catch (error) {
+          console.error('Login error:', error.message);
+          alert(error.message);
         }
-        else { setError("Virheellinen sähköposti tai salasana!") };
-    };
+      };
 
     return (
         <div className="min-h-screen relative bg-gray-800">
@@ -58,6 +80,7 @@ export default function LoginPage() {
                                 className="w-full outline-none bg-transparent text-sm"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                required
                             />
                         </div>
 
@@ -69,6 +92,7 @@ export default function LoginPage() {
                                 className="w-full outline-none bg-transparent text-sm"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                required
                             />
                         </div>
 
