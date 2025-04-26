@@ -1,7 +1,3 @@
-/* TODO - add styles for admin */
-
-/* aaded groups for components */
-
 
 const AdminDashboard = () => {
     return (

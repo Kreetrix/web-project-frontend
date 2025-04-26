@@ -8,7 +8,9 @@ export default function LoginPage() {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const fakeUser = {                                      /*  JUST TEST             */
+
+    /*  JUST TEST   
+    const fakeUser = {                                      
         email: "user@burger.com",
         password: "1234",
     };
@@ -18,43 +20,43 @@ export default function LoginPage() {
         email: "admin@burger.com",
         password: "1234",
     };
-
+ */
 
 
     const HandleLogin = async (e) => {
         e.preventDefault();
-        
+
         const formData = {
-          email: email,
-          password: password,
+            email: email,
+            password: password,
         };
-      
+
         try {
-          const response = await fetch('http://127.0.0.1:3000/api/v1/auth/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          });
-      
-          if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.message);
-          }
-      
-          const { accessToken, user } = await response.json();
-      
-          localStorage.setItem('accessToken', accessToken);
-          console.log('Login successful! -> ', user);
-      
-          //TODO: redirect!!
-      
+            const response = await fetch('http://127.0.0.1:3000/api/v1/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message);
+            }
+
+            const { accessToken, user } = await response.json();
+
+            localStorage.setItem('accessToken', accessToken);
+            console.log('Login successful! -> ', user);
+
+            navigate('/dashboard');
+
         } catch (error) {
-          console.error('Login error:', error.message);
-          alert(error.message);
+            console.error('Login error:', error.message);
+            alert(error.message);
         }
-      };
+    };
 
     return (
         <div className="min-h-screen relative bg-gray-800">

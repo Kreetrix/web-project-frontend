@@ -7,3 +7,15 @@
         email: "admin@burger.com",
         password: "1234",
     };
+  
+
+
+
+  {
+  username: "Poika123",
+  email: "poika@example.com",
+  firstName: "Matti",
+  lastName: "Meikäläinen",
+  address: "Esimerkkikatu 123, 00100 Helsinki",
+  phone: "+358 40 123 4567"
+}
