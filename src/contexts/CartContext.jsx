@@ -1,10 +1,14 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-  const [dailySpecials, setDailySpecials] = useState([]); // Store daily specials
+  const [dailySpecials, setDailySpecials] = useState(() => {
+    // Load daily specials from local storage on initialization
+    const savedSpecials = localStorage.getItem("dailySpecials");
+    return savedSpecials ? JSON.parse(savedSpecials) : [];
+  });
 
   const addToCart = (product) => {
     setCartItems((prevItems) => {
@@ -28,15 +32,18 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = (id) => {
     setCartItems((prevItems) => {
-        return prevItems
-            .map((item) =>
-                item.id === id
-                    ? { ...item, quantity: item.quantity - 1 }
-                    : item
-            )
-            .filter((item) => item.quantity > 0);
+      return prevItems
+        .map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        .filter((item) => item.quantity > 0);
     });
-};
+  };
+
+  // Save daily specials to local storage whenever they change
+  useEffect(() => {
+    localStorage.setItem("dailySpecials", JSON.stringify(dailySpecials));
+  }, [dailySpecials]);
 
   return (
     <CartContext.Provider
