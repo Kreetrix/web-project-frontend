@@ -57,6 +57,18 @@ function ProductPage() {
           <p className="text-lg text-gray-700 text-center">
             {product.description}
           </p>
+          {product.allergies && product.allergies.length > 0 && (
+          <div className="border-t border-gray-300 pt-4">
+            <h3 className="text-xl font-bold text-gray-800 text-center">
+              Allergiat
+            </h3>
+            <ul className="list-disc list-inside text-gray-700 text-center">
+              {product.allergies.map((allergy, index) => (
+                <li key={index}>{allergy}</li>
+              ))}
+            </ul>
+          </div>
+        )}
         </div>
         <div className="border-t border-gray-300 pt-4">
           {isSpecial ? (
