@@ -4,45 +4,42 @@ import fetchProducts from "../../data/fetchProducts";
 
 const SpecialOffer = () => {
   const [specialOffers, setSpecialOffers] = useState([]);
-  const { setDailySpecials } = useCart(); // Access setDailySpecials from context
-  const [isLoading, setIsLoading] = useState(true); // Добавляем состояние загрузки
+  const { dailySpecials, setDailySpecials } = useCart();
 
   useEffect(() => {
     const getSpecialOffers = async () => {
-      try {
-        setIsLoading(true);
-        const products = await fetchProducts();
+      if (dailySpecials.length > 0) {
+        // If daily specials are already set, use them
+        setSpecialOffers(dailySpecials);
+        return;
+      }
 
-      const productsWithDiscount = products.map((product) => ({
-        ...product,
-        discountedPrice: product.price * 0.85,
-      }));
+      const products = await fetchProducts();
 
-        const today = new Date().toISOString().split("T")[0];
-        const seed = today.split("-").reduce((acc, val) => acc + parseInt(val), 0);
+      // Use the current day as a seed for consistent randomization
+      const today = new Date().toISOString().split("T")[0];
+      const seed = today
+        .split("-")
+        .reduce((acc, val) => acc + parseInt(val), 0);
 
         const seededRandom = (seed) => {
           let x = Math.sin(seed) * 10000;
           return x - Math.floor(x);
         };
 
-        const shuffledProducts = [...productsWithDiscount].sort(
-          () => seededRandom(seed) - 0.5
-        );
+      // Shuffle products using the seeded random function
+      const shuffledProducts = [...products].sort(
+        () => seededRandom(seed) - 0.5
+      );
 
       // Select the first two products as special offers
       const specials = shuffledProducts.slice(0, 2);
-      setDailySpecials(specials); // Set daily specials in context
-        setSpecialOffers(shuffledProducts.slice(0, 2));
-      } catch (error) {
-        console.error("Error fetching special offers:", error);
-      } finally {
-        setIsLoading(false);
-      }
+      setSpecialOffers(specials);
+      setDailySpecials(specials); // Save specials to context and local storage
     };
 
     getSpecialOffers();
-  }, [setDailySpecials]);
+  }, [dailySpecials, setDailySpecials]);
 
   return (
     <section className="p-8 rounded-xl shadow-lg">
@@ -50,15 +47,6 @@ const SpecialOffer = () => {
         Tämän päivän erikoisuudet
       </h2>
 
-      {isLoading ? (
-        <p className="text-center text-gray-500">
-          Ladataan erikoistarjouksia...
-        </p>
-      ) : specialOffers.length === 0 ? (
-        <p className="text-center text-gray-500">
-          Ei erikoistarjouksia tänään
-        </p>
-      ) : (
         <div className="grid md:grid-cols-2 gap-8">
           {specialOffers.map((product) => (
             <div
@@ -90,7 +78,6 @@ const SpecialOffer = () => {
             </div>
           ))}
         </div>
-      )}
     </section>
   );
 };
