@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
+import { useCart } from "../../contexts/CartContext";
 import fetchProducts from "../../data/fetchProducts";
 
 const SpecialOffer = () => {
   const [specialOffers, setSpecialOffers] = useState([]);
+  const { setDailySpecials } = useCart(); // Access setDailySpecials from context
 
   useEffect(() => {
     const getSpecialOffers = async () => {
       const products = await fetchProducts();
 
-      const productsWithDiscount = products.map(product => ({
+      const productsWithDiscount = products.map((product) => ({
         ...product,
-        discountedPrice: product.price * 0.85
+        discountedPrice: product.price * 0.85,
       }));
 
       // Use the current day as a seed for consistent randomization
@@ -31,11 +33,13 @@ const SpecialOffer = () => {
       );
 
       // Select the first two products as special offers
-      setSpecialOffers(shuffledProducts.slice(0, 2));
+      const specials = shuffledProducts.slice(0, 2);
+      setSpecialOffers(specials);
+      setDailySpecials(specials); // Set daily specials in context
     };
 
     getSpecialOffers();
-  }, []);
+  }, [setDailySpecials]);
 
   if (specialOffers.length === 0) {
     return (
@@ -69,8 +73,12 @@ const SpecialOffer = () => {
             <div className="ml-4">
               <h3 className="font-bold text-lg">{product.name}</h3>
               <p className="text-gray-600 mb-2">{product.description}</p>
-              <p className="text-gray-400 line-through">{product.price.toFixed(2)}€</p>
-              <p className="text-red-600 font-bold">{product.discountedPrice.toFixed(2)}€</p>
+              <p className="text-gray-400 line-through">
+                {product.price.toFixed(2)}€
+              </p>
+              <p className="text-red-600 font-bold">
+                {product.discountedPrice.toFixed(2)}€
+              </p>
             </div>
           </div>
         ))}
