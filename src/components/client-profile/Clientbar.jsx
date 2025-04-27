@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Clientbar = () => {
     return (
         <>
             <div className="p-6 text-2xl font-bold text-white">🍔 BurgerAdmin</div>
             <nav className="flex flex-col gap-4 p-4">
-                <Link to="/client-profile/admindashboard" className="nav-button">Dashboard</Link>
-                <Link to="/client-profile/products" className="nav-button">Tuotteet</Link>
-                <Link to="/client-profile/orders" className="nav-button">Tilaukset</Link>
-                <Link to="/client-profile/feedbacks" className="nav-button">Feedbacks</Link>
+                <NavLink to="/client-profile/admindashboard" className={({ isActive }) => isActive ? "nav-button-active" : "nav-button"}>Dashboard</NavLink>
+                <NavLink to="/client-profile/products" className={({ isActive }) => isActive ? "nav-button-active" : "nav-button"}>Tuotteet</NavLink>
+                <NavLink to="/client-profile/orders" className={({ isActive }) => isActive ? "nav-button-active" : "nav-button"}>Tilaukset</NavLink>
+                <NavLink to="/client-profile/feedbacks" className={({ isActive }) => isActive ? "nav-button-active" : "nav-button"}>Feedbacks</NavLink>
             </nav>
         </>
     );
