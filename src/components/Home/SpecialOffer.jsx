@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useCart } from "../../contexts/CartContext";
 import fetchProducts from "../../data/fetchProducts";
 
 const SpecialOffer = () => {
   const [specialOffers, setSpecialOffers] = useState([]);
+  const { setDailySpecials } = useCart(); // Access setDailySpecials from context
   const [isLoading, setIsLoading] = useState(true); // Добавляем состояние загрузки
 
   useEffect(() => {
@@ -11,10 +13,10 @@ const SpecialOffer = () => {
         setIsLoading(true);
         const products = await fetchProducts();
 
-        const productsWithDiscount = products.map(product => ({
-          ...product,
-          discountedPrice: product.price * 0.85
-        }));
+      const productsWithDiscount = products.map((product) => ({
+        ...product,
+        discountedPrice: product.price * 0.85,
+      }));
 
         const today = new Date().toISOString().split("T")[0];
         const seed = today.split("-").reduce((acc, val) => acc + parseInt(val), 0);
@@ -28,6 +30,9 @@ const SpecialOffer = () => {
           () => seededRandom(seed) - 0.5
         );
 
+      // Select the first two products as special offers
+      const specials = shuffledProducts.slice(0, 2);
+      setDailySpecials(specials); // Set daily specials in context
         setSpecialOffers(shuffledProducts.slice(0, 2));
       } catch (error) {
         console.error("Error fetching special offers:", error);
@@ -37,7 +42,7 @@ const SpecialOffer = () => {
     };
 
     getSpecialOffers();
-  }, []);
+  }, [setDailySpecials]);
 
   return (
     <section className="p-8 rounded-xl shadow-lg">

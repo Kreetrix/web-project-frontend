@@ -1,17 +1,18 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import fetchProducts from "../data/fetchProducts";
+import { useCart } from "../contexts/CartContext";
 
 function ProductPage() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { addToCart, dailySpecials } = useCart(); // Access daily specials from context
 
   useEffect(() => {
     const loadProduct = async () => {
       setLoading(true);
       const products = await fetchProducts();
-      console.log(products);
       const foundProduct = products.find((item) => item.id === Number(id));
       setProduct(foundProduct);
       setLoading(false);
@@ -36,39 +37,48 @@ function ProductPage() {
     );
   }
 
+  const isSpecial = dailySpecials.some((special) => special.id === product.id);
+  const discountedPrice = isSpecial ? (product.price * 0.85).toFixed(2) : null;
+
   return (
     <div className="max-w-4xl mx-auto p-8 space-y-8">
-      {/* Product Card Container */}
       <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-300 space-y-6">
-        {/* Product Name */}
         <h1 className="text-5xl font-extrabold text-center text-yellow-700">
           {product.name}
         </h1>
-
-        {/* Product Image */}
         <div className="flex justify-center">
           <img
-            src="/placeholder.png" // Здесь можно заменить на реальное изображение
+            src="/placeholder.png"
             alt={product.name}
             className="w-full max-w-xl h-auto object-cover rounded-xl shadow-lg mb-6"
           />
         </div>
-
-        {/* Product Description */}
         <div className="border-t border-gray-300 pt-4">
-          <p className="text-lg text-gray-700 text-center">{product.description}</p>
-        </div>
-
-        {/* Product Price */}
-        <div className="border-t border-gray-300 pt-4">
-          <p className="text-3xl font-bold text-yellow-600 text-center">
-            {product.price}€
+          <p className="text-lg text-gray-700 text-center">
+            {product.description}
           </p>
         </div>
-
-        {/* Add to Cart Button */}
+        <div className="border-t border-gray-300 pt-4">
+          {isSpecial ? (
+            <>
+              <p className="text-gray-400 line-through text-center">
+                {product.price.toFixed(2)}€
+              </p>
+              <p className="text-3xl font-bold text-red-600 text-center">
+                {discountedPrice}€
+              </p>
+            </>
+          ) : (
+            <p className="text-3xl font-bold text-yellow-600 text-center">
+              {product.price.toFixed(2)}€
+            </p>
+          )}
+        </div>
         <div className="flex justify-center mt-8">
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition-colors">
+          <button
+            onClick={() => addToCart(product)}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition-colors"
+          >
             Lisää koriin
           </button>
         </div>
