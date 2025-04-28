@@ -1,47 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useTheme } from "../contexts/ThemeContext";
+
 
 
 export default function AboutUs() {
-    const [darkMode, setDarkMode] = useState(false);
+    const { darkMode, toggleDarkMode } = useTheme();
 
-    useEffect(() => {
-        const savedTheme = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-        const initialMode = savedTheme ? savedTheme === "dark" : prefersDark;
-        setDarkMode(initialMode);
-
-        if (initialMode) {
-            document.documentElement.classList.add("dark");
-            document.documentElement.setAttribute("data-theme", "dark");
-        } else {
-            document.documentElement.classList.remove("dark");
-            document.documentElement.removeAttribute("data-theme");
-        }
-    }, []);
-
-    const toggleDarkMode = () => {
-        const newMode = !darkMode;
-        setDarkMode(newMode);
-        localStorage.setItem("theme", newMode ? "dark" : "light");
-
-        document.documentElement.classList.toggle("dark", newMode);
-        if (newMode) {
-            document.documentElement.setAttribute("data-theme", "dark");
-        } else {
-            document.documentElement.removeAttribute("data-theme");
-        }
-    };
 
     return (
         <div className="min-h-screen bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
             <main className="px-6 py-12 max-w-5xl mx-auto space-y-12 relative">
+
+
                 <button
                     onClick={toggleDarkMode}
                     className="absolute top-5 right-5 p-3 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                 >
                     {darkMode ? "🌞" : "🌑"}
                 </button>
+
+
 
                 {/* Historia */}
                 <section>
