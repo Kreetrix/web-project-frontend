@@ -6,7 +6,7 @@ export default function AboutUs() {
 
 
     return (
-        <div className="min-h-screen bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+        <div className="min-h-screen bg-gray-50 text-gray-800 dark:bg-gray-600 dark:text-gray-100">
             <main className="px-6 py-12 max-w-5xl mx-auto space-y-12 relative">
                 {/* Historia */}
                 <section>

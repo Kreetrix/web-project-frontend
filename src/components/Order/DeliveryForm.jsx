@@ -3,12 +3,12 @@ import React from "react";
 
 const DeliveryForm = ({ firstName, setFirstName, lastName, setLastName, address, setAddress, phone,
     setPhone, email, setEmail, deliveryTime, setDeliveryTime }) => (
-    <div className="bg-white rounded-xl shadow-md p-6 mb-6">
-        <h3 className="text-xl font-bold mb-4  text-gray-800">Toimitustiedot</h3>
+    <div className="bg-white  dark:bg-gray-600  rounded-xl shadow-md p-6 mb-6">
+        <h3 className="text-xl font-bold mb-4  text-gray-800 dark:text-gray-100">Toimitustiedot</h3>
 
         <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
-                <label className="block text-gray-700 mb-2">Etunimi</label>
+                <label className="block text-gray-800 dark:text-gray-100 mb-2">Etunimi</label>
                 <input
                     type="text"
                     value={firstName}
@@ -17,7 +17,7 @@ const DeliveryForm = ({ firstName, setFirstName, lastName, setLastName, address,
                 />
             </div>
             <div>
-                <label className="block text-gray-700 mb-2">Sukunimi</label>
+                <label className="block  text-gray-800 dark:text-gray-100 mb-2">Sukunimi</label>
                 <input
                     type="text"
                     value={lastName}
@@ -26,7 +26,7 @@ const DeliveryForm = ({ firstName, setFirstName, lastName, setLastName, address,
                 />
             </div>
             <div>
-                <label className="block text-gray-700 mb-2">Osoite</label>
+                <label className="block text-gray-800 dark:text-gray-100 mb-2">Osoite</label>
                 <input
                     type="text"
                     value={address}
@@ -35,7 +35,7 @@ const DeliveryForm = ({ firstName, setFirstName, lastName, setLastName, address,
                 />
             </div>
             <div>
-                <label className="block text-gray-700 mb-2">puhelin</label>
+                <label className="block text-gray-800 dark:text-gray-100 mb-2">puhelin</label>
                 <input
                     type="text"
                     value={phone}
@@ -44,7 +44,7 @@ const DeliveryForm = ({ firstName, setFirstName, lastName, setLastName, address,
                 />
             </div>
             <div>
-                <label className="block text-gray-700 mb-2">email</label>
+                <label className="block text-gray-800 dark:text-gray-100 mb-2">email</label>
                 <input
                     type="text"
                     value={email}
@@ -53,7 +53,7 @@ const DeliveryForm = ({ firstName, setFirstName, lastName, setLastName, address,
                 />
             </div>
             <div>
-                <label className="block text-gray-700 mb-2">Toimitusaika</label>
+                <label className="block text-gray-800 dark:text-gray-100 mb-2">Toimitusaika</label>
                 <select
                     value={deliveryTime}
                     onChange={(e) => setDeliveryTime(e.target.value)}

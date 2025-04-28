@@ -1,13 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { Home, Utensils, ShoppingCart, LogIn, Languages, MessageSquare, Info, User } from 'lucide-react';
+import { Home, Utensils, ShoppingCart, LogIn, Languages, MessageSquare, Info, User, Moon, Coffee } from 'lucide-react';
 import { useTheme } from "../contexts/ThemeContext";
+
+
+
 
 
 export default function Header() {
 
     const { darkMode, toggleDarkMode } = useTheme();
-
-
 
 
     return (
@@ -73,10 +74,18 @@ export default function Header() {
                             <li>
                                 <button
                                     onClick={toggleDarkMode}
-                                    className="theme-toggle ml-4 p-2 rounded-full bg-gray-700 dark:bg-gray-600 hover:bg-gray-600 dark:hover:bg-gray-500"
-                                    aria-label="chenge theme"
+                                    className="ml-4 p-2 rounded-full 
+           bg-white/90 dark:bg-gray-900/90 
+           backdrop-blur-sm
+           border-2 border-gray-300 dark:border-gray-600
+           shadow-lg hover:shadow-xl
+           transition-all duration-200"
                                 >
-                                    {darkMode ? '🌞' : '🌑'}
+                                    {darkMode ? (
+                                        <Coffee className="w-6 h-6 text-amber-600 stroke-[2.5]" />
+                                    ) : (
+                                        <Moon className="w-6 h-6 text-indigo-700 stroke-[2.5]" />
+                                    )}
                                 </button>
                             </li>
                         </ul>

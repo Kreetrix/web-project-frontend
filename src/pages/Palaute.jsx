@@ -25,11 +25,11 @@ const Palaute = () => {
     };
 
     return (
-        <div className="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out">
-            <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Palaute</h2>
+        <div className="max-w-xl mx-auto p-6 bg-white dark:bg-gray-600 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out">
+            <h2 className="text-3xl font-bold text-center text--800 mb-6">Palaute</h2>
 
             <div className="mb-6">
-                <label htmlFor="category" className="block text-lg font-medium text-gray-700 mb-2">
+                <label htmlFor="category" className="block text-lg font-medium text-gray-700 dark:text-white mb-2">
                     Mitä asianne koskee :
                 </label>
                 <select
@@ -61,7 +61,7 @@ const Palaute = () => {
             </div>
 
             <textarea
-                className="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-yellow-500 focus:outline-none mb-6 transition duration-200 ease-in-out"
+                className="w-full p-4 border border-gray-300 dark:text-white rounded-md shadow-sm focus:ring-2 focus:ring-yellow-500 focus:outline-none mb-6 transition duration-200 ease-in-out"
                 placeholder="Teidän kommentti..."
                 value={feedback}
                 onChange={handleFeedbackChange}
@@ -69,7 +69,7 @@ const Palaute = () => {
             ></textarea>
 
             <button
-                className="w-full py-3 bg-yellow-500 text-white font-semibold rounded-md hover:bg-yellow-600 transition-all duration-300 ease-in-out transform hover:scale-105"
+                className="w-full py-3 bg-yellow-500 text-white dark:text-gray-900 font-semibold rounded-md hover:bg-yellow-600 transition-all duration-300 ease-in-out transform hover:scale-105"
                 onClick={handleSubmit}
             >
                 Lähetä palaute

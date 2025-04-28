@@ -40,7 +40,7 @@ const SpecialOffer = () => {
   }, []);
 
   return (
-    <section className="p-8 rounded-xl shadow-lg bg-white dark:bg-gray-800">
+    <section className="p-8 rounded-xl shadow-lg">
       <h2 className="text-2xl font-bold mb-6 text-center text-yellow-600 dark:text-yellow-400">
         Tämän päivän erikoisuudet
       </h2>

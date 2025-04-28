@@ -23,7 +23,7 @@ export default function Dashboard() {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-start py-8 px-4">
-            <h1 className="text-3xl font-bold text-green-600 mb-6">Tervetuloa takaisin! 🍟</h1>
+            <h1 className="text-3xl font-bold text-orange-600 mb-6">Tervetuloa takaisin! 🍟</h1>
 
             <div className="flex gap-4 mb-6">
                 <button
