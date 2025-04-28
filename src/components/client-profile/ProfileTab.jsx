@@ -40,17 +40,15 @@ export default function ProfileTab() {                  /* TODO - add data from 
         alert("Profile updated successfully! ✅");
     };
 
-    // If user data isn't loaded yet
     useEffect(() => {
         if (!user) {
-            // You can add additional actions or show loading indicator
             return;
         }
     }, [user]);
 
     return (
-        <div className="space-y-6">
-            <div className="profile-info mb-4 space-y-2 bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+        <div className="space-y-6" >
+            <div className="profile-info mb-4 space-y-2 bg-white dark:bg-gray-600 p-4 rounded-lg shadow  ">
                 <p className="text-gray-800 dark:text-gray-200">
                     <strong className="font-medium dark:text-white">Username:</strong>
                     <span className="ml-2 text-gray-700 dark:text-gray-300">{user?.username || "Not set"}</span>

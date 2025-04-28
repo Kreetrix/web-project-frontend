@@ -5,7 +5,7 @@ const BurgerSection = () => {
 
     return (
         <>
-            <section className="burger-bg rounded-xl p-12 text-center text-white mb-12 animate-fadeIn">
+            <section className="burger-bg  rounded-xl p-12 text-center text-white mb-12 animate-fadeIn">
                 <h2 className="text-4xl font-bold mb-4 text-shadow">Tervetuloa Burger Palaceen!</h2>
                 <p className="text-xl text-shadow">Maistuvimmat burgereit kaupungissa 🔥</p>
                 <button onClick={() => navigate("/menu")}

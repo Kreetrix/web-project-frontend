@@ -1,6 +1,6 @@
 const PaymentMethod = ({ paymentMethod, setPaymentMethod }) => (
-    <div className="bg-white rounded-xl shadow-md p-6">
-        <h3 className="text-xl font-bold mb-6 text-gray-800">Maksutapa</h3>
+    <div className="bg-white  dark:bg-gray-600  rounded-xl shadow-md p-6">
+        <h3 className="text-xl font-bold mb-6 text-white">Maksutapa</h3>
 
         <div className="space-y-4">
             {/* Cash on delivery */}
@@ -18,8 +18,8 @@ const PaymentMethod = ({ paymentMethod, setPaymentMethod }) => (
                     className="h-5 w-5 text-yellow-600 focus:ring-yellow-500"
                 />
                 <div className="ml-3">
-                    <label htmlFor="cash" className="block text-sm font-medium text-gray-700">Käteisellä toimituksen yhteydessä</label>
-                    <p className="text-xs text-gray-500 mt-1">Maksa kun tuotteet saapuvat perille</p>
+                    <label htmlFor="cash" className="block text-sm font-medium text-gray-800 dark:text-gray-100">Käteisellä toimituksen yhteydessä</label>
+                    <p className="text-xs text-gray-800 dark:text-gray-100 mt-1">Maksa kun tuotteet saapuvat perille</p>
                 </div>
             </div>
 
@@ -38,8 +38,8 @@ const PaymentMethod = ({ paymentMethod, setPaymentMethod }) => (
                     className="h-5 w-5 text-yellow-600 focus:ring-yellow-500"
                 />
                 <div className="ml-3">
-                    <label htmlFor="card" className="block text-sm font-medium text-gray-700">Korttimaksu</label>
-                    <p className="text-xs text-gray-500 mt-1">Visa, Mastercard, American Express</p>
+                    <label htmlFor="card" className="block text-sm font-medium text-gray-800 dark:text-gray-100">Korttimaksu</label>
+                    <p className="text-xs text-gray-800 dark:text-gray-100 mt-1">Visa, Mastercard, American Express</p>
                 </div>
             </div>
 
@@ -58,8 +58,8 @@ const PaymentMethod = ({ paymentMethod, setPaymentMethod }) => (
                     className="h-5 w-5 text-yellow-600 focus:ring-yellow-500"
                 />
                 <div className="ml-3">
-                    <label htmlFor="mobilepay" className="block text-sm font-medium text-gray-700">MobilePay</label>
-                    <p className="text-xs text-gray-500 mt-1">Maksa helposti puhelimellasi</p>
+                    <label htmlFor="mobilepay" className="block text-sm font-medium text-gray-800 dark:text-gray-100">MobilePay</label>
+                    <p className="text-xs  text-gray-800 dark:text-gray-100 mt-1">Maksa helposti puhelimellasi</p>
                 </div>
             </div>
 
@@ -78,8 +78,8 @@ const PaymentMethod = ({ paymentMethod, setPaymentMethod }) => (
                     className="h-5 w-5 text-yellow-600 focus:ring-yellow-500"
                 />
                 <div className="ml-3">
-                    <label htmlFor="bank" className="block text-sm font-medium text-gray-700">Pankkisiirto</label>
-                    <p className="text-xs text-gray-500 mt-1">Tilisiirto  pankkitilille</p>
+                    <label htmlFor="bank" className="block text-sm font-medium text-gray-800 dark:text-gray-100">Pankkisiirto</label>
+                    <p className="text-xs text-gray-800 dark:text-gray-100 mt-1">Tilisiirto  pankkitilille</p>
                 </div>
             </div>
         </div>
