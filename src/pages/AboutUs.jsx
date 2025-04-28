@@ -1,26 +1,13 @@
 import React from "react";
-import { useTheme } from "../contexts/ThemeContext";
 
 
 
 export default function AboutUs() {
-    const { darkMode, toggleDarkMode } = useTheme();
 
 
     return (
         <div className="min-h-screen bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
             <main className="px-6 py-12 max-w-5xl mx-auto space-y-12 relative">
-
-
-                <button
-                    onClick={toggleDarkMode}
-                    className="absolute top-5 right-5 p-3 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-                >
-                    {darkMode ? "🌞" : "🌑"}
-                </button>
-
-
-
                 {/* Historia */}
                 <section>
                     <h2 className="text-3xl font-semibold mb-4">Meidän tarina</h2>

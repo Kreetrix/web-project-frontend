@@ -1,7 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { Home, Utensils, ShoppingCart, LogIn, Languages, MessageSquare, Info, User } from 'lucide-react';
+import { useTheme } from "../contexts/ThemeContext";
+
 
 export default function Header() {
+
+    const { darkMode, toggleDarkMode } = useTheme();
+
+
+
+
     return (
         <header className="bg-yellow-700 text-white shadow-lg sticky top-0 z-50 ">
             <div className="container mx-auto px-5 py-4 flex flex-col md:flex-row items-center justify-between">
@@ -61,6 +69,15 @@ export default function Header() {
                                     <User size={14} />
                                     Profile Test
                                 </NavLink>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={toggleDarkMode}
+                                    className="theme-toggle ml-4 p-2 rounded-full bg-gray-700 dark:bg-gray-600 hover:bg-gray-600 dark:hover:bg-gray-500"
+                                    aria-label="chenge theme"
+                                >
+                                    {darkMode ? '🌞' : '🌑'}
+                                </button>
                             </li>
                         </ul>
                     </div>
