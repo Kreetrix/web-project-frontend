@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root {
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -8,7 +9,7 @@
     align-content: center;
 
     color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
+    color: #213547;
     background: linear-gradient(to right, #f9f9f9, #e7e7e7);
 
     font-synthesis: none;
@@ -17,12 +18,24 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.dark,
+[data-theme=dark] {
+    color: rgba(255, 255, 255, 0.87);
+    background: linear-gradient(to right, #1a1a1a, #2d2d2d);
+}
+
 .custom-card {
     transition: all 0.3s ease;
     border: none;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
+.dark .custom-card,
+[data-theme=dark] .custom-card {
+    background-color: #333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.87);
 }
 
 .custom-card:hover {
@@ -30,6 +43,10 @@
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
 }
 
+.dark .custom-card:hover,
+[data-theme=dark] .custom-card:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
 
 .text-shadow {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -42,11 +59,21 @@
     position: relative;
     transition: all 0.3s ease;
     pointer-events: auto;
+}
 
+.dark .burger-bg,
+[data-theme=dark] .burger-bg {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+        url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1899&q=80') center/cover no-repeat;
 }
 
 header {
     background-color: #2c3e50;
+}
+
+.dark header,
+[data-theme=dark] header {
+    background-color: #1a242f;
 }
 
 footer {
@@ -55,7 +82,10 @@ footer {
     padding: 1rem;
 }
 
-
+.dark footer,
+[data-theme=dark] footer {
+    background-color: #1a242f;
+}
 
 .animate-fadeIn {
     animation: fadeIn 1s ease-out forwards;
@@ -73,7 +103,6 @@ footer {
     }
 }
 
-
 @media (max-width: 768px) {
     .burger-bg {
         padding: 4rem 1rem;
@@ -85,29 +114,23 @@ footer {
     }
 }
 
-
 h1 {
     font-size: 2em;
     line-height: 1.1;
 }
 
-
-@media (prefers-color-scheme: light) {
-    :root {
-        color: #213547;
-        background-color: #ffffff;
+@media (prefers-color-scheme: dark) {
+    :root:not(.light) {
+        color: rgba(255, 255, 255, 0.87);
+        background-color: #242424;
     }
 
-    a:hover {
+    a:hover:not(.light a) {
         color: #747bff;
     }
-
-
 }
 
-
-/*  nav button   */
-
+/* Nav button */
 .navbar-strip {
     background-color: #f1c40f;
     padding: 0.5rem 1rem;
@@ -115,6 +138,12 @@ h1 {
     display: inline-flex;
     gap: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dark .navbar-strip,
+[data-theme=dark] .navbar-strip {
+    background-color: #d4ac0d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .nav-button {
@@ -127,8 +156,43 @@ h1 {
     border: 2px solid transparent;
 }
 
+.dark .nav-button,
+[data-theme=dark] .nav-button {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #f8f8f8;
+}
+
 .nav-button:hover {
     background-color: #fef2c0;
     border-color: #2c3e50;
     color: #2c3e50;
+}
+
+.dark .nav-button:hover,
+[data-theme=dark] .nav-button:hover {
+    background-color: #e2d8a8;
+    border-color: #1f2c38;
+    color: #1f2c38;
+}
+
+.theme-toggle {
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: currentColor;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.dark .theme-toggle,
+[data-theme=dark] .theme-toggle {
+    color: rgba(255, 255, 255, 0.87);
 }
