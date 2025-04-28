@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTheme } from "../contexts/ThemeContext";
+import { Coffee, Moon } from "lucide-react";
 
 const Sidebar = () => {
     const { darkMode, toggleDarkMode } = useTheme();
@@ -17,10 +18,18 @@ const Sidebar = () => {
                 >Logout</Link>
                 <button
                     onClick={toggleDarkMode}
-                    className="theme-toggle ml-4 p-2 rounded-full bg-gray-700 dark:bg-gray-600 hover:bg-gray-600 dark:hover:bg-gray-500"
-                    aria-label="chenge theme"
+                    className="ml-4 p-2 rounded-full 
+           bg-white/90 dark:bg-gray-900/90 
+           backdrop-blur-sm
+           border-2 border-gray-300 dark:border-gray-600
+           shadow-lg hover:shadow-xl
+           transition-all duration-200"
                 >
-                    {darkMode ? '🌞' : '🌑'}
+                    {darkMode ? (
+                        <Coffee className="w-6 h-6 text-amber-600 " />
+                    ) : (
+                        <Moon className="w-6 h-6 text-yellow-700 " />
+                    )}
                 </button>
             </nav>
         </aside>
