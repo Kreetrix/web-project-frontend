@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Home from './pages/Home';
+import Home from "./pages/Home";
 import Layout from "./components/Layout";
 import Menu from "./pages/Menu";
 import Order from "./pages/Order";
@@ -14,8 +14,7 @@ import OrdersPage from "./admin/OrdersPage";
 import AdminFeedbacks from "./admin/Feedbacks";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-
-
+import AdminRoute from "./components/admin/AdminRoute";
 
 function App() {
   return (
@@ -30,24 +29,25 @@ function App() {
         <Route path="palaute" element={<Palaute />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
-
       </Route>
 
-      <Route path="/admin" element={<AdminLayout />}>
+      <Route
+        path="/admin"
+        element={
+          <AdminRoute>
+            <AdminLayout />
+          </AdminRoute>
+        }
+      >
         <Route index element={<AdminDashboard />} />
         <Route path="admindashboard" element={<AdminDashboard />} />
 
         <Route path="products" element={<Products />} />
         <Route path="orders" element={<OrdersPage />} />
         <Route path="feedbacks" element={<AdminFeedbacks />} />
-
       </Route>
-
-
     </Routes>
   );
 }
 
 export default App;
-
