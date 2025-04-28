@@ -29,18 +29,18 @@ export default function Register() {
               body: JSON.stringify(formData),
             });
         
-            const data = await response.json();
+            const status = await response.json();
         
             if (!response.ok) {
-              throw new Error(data.message || 'Registration failed');
+              throw new Error(status || 'Registration failed');
             }
             
             //TODO: redirect!
-            console.log('Registration successful:', data);
+            alert('Registration successful! TODO: REDIRECT');
             
           } catch (error) {
             console.error('Registration error:', error.message);
-            alert(error.message);
+            alert(error);
           }
     };
 
