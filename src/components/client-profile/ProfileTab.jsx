@@ -50,13 +50,31 @@ export default function ProfileTab() {                  /* TODO - add data from 
 
     return (
         <div className="space-y-6">
-            <div className="profile-info mb-4 space-y-2">
-                <p><strong>Username:</strong> <span>{user?.username || "Not set"}</span></p>
-                <p><strong>First name:</strong> <span>{user?.firstName || "Not set"}</span></p>
-                <p><strong>Last name:</strong> <span>{user?.lastName || "Not set"}</span></p>
-                <p><strong>Address:</strong> <span>{user?.address || "Not set"}</span></p>
-                <p><strong>Phone:</strong> <span>{user?.phone || "Not set"}</span></p>
-                <p><strong>Email:</strong> <span>{user?.email || "Not set"}</span></p>
+            <div className="profile-info mb-4 space-y-2 bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+                <p className="text-gray-800 dark:text-gray-200">
+                    <strong className="font-medium dark:text-white">Username:</strong>
+                    <span className="ml-2 text-gray-700 dark:text-gray-300">{user?.username || "Not set"}</span>
+                </p>
+                <p className="text-gray-800 dark:text-gray-200">
+                    <strong className="font-medium dark:text-white">First name:</strong>
+                    <span className="ml-2 text-gray-700 dark:text-gray-300">{user?.firstName || "Not set"}</span>
+                </p>
+                <p className="text-gray-800 dark:text-gray-200">
+                    <strong className="font-medium dark:text-white">Last name:</strong>
+                    <span className="ml-2 text-gray-700 dark:text-gray-300">{user?.lastName || "Not set"}</span>
+                </p>
+                <p className="text-gray-800 dark:text-gray-200">
+                    <strong className="font-medium dark:text-white">Address:</strong>
+                    <span className="ml-2 text-gray-700 dark:text-gray-300">{user?.address || "Not set"}</span>
+                </p>
+                <p className="text-gray-800 dark:text-gray-200">
+                    <strong className="font-medium dark:text-white">Phone:</strong>
+                    <span className="ml-2 text-gray-700 dark:text-gray-300">{user?.phone || "Not set"}</span>
+                </p>
+                <p className="text-gray-800 dark:text-gray-200">
+                    <strong className="font-medium dark:text-white">Email:</strong>
+                    <span className="ml-2 text-gray-700 dark:text-gray-300">{user?.email || "Not set"}</span>
+                </p>
             </div>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">

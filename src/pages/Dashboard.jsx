@@ -22,7 +22,7 @@ export default function Dashboard() {
     };
 
     return (
-        <main className="min-h-screen flex flex-col items-center justify-start bg-gray-50 py-8 px-4">
+        <div className="min-h-screen flex flex-col items-center justify-start py-8 px-4">
             <h1 className="text-3xl font-bold text-green-600 mb-6">Tervetuloa takaisin! 🍟</h1>
 
             <div className="flex gap-4 mb-6">
@@ -53,6 +53,6 @@ export default function Dashboard() {
             </div>
 
             <section className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-lg">{renderTab()}</section>
-        </main>
+        </div>
     );
 }

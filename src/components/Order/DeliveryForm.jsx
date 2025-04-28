@@ -4,7 +4,8 @@ import React from "react";
 const DeliveryForm = ({ firstName, setFirstName, lastName, setLastName, address, setAddress, phone,
     setPhone, email, setEmail, deliveryTime, setDeliveryTime }) => (
     <div className="bg-white rounded-xl shadow-md p-6 mb-6">
-        <h3 className="text-xl font-bold mb-4">Toimitustiedot</h3>
+        <h3 className="text-xl font-bold mb-4  text-gray-800">Toimitustiedot</h3>
+
         <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
                 <label className="block text-gray-700 mb-2">Etunimi</label>

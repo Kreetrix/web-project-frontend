@@ -7,7 +7,7 @@ const Cart = ({ cartItems, removeFromCart }) => {
 
     return (
         <div className="bg-white rounded-xl shadow-md p-6 sticky top-4 max-h-[90vh] overflow-y-auto">
-            <h3 className="text-xl font-bold mb-4">Ostoskori</h3>
+            <h3 className="text-xl font-bold mb-4  text-gray-800">Ostoskori</h3>
 
             <div className="space-y-4 mb-6">
                 {cartItems.length === 0 ? (
@@ -17,7 +17,7 @@ const Cart = ({ cartItems, removeFromCart }) => {
                         <div key={item.id} className="flex justify-between border-b pb-2">
                             <div>
                                 <p className="font-medium">{item.name}</p>
-                                <p className="text-sm text-gray-500">{item.quantity} kpl</p>
+                                <p className="text-sm text-gray-800">{item.quantity} kpl</p>
                             </div>
                             <div className="text-right">
                                 <p className="font-medium">{(item.price * item.quantity).toFixed(2)}€</p>
