@@ -13,6 +13,7 @@ export const fetchProducts = async () => {
             price: product.price,
             description: product.description,
             category: product.category,
+            allergies: product.allergies.map(allergy => allergy.name),
         }));
     } catch (error) {
         console.error('Error fetching products:', error);
