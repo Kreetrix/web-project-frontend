@@ -24,7 +24,7 @@ const Cart = ({ isFormValid }) => {
     };
     console.log("Order data:", orderData); // Log the order data for debugging
     ("Order data:", orderData); // Log the order data for debugging
-    
+
 
     try {
       const response = await sendOrder(orderData);
@@ -90,11 +90,10 @@ const Cart = ({ isFormValid }) => {
 
           <button
             onClick={handleOrder}
-            className={`w-full bg-gradient-to-r from-orange-300 via-orange-400 to-yellow-500 text-white font-bold py-3 px-4 rounded-lg mt-6 shadow-md transition-all duration-300 ${
-              !isFormValid
+            className={`w-full bg-gradient-to-r from-orange-300 via-orange-400 to-yellow-500 text-white font-bold py-3 px-4 rounded-lg mt-6 shadow-md transition-all duration-300 ${!isFormValid
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:from-yellow-500 hover:to-yellow-700"
-            }`}
+              }`}
             disabled={!isFormValid}
           >
             Maksa tilaus

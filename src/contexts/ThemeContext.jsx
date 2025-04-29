@@ -9,14 +9,18 @@ export function ThemeProvider({ children }) {
 
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme');
+
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        const initialMode = savedTheme ? savedTheme === 'dark' : prefersDark;
-        setDarkMode(initialMode);
+        const initialMode = savedTheme === 'dark'
+            || (!savedTheme && prefersDark);
 
+        setDarkMode(initialMode);
         applyTheme(initialMode);
         setMounted(true);
     }, []);
+
+
 
     const applyTheme = (isDark) => {
         if (isDark) {
