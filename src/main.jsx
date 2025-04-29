@@ -7,6 +7,7 @@ import "./styles/main.css";
 import { UserProvider } from "./contexts/UserContext";
 import { ThemeProvider } from './contexts/ThemeContext';
 import { CartProvider } from "./contexts/CartContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 
 createRoot(document.getElementById("root")).render(
@@ -14,13 +15,13 @@ createRoot(document.getElementById("root")).render(
 
     <BrowserRouter>
     <ThemeProvider>
-    <CartProvider>
+    <AuthProvider>
       <UserProvider>
         <CartProvider>
           <App />
         </CartProvider>
       </UserProvider>
-      </CartProvider>
+      </AuthProvider>
       </ ThemeProvider>
     </BrowserRouter>
   </StrictMode >

@@ -4,29 +4,42 @@ import {
   Utensils,
   ShoppingCart,
   LogIn,
+  LogOut,
   Languages,
   MessageSquare,
   Info,
-  User, Moon, Coffee,
+  User,
+  Moon,
+  Coffee,
 } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useTheme } from "../contexts/ThemeContext";
-
-
-
-
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Header() {
+<<<<<<< HEAD
 
   const { cartItems } = useCart();
+=======
+  const { cartItems, clearCart } = useCart();
+>>>>>>> f9a9171f5a1f4bc5d5537c637f759e4164a53202
   const cartItemCount = cartItems.reduce(
     (total, item) => total + item.quantity,
     0
   );
 
+  const { darkMode, toggleDarkMode } = useTheme();
+  const { isLoggedIn, logout } = useAuth();
 
+<<<<<<< HEAD
   const { darkMode, toggleDarkMode } = useTheme();
 
+=======
+  const handleLogout = () => {
+    clearCart();
+    logout();
+  };
+>>>>>>> f9a9171f5a1f4bc5d5537c637f759e4164a53202
 
   return (
     <header className="bg-yellow-700 text-white shadow-lg sticky top-0 z-50 ">
@@ -81,13 +94,23 @@ export default function Header() {
                 )}
               </li>
               <li>
-                <NavLink
-                  to="/login"
-                  className="nav-button flex items-center gap-1"
-                >
-                  <LogIn size={14} />
-                  Kirjaudu
-                </NavLink>
+                {isLoggedIn ? (
+                  <button
+                    onClick={handleLogout}
+                    className="nav-button flex items-center gap-1"
+                  >
+                    <LogOut size={14} />
+                    Kirjaudu ulos
+                  </button>
+                ) : (
+                  <NavLink
+                    to="/login"
+                    className="nav-button flex items-center gap-1"
+                  >
+                    <LogIn size={14} />
+                    Kirjaudu
+                  </NavLink>
+                )}
               </li>
               <li>
                 <NavLink

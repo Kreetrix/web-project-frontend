@@ -40,6 +40,10 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  const clearCart = () => {
+    setCartItems([]); // Clear all items from the cart
+  };
+
   // Save daily specials to local storage whenever they change
   useEffect(() => {
     localStorage.setItem("dailySpecials", JSON.stringify(dailySpecials));
@@ -51,6 +55,7 @@ export const CartProvider = ({ children }) => {
         cartItems,
         addToCart,
         removeFromCart,
+        clearCart,
         dailySpecials,
         setDailySpecials,
       }}

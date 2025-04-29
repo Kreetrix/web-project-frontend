@@ -1,12 +1,14 @@
 import { Mail, KeyRound, LogIn } from 'lucide-react';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { login } = useAuth();
 
 
     /*  JUST TEST   
@@ -48,9 +50,10 @@ export default function LoginPage() {
             const { accessToken, user } = await response.json();
 
             localStorage.setItem('accessToken', accessToken);
+            login(accessToken); // Call the login function from AuthContext
             console.log('Login successful! -> ', user);
 
-            navigate('/dashboard');
+            navigate('/dashboard'); // Redirect to dashboard after login
 
         } catch (error) {
             console.error('Login error:', error.message);
