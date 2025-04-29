@@ -1,18 +1,36 @@
 import { useCart } from "../../contexts/CartContext";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function MenuItemCard({ item }) {
   const { addToCart, dailySpecials } = useCart();
+  const navigate = useNavigate();
 
   const isSpecial = dailySpecials.some((special) => special.id === item.ID);
   const discountedPrice = isSpecial ? (item.price * 0.85).toFixed(2) : null;
 
+
   const handleAddToCart = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) {
+      // If no access token, prompt the user to log in
+      const confirmLogin = window.confirm(
+        "Sinun täytyy kirjautua sisään lisätäksesi tuotteen koriin. Haluatko kirjautua sisään nyt?"
+      );
+      if (confirmLogin) {
+        navigate("/login"); // Redirect to the login page
+      }
+      return;
+    }
+
+    // Add the product to the cart if the user is logged in
     addToCart({
       ...item,
       price: isSpecial ? parseFloat(discountedPrice) : item.price,
     });
   };
+
+  
 
   return (
     <div className="bg-white dark:bg-gray-500 rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transition-all duration-300 hover:scale-105 hover:shadow-xl">
