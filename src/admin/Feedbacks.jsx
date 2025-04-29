@@ -33,13 +33,13 @@ const AdminFeedbacks = () => {
             : feedbacks.filter((f) => f.category === selectedCategory);
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow">
+        <div className="bg-white dark:bg-gray-600 p-6 rounded-lg shadow">
             <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold text-gray-800">Asiakaspalautteet</h2>
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Asiakaspalautteet</h2>
                 <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="border border-gray-300 rounded px-4 py-2"
+                    className="border border-gray-300 rounded px-4 py-2 "
                 >
                     <option value="all">Kaikki</option>
                     <option value="product">Tuote</option>
@@ -55,7 +55,7 @@ const AdminFeedbacks = () => {
                         key={f.id}
                         className="border-b pb-4 last:border-none"
                     >
-                        <div className="flex justify-between text-sm text-gray-500 mb-1">
+                        <div className="flex justify-between text-sm text-gray-500 dark:text-white mb-1">
                             <span>Kategoria: {f.category}</span>
                             <span>{f.date}</span>
                         </div>
@@ -63,13 +63,13 @@ const AdminFeedbacks = () => {
                             {[1, 2, 3, 4, 5].map((i) => (
                                 <span
                                     key={i}
-                                    className={`text-lg ${i <= f.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                                    className={`text-lg ${i <= f.rating ? 'text-yellow-400' : 'text-gray-300 '}`}
                                 >
                                     ★
                                 </span>
                             ))}
                         </div>
-                        <p className="text-gray-800">{f.comment}</p>
+                        <p className="text-gray-800 dark:text-white">{f.comment}</p>
                     </div>
                 ))}
             </div>

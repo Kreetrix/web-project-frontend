@@ -15,8 +15,8 @@ export default function OrdersPage() {
     };
 
     return (
-        <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4">Tilaukset</h1>
+        <div className="p-6 bg-white dark:bg-gray-600  ">
+            <h1 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Tilaukset</h1>
             <OrderTable orders={orders} onStatusChange={handleStatusChange} />
         </div>
     );

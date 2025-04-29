@@ -18,17 +18,19 @@ const Sidebar = () => {
                 >Logout</Link>
                 <button
                     onClick={toggleDarkMode}
-                    className="ml-4 p-2 rounded-full 
+                    className="ml-4 p-3 rounded-full
            bg-white/90 dark:bg-gray-900/90 
            backdrop-blur-sm
            border-2 border-gray-300 dark:border-gray-600
            shadow-lg hover:shadow-xl
-           transition-all duration-200"
+           transition-all duration-200
+           w-12 h-12 flex items-center justify-center"
+                    aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
                 >
                     {darkMode ? (
-                        <Coffee className="w-6 h-6 text-amber-600 " />
+                        <Coffee className="w-7 h-7 text-amber-600 transition-transform hover:rotate-12" />
                     ) : (
-                        <Moon className="w-6 h-6 text-yellow-700 " />
+                        <Moon className="w-7 h-7 text-yellow-700 transition-transform hover:rotate-12" />
                     )}
                 </button>
             </nav>

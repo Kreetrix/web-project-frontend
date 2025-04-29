@@ -2,7 +2,7 @@ const AdminDashboard = () => {
   //   const [loading, setLoading] = useState(true);
 
   return (
-    <div className="p-6">
+    <div className="p-6 dark:bg-gray-600" >
       <h1 className="text-3xl font-bold mb-6 text-gray-800">
         Tervetuloa, Admin! 👋
       </h1>
@@ -15,16 +15,16 @@ const AdminDashboard = () => {
           { title: "Keskimääräinen tilaus", value: "21,30 €" },
           { title: "Tämän viikon myynti", value: "450,00 €" },
         ].map((card, i) => (
-          <div key={i} className="p-6 bg-white rounded-lg shadow">
+          <div key={i} className="p-6 bg-white dark:bg-gray-400 rounded-lg shadow">
             <h2 className="text-xl font-semibold text-gray-700">
               {card.title}
             </h2>
-            <p className="text-2xl text-yellow-600 mt-2">{card.value}</p>
+            <p className="text-2xl text-yellow-800 mt-2">{card.value}</p>
           </div>
         ))}
 
         {/* Tuote päivälle */}
-        <div className="p-6 bg-yellow-100 border border-yellow-300 rounded-lg shadow-md">
+        <div className="p-6 bg-yellow-200 border border-yellow-300 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold text-yellow-800 mb-2">
             🔥 Päivän tuote
           </h2>
@@ -45,7 +45,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Suosituimmat tuotteet */}
-      <div className="bg-white p-6 rounded-lg shadow">
+      <div className="bg-white  dark:bg-gray-400 p-6 rounded-lg shadow">
         <h4 className="text-lg font-medium text-gray-900 mb-4">
           📈 Suosituimmat tuotteet
         </h4>

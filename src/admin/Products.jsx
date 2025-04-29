@@ -208,7 +208,7 @@ export default function AdminProductList() {
             {/* Edit Product Form */}
             {editingProduct && (
                 <div className="mb-6 p-4 border border-blue-300 rounded-lg bg-blue-50">
-                    <h3 className="text-xl font-semibold mb-3">Edit Product</h3>
+                    <h3 className="text-xl font-semibold  mb-3">Edit Product</h3>
                     <div className="space-y-3">
                         <input
                             type="text"
