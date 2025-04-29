@@ -33,7 +33,7 @@
 
 .dark .custom-card,
 [data-theme=dark] .custom-card {
-    background-color: #333;
+    background-color: #4B5563;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     color: rgba(255, 255, 255, 0.87);
 }
