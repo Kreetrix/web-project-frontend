@@ -40,22 +40,7 @@ const SpecialOffer = () => {
 
     getSpecialOffers();
   }, [dailySpecials, setDailySpecials]);
-<<<<<<< HEAD
-=======
 
-  if (specialOffers.length === 0) {
-    return (
-      <section className="bg-white p-8 rounded-xl shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-center text-yellow-600">
-          Tämän päivän erikoisuudet
-        </h2>
-        <p className="text-center text-gray-500">
-          Ladataan erikoistarjouksia...
-        </p>
-      </section>
-    );
-  }
->>>>>>> b3eaea0fdc5b599eec64382f7f81da3520eec0e5
 
   return (
     <section className="p-8 rounded-xl shadow-lg">
@@ -83,12 +68,6 @@ const SpecialOffer = () => {
                 <p className="text-gray-600 dark:text-gray-300 mb-2">{product.description}</p>
                 <div className="flex items-center gap-2">
                   <p className="text-gray-400 dark:text-gray-500 line-through">{product.price.toFixed(2)}€</p>
-                  <p className="text-red-600 dark:text-red-400 font-bold text-lg">
-                    {product.discountedPrice.toFixed(2)}€
-                  </p>
-                  <span className="ml-auto bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs font-semibold px-2 py-1 rounded-full">
-                    -{Math.round((1 - product.discountedPrice / product.price) * 100)}%
-                  </span>
                 </div>
               </div>
             </div>
