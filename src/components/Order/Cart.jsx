@@ -1,13 +1,39 @@
 import React from "react";
 import { useCart } from "../../contexts/CartContext";
+import { sendOrder } from "../../data/sendOrder";
 
-const Cart = () => {
+const Cart = ({ isFormValid }) => {
   const { cartItems, removeFromCart } = useCart();
 
   const calculateTotal = () => {
     return cartItems
       .reduce((total, item) => total + item.price * item.quantity, 0)
       .toFixed(2);
+  };
+
+  const handleOrder = async () => {
+    const orderData = {
+      //TODO : ADD USER ID TO THE ORDER
+      user_id: 1, // Replace with the actual user ID if available
+      items: cartItems.map((item) => ({
+        product_id: item.ID,
+        quantity: item.quantity,
+      })),
+      price: parseFloat(calculateTotal()) + 5.9, // Add delivery fee
+      status: "completed",
+    };
+    console.log("Order data:", orderData); // Log the order data for debugging
+    ("Order data:", orderData); // Log the order data for debugging
+    
+
+    try {
+      const response = await sendOrder(orderData);
+      console.log("Order sent successfully:", response);
+      alert("Tilaus lähetetty onnistuneesti!");
+    } catch (error) {
+      console.log("Error sending order:", error);
+      alert("Tilausta ei voitu lähettää. Yritä uudelleen.");
+    }
   };
 
   return (
@@ -62,7 +88,15 @@ const Cart = () => {
             </span>
           </div>
 
-          <button className="w-full bg-gradient-to-r from-orange-300 via-orange-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-700 text-white font-bold py-3 px-4 rounded-lg mt-6 shadow-md transition-all duration-300">
+          <button
+            onClick={handleOrder}
+            className={`w-full bg-gradient-to-r from-orange-300 via-orange-400 to-yellow-500 text-white font-bold py-3 px-4 rounded-lg mt-6 shadow-md transition-all duration-300 ${
+              !isFormValid
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:from-yellow-500 hover:to-yellow-700"
+            }`}
+            disabled={!isFormValid}
+          >
             Maksa tilaus
           </button>
         </div>

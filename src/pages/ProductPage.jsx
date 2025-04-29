@@ -1,14 +1,14 @@
-import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import fetchProducts from "../data/fetchProducts";
 import { useCart } from "../contexts/CartContext";
 
 function ProductPage() {
   const { id } = useParams();
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { addToCart, dailySpecials } = useCart(); // Access daily specials from context
+  const { addToCart, dailySpecials } = useCart();
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -106,7 +106,7 @@ function ProductPage() {
         </div>
         <div className="flex justify-center mt-8">
           <button
-            onClick={handleAddToCart} // Use the updated handler
+            onClick={handleAddToCart}
             className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition-colors"
           >
             Lisää koriin
