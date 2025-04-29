@@ -1,7 +1,7 @@
 import React from "react";
 import { useCart } from "../../contexts/CartContext";
 
-const Cart = () => {
+const Cart = ({ isFormValid }) => {
   const { cartItems, removeFromCart } = useCart();
 
   const calculateTotal = () => {
@@ -15,7 +15,7 @@ const Cart = () => {
       <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">
         Ostoskori
       </h3>
-
+  
       <div className="space-y-4 mb-6">
         {cartItems.length === 0 ? (
           <p className="text-gray-600 dark:text-gray-400">Ostoskori on tyhjä</p>
@@ -61,8 +61,15 @@ const Cart = () => {
               {(parseFloat(calculateTotal()) + 5.9).toFixed(2)}€
             </span>
           </div>
-
-          <button className="w-full bg-gradient-to-r from-orange-300 via-orange-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-700 text-white font-bold py-3 px-4 rounded-lg mt-6 shadow-md transition-all duration-300">
+  
+          <button
+            className={`w-full bg-gradient-to-r from-orange-300 via-orange-400 to-yellow-500 text-white font-bold py-3 px-4 rounded-lg mt-6 shadow-md transition-all duration-300 ${
+              !isFormValid
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:from-yellow-500 hover:to-yellow-700"
+            }`}
+            disabled={!isFormValid}
+          >
             Maksa tilaus
           </button>
         </div>
