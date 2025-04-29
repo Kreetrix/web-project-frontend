@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import TabComponent from "../components/Menu/TabComponent";
 import MenuItemCard from "../components/Menu/MenuItemCard";
 import { Link } from "react-router-dom";
+import { useCart } from "../contexts/CartContext";
 
 const Menu = () => {
   const [menuData, setMenuData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { dailySpecials } = useCart(); // Access daily specials from context
 
   const categories = [
     "burger",
@@ -19,7 +21,6 @@ const Menu = () => {
     "salad",
   ];
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
-
 
   useEffect(() => {
     const fetchMenuData = async () => {
@@ -39,7 +40,6 @@ const Menu = () => {
 
     fetchMenuData();
   }, []);
-
 
   const filteredItems = menuData.filter(
     (item) => item.category === selectedCategory
@@ -61,11 +61,26 @@ const Menu = () => {
       />
       <div className="grid md:grid-cols-2 gap-6">
         {filteredItems.length > 0 ? (
-          filteredItems.map((item) => (
-            <Link to={`/product/${item.ID}`} key={item.ID}>
-              <MenuItemCard item={item} />
-            </Link>
-          ))
+          filteredItems.map((item) => {
+            const isSpecial = dailySpecials.some(
+              (special) => special.id === item.ID
+            );
+            const discountedPrice = isSpecial
+              ? (item.price * 0.85).toFixed(2)
+              : null;
+
+            return (
+              <Link to={`/product/${item.ID}`} key={item.ID}>
+                <MenuItemCard
+                  item={{
+                    ...item,
+                    discountedPrice,
+                    isSpecial,
+                  }}
+                />
+              </Link>
+            );
+          })
         ) : (
           <p className="text-center text-lg font-medium col-span-full">
             No items found in this category.
