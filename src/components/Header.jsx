@@ -17,12 +17,7 @@ import { useTheme } from "../contexts/ThemeContext";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function Header() {
-<<<<<<< HEAD
-
-  const { cartItems } = useCart();
-=======
   const { cartItems, clearCart } = useCart();
->>>>>>> f9a9171f5a1f4bc5d5537c637f759e4164a53202
   const cartItemCount = cartItems.reduce(
     (total, item) => total + item.quantity,
     0
@@ -31,15 +26,10 @@ export default function Header() {
   const { darkMode, toggleDarkMode } = useTheme();
   const { isLoggedIn, logout } = useAuth();
 
-<<<<<<< HEAD
-  const { darkMode, toggleDarkMode } = useTheme();
-
-=======
   const handleLogout = () => {
     clearCart();
     logout();
   };
->>>>>>> f9a9171f5a1f4bc5d5537c637f759e4164a53202
 
   return (
     <header className="bg-yellow-700 text-white shadow-lg sticky top-0 z-50 ">
