@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import { useEffect, useState } from "react";
 import fetchProducts from "../data/fetchProducts";
 import { useCart } from "../contexts/CartContext";
 
 function ProductPage() {
   const { id } = useParams();
+  const navigate = useNavigate(); // Initialize useNavigate
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const { addToCart, dailySpecials } = useCart(); // Access daily specials from context
@@ -40,6 +41,23 @@ function ProductPage() {
   const isSpecial = dailySpecials.some((special) => special.id === product.id);
   const discountedPrice = isSpecial ? (product.price * 0.85).toFixed(2) : null;
 
+  const handleAddToCart = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) {
+      // If no access token, prompt the user to log in
+      const confirmLogin = window.confirm(
+        "Sinun täytyy kirjautua sisään lisätäksesi tuotteen koriin. Haluatko kirjautua sisään nyt?"
+      );
+      if (confirmLogin) {
+        navigate("/login"); // Redirect to the login page
+      }
+      return;
+    }
+
+    // Add the product to the cart if the user is logged in
+    addToCart(product);
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-8 space-y-8">
       <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-300 space-y-6">
@@ -58,17 +76,17 @@ function ProductPage() {
             {product.description}
           </p>
           {product.allergies && product.allergies.length > 0 && (
-          <div className="border-t border-gray-300 pt-4">
-            <h3 className="text-xl font-bold text-gray-800 text-center">
-              Allergiat
-            </h3>
-            <ul className="list-disc list-inside text-gray-700 text-center">
-              {product.allergies.map((allergy, index) => (
-                <li key={index}>{allergy}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+            <div className="border-t border-gray-300 pt-4">
+              <h3 className="text-xl font-bold text-gray-800 text-center">
+                Allergiat
+              </h3>
+              <ul className="list-disc list-inside text-gray-700 text-center">
+                {product.allergies.map((allergy, index) => (
+                  <li key={index}>{allergy}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
         <div className="border-t border-gray-300 pt-4">
           {isSpecial ? (
@@ -88,7 +106,7 @@ function ProductPage() {
         </div>
         <div className="flex justify-center mt-8">
           <button
-            onClick={() => addToCart(product)}
+            onClick={handleAddToCart} // Use the updated handler
             className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition-colors"
           >
             Lisää koriin
