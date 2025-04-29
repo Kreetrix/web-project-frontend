@@ -2,7 +2,6 @@ import { useState } from "react";
 import ProfileTab from "../components/client-profile/ProfileTab";
 import OrdersTab from "../components/client-profile/OrdersTab";
 import FavoritesTab from "../components/client-profile/FavoritesTab";
-import SettingsTab from "../components/client-profile/SettingsTab";
 
 export default function Dashboard() {
     const [activeTab, setActiveTab] = useState("profile");
@@ -13,8 +12,6 @@ export default function Dashboard() {
                 return <OrdersTab />;
             case "favorites":
                 return <FavoritesTab />;
-            case "settings":
-                return <SettingsTab />;
             case "profile":
             default:
                 return <ProfileTab />;
@@ -44,12 +41,7 @@ export default function Dashboard() {
                 >
                     Suosikit
                 </button>
-                <button
-                    onClick={() => setActiveTab("settings")}
-                    className="px-6 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-bold rounded-md transition-all duration-200"
-                >
-                    Asetukset
-                </button>
+
             </div>
 
             <section className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-lg">{renderTab()}</section>

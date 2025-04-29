@@ -1,0 +1,23 @@
+.burger-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.rotating-burger {
+    width: 120px;
+    height: 120px;
+    animation: spin 5s linear infinite;
+    transition: transform 0.3s ease;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

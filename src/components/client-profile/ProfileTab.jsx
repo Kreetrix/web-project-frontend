@@ -75,6 +75,9 @@ export default function ProfileTab() {                  /* TODO - add data from 
                 </p>
             </div>
 
+
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-800">Update your profile</h2>
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input

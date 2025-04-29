@@ -26,7 +26,7 @@ const Sidebar = () => {
                 <Link to="/admin/products" className="nav-button">Tuotteet</Link>
                 <Link to="/admin/orders" className="nav-button">Tilaukset</Link>
                 <Link to="/admin/feedbacks" className="nav-button">Feedbacks</Link>
-                <Link to="/" className="nav-button">Our main page</Link>
+                <Link to="/" className="nav-button">Ravintolan sivu</Link>
 
                 <Link to="/" className="bg-orange-600 text-white font-bold py-2 px-4 rounded hover:bg-orange-700">
                     <button
