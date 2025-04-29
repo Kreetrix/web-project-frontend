@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import TabComponent from "../components/Menu/TabComponent";
 import MenuItemCard from "../components/Menu/MenuItemCard";
-import { Link } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 
 const Menu = () => {
   const [menuData, setMenuData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { dailySpecials } = useCart(); // Access daily specials from context
+  const { dailySpecials } = useCart();
 
   const categories = [
     "burger",
@@ -70,15 +69,14 @@ const Menu = () => {
               : null;
 
             return (
-              <Link to={`/product/${item.ID}`} key={item.ID}>
-                <MenuItemCard
-                  item={{
-                    ...item,
-                    discountedPrice,
-                    isSpecial,
-                  }}
-                />
-              </Link>
+              <MenuItemCard
+                key={item.ID}
+                item={{
+                  ...item,
+                  discountedPrice,
+                  isSpecial,
+                }}
+              />
             );
           })
         ) : (
