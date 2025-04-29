@@ -2,14 +2,21 @@ import { useCart } from "../../contexts/CartContext";
 import { Link } from "react-router-dom";
 
 export default function MenuItemCard({ item }) {
-  const { addToCart } = useCart();
+  const { addToCart, dailySpecials } = useCart();
+
+  const isSpecial = dailySpecials.some((special) => special.id === item.ID);
+  const discountedPrice = isSpecial ? (item.price * 0.85).toFixed(2) : null;
+
+  const handleAddToCart = () => {
+    addToCart({
+      ...item,
+      price: isSpecial ? parseFloat(discountedPrice) : item.price,
+    });
+  };
 
   return (
     <div className="bg-white dark:bg-gray-500 rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transition-all duration-300 hover:scale-105 hover:shadow-xl">
-      <Link
-        to={`/product/${item.ID}`}
-        className="block w-full"
-      >
+      <Link to={`/product/${item.ID}`} className="block w-full">
         <img
           src={item.imageUrl || "/placeholder.png"}
           alt={item.name}
@@ -22,13 +29,13 @@ export default function MenuItemCard({ item }) {
           {item.description}
         </p>
         <div className="mt-3">
-          {item.discountedPrice ? (
+          {isSpecial ? (
             <>
               <p className="text-gray-400 line-through">
                 {item.price.toFixed(2)}€
               </p>
               <p className="text-rose-600 dark:text-rose-400 font-bold text-lg">
-                {item.discountedPrice}€
+                {discountedPrice}€
               </p>
             </>
           ) : (
@@ -39,7 +46,7 @@ export default function MenuItemCard({ item }) {
         </div>
       </Link>
       <button
-        onClick={() => addToCart(item)}
+        onClick={handleAddToCart}
         className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300"
       >
         Lisää ostoskoriin
