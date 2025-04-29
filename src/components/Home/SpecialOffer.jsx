@@ -40,6 +40,22 @@ const SpecialOffer = () => {
 
     getSpecialOffers();
   }, [dailySpecials, setDailySpecials]);
+<<<<<<< HEAD
+=======
+
+  if (specialOffers.length === 0) {
+    return (
+      <section className="bg-white p-8 rounded-xl shadow-lg">
+        <h2 className="text-2xl font-bold mb-6 text-center text-yellow-600">
+          Tämän päivän erikoisuudet
+        </h2>
+        <p className="text-center text-gray-500">
+          Ladataan erikoistarjouksia...
+        </p>
+      </section>
+    );
+  }
+>>>>>>> b3eaea0fdc5b599eec64382f7f81da3520eec0e5
 
   return (
     <section className="p-8 rounded-xl shadow-lg">
