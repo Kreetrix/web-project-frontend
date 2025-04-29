@@ -1,9 +1,21 @@
 import { Link } from 'react-router-dom';
 import { useTheme } from "../contexts/ThemeContext";
 import { Coffee, Moon } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext"
+
+
 
 const Sidebar = () => {
     const { darkMode, toggleDarkMode } = useTheme();
+    const { logout } = useAuth();
+
+
+
+    const handleLogout = () => {
+        logout();
+    };
+
+
 
     return (
         <aside className="w-64 bg-[#2c3e50] shadow-lg">
@@ -14,8 +26,16 @@ const Sidebar = () => {
                 <Link to="/admin/products" className="nav-button">Tuotteet</Link>
                 <Link to="/admin/orders" className="nav-button">Tilaukset</Link>
                 <Link to="/admin/feedbacks" className="nav-button">Feedbacks</Link>
-                <Link to="/" className="bg-orange-600 text-white font-bold py-2 px-4 rounded hover:bg-orange-700"
-                >Logout</Link>
+                <Link to="/" className="nav-button">Our main page</Link>
+
+                <Link to="/" className="bg-orange-600 text-white font-bold py-2 px-4 rounded hover:bg-orange-700">
+                    <button
+                        onClick={handleLogout}
+                    >
+                        Logout
+                    </button>
+                </Link>
+
                 <button
                     onClick={toggleDarkMode}
                     className="ml-4 p-3 rounded-full
