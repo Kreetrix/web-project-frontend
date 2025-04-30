@@ -22,3 +22,18 @@ export function useAuth() {
 
   return { checkAdmin };
 }
+
+export function useProducts() {
+  const deleteProduct = async (product) => {
+    console.log(product.ID)
+    const token = localStorage.getItem("accessToken");
+    const fetchOptions = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return await fetchData(`${API}/admin/products/${product.ID}`, fetchOptions);
+  };
+  return { deleteProduct };
+}

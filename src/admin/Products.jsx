@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Trash2, Edit, Plus, Save, Star, Award } from "lucide-react";
-
+import { Trash2, Edit, Plus, Save, Star, Award, Key } from "lucide-react";
+import ModalDelete from "../components/modals/modalDelete";
+import { useProducts } from "../hooks/apiHooks";
 
 
 // TODO     add api calls here to fetch, add, edit, and delete products
@@ -19,6 +20,10 @@ export default function AdminProductList() {
         isProductOfTheDay: false
     });
     const [productOfTheDay, setProductOfTheDay] = useState(null);
+    const [deleteModal, setDeleteModal] = useState(false);
+    const [oneProduct, setOneProduct] = useState(null);
+    const {deleteProduct} = useProducts();
+
 
     useEffect(() => {
         fetch("http://localhost:3000/api/v1/products")
@@ -36,11 +41,20 @@ export default function AdminProductList() {
             });
     }, []);
 
-    const deleteProduct = (id) => {
-        setProducts(products.filter((product) => product.id !== id && product._id !== id));
-        // If deleted product was product of the day, clear it
-        if (productOfTheDay && (productOfTheDay.id === id || productOfTheDay._id === id)) {
-            setProductOfTheDay(null);
+    const handleDeleteProduct = async (product) => {
+        try {
+            await deleteProduct(product);
+            
+            const updatedProducts = products.filter(p => p.ID !== product.ID);
+            setProducts(updatedProducts);
+            
+            if (productOfTheDay && productOfTheDay.ID === product.ID) {
+                setProductOfTheDay(null);
+            }
+            
+            setDeleteModal(false);
+        } catch (error) {
+            console.error("Error deleting product:", error);
         }
     };
 
@@ -50,7 +64,7 @@ export default function AdminProductList() {
 
     const saveEditedProduct = () => {
         const updatedProducts = products.map(p =>
-            p.id === editingProduct.id || p._id === editingProduct._id ? editingProduct : p
+            p.ID === editingProduct.ID || p._id === editingProduct._id ? editingProduct : p
         );
 
         setProducts(updatedProducts);
@@ -61,10 +75,10 @@ export default function AdminProductList() {
             // Ensure only one product of the day exists
             setProducts(updatedProducts.map(p => ({
                 ...p,
-                isProductOfTheDay: p.id === editingProduct.id || p._id === editingProduct._id
+                isProductOfTheDay: p.ID === editingProduct.ID || p._id === editingProduct._id
             })));
         } else if (productOfTheDay &&
-            (productOfTheDay.id === editingProduct.id || productOfTheDay._id === editingProduct._id)) {
+            (productOfTheDay.ID === editingProduct.ID || productOfTheDay._id === editingProduct._id)) {
             setProductOfTheDay(null);
         }
 
@@ -118,7 +132,7 @@ export default function AdminProductList() {
 
         // Set the selected product as product of the day
         const productToUpdate = updatedProducts.find(p =>
-            p.id === product.id || p._id === product._id
+            p.ID === product.ID || p._id === product._id
         );
 
         if (productToUpdate) {
@@ -128,7 +142,7 @@ export default function AdminProductList() {
 
             // If editing this product, update the editing form
             if (editingProduct &&
-                (editingProduct.id === product.id || editingProduct._id === product._id)) {
+                (editingProduct.ID === product.ID || editingProduct._id === product._id)) {
                 setEditingProduct({ ...productToUpdate });
             }
         }
@@ -260,13 +274,13 @@ export default function AdminProductList() {
             )}
 
             {/* Products List */}
-            <div className="space-y-4">
+            <div className="space-y-4 grid [grid-template-areas:'header_header_header'_'footer_footer_footer']">
                 {products.length === 0 ? (
                     <p className="text-gray-500 text-center py-4">No products found</p>
                 ) : (
                     products.map((product) => (
                         <div
-                            key={product.id || product._id}
+                            key={product.ID}
                             className={`flex justify-between items-center p-4 border rounded-lg hover:bg-gray-50 ${product.isProductOfTheDay ? 'border-2 border-yellow-400' : 'border-gray-200'
                                 }`}
                         >
@@ -313,16 +327,24 @@ export default function AdminProductList() {
                                     </button>
                                 )}
                                 <button
-                                    onClick={() => deleteProduct(product.id || product._id)}
+                                    // onClick={() => deleteProduct(product.ID)}
+                                    onClick={() => {
+                                        setOneProduct(product);
+                                        setDeleteModal(true);
+                                    }}
                                     className="p-2 text-red-600 hover:bg-red-50 rounded-full"
                                     aria-label="Delete product"
                                 >
                                     <Trash2 size={20} />
                                 </button>
+
+
+                                
                             </div>
                         </div>
                     ))
                 )}
+                {deleteModal && <ModalDelete item={oneProduct} setSelectedItem={setDeleteModal} onConfirm={handleDeleteProduct}/>}
             </div>
         </div>
     );
