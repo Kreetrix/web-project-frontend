@@ -27,55 +27,60 @@ export default function Header() {
   const { darkMode, toggleDarkMode } = useTheme();
   const { isLoggedIn, logout } = useAuth();
 
-
   const handleLogout = () => {
     clearCart();
     logout();
   };
 
   return (
-    <header className="bg-yellow-700 text-white shadow-lg sticky top-0 z-50 ">
+    <header className="bg-yellow-700 text-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-5 py-4 flex flex-col md:flex-row items-center justify-between">
-        <h1 className="text-2xl font-bold">🍔 Burger Palace</h1>
+        {/* Логотип с анимацией */}
+        <h1 className="text-2xl font-bold cursor-pointer hover:scale-110 transition-all duration-300">
+          <NavLink to="/">
+            🍔 Burger Palace
+          </NavLink>
+        </h1>
 
+        {/* Навигация */}
         <nav className="ml-auto py-2">
           <div className="navbar-strip inline-flex">
             <ul className="flex flex-wrap gap-4 mt-3 md:mt-0 text-sm font-medium">
+              {/* Кнопка Home */}
               <li>
-                <NavLink to="/" className="nav-button flex items-center gap-1">
+                <NavLink to="/" className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105">
                   <Home size={14} />
                   Home
                 </NavLink>
               </li>
+
+              {/* Кнопка Menu */}
               <li>
-                <NavLink
-                  to="/menu"
-                  className="nav-button flex items-center gap-1"
-                >
+                <NavLink to="/menu" className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105">
                   <Utensils size={14} />
                   Menu
                 </NavLink>
               </li>
+
+              {/* Кнопка Kieli */}
               <li>
-                <NavLink to="/" className="nav-button flex items-center gap-1">
+                <NavLink to="/" className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105">
                   <Languages size={14} />
                   Kieli
                 </NavLink>
               </li>
+
+              {/* Кнопка Palaute */}
               <li>
-                <NavLink
-                  to="/palaute"
-                  className="nav-button flex items-center gap-1"
-                >
+                <NavLink to="/palaute" className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105">
                   <MessageSquare size={14} />
                   Palaute
                 </NavLink>
               </li>
+
+              {/* Корзина с анимацией */}
               <li className="relative">
-                <NavLink
-                  to="/order"
-                  className="nav-button flex items-center gap-1"
-                >
+                <NavLink to="/order" className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105">
                   <ShoppingCart size={14} />
                   Ostoskori
                 </NavLink>
@@ -85,11 +90,13 @@ export default function Header() {
                   </span>
                 )}
               </li>
+
+              {/* Кнопка для логина/выхода */}
               <li>
                 {isLoggedIn ? (
                   <button
                     onClick={handleLogout}
-                    className="nav-button flex items-center gap-1"
+                    className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105"
                   >
                     <LogOut size={14} />
                     Kirjaudu ulos
@@ -97,40 +104,41 @@ export default function Header() {
                 ) : (
                   <NavLink
                     to="/login"
-                    className="nav-button flex items-center gap-1"
+                    className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105"
                   >
                     <LogIn size={14} />
                     Kirjaudu
                   </NavLink>
                 )}
               </li>
+
+              {/* О нас */}
               <li>
                 <NavLink
                   to="/about"
-                  className="nav-button flex items-center gap-1"
+                  className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105"
                 >
                   <Info size={14} />
                   About Us
                 </NavLink>
               </li>
+
+              {/* Профиль */}
               <li>
                 <NavLink
                   to="/dashboard"
-                  className="nav-button flex items-center gap-1"
+                  className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105"
                 >
                   <User size={14} />
-                  Profile Test
+                  My Profile
                 </NavLink>
               </li>
+
               <li>
                 <button
                   onClick={toggleDarkMode}
-                  className="ml-4 p-2 rounded-full 
-           bg-white/90 dark:bg-gray-900/90 
-           backdrop-blur-sm
-           border-2 border-gray-300 dark:border-gray-600
-           shadow-lg hover:shadow-xl
-           transition-all duration-200"
+                  className="ml-4 p-2 rounded-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-gray-300 dark:border-gray-600 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                  aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
                 >
                   {darkMode ? (
                     <Coffee className="w-6 h-6 text-amber-600 stroke-[2.5]" />

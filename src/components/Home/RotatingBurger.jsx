@@ -2,7 +2,6 @@ import React from 'react';
 import '../../styles/RotatingBurger.css';
 
 
-
 const RotatingBurger = () => {
     const text = ' PARAS BURGERI SUOMESSA ';
     const radius = 90;
@@ -48,8 +47,8 @@ const RotatingBurger = () => {
                 <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-32 h-32 animate-spin-slow">
                         <img
-                            src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"
-
+                            srcSet="/src/assets/images/burger.png"
+                            sizes="(max-width: 600px) 160px, 512px"
                             alt="Burger"
                             className="w-full h-full object-contain"
                         />

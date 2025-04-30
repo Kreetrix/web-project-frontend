@@ -28,9 +28,10 @@ const Sidebar = () => {
                 <Link to="/admin/feedbacks" className="nav-button">Feedbacks</Link>
                 <Link to="/" className="nav-button">Ravintolan sivu</Link>
 
-                <Link to="/" className="bg-orange-600 text-white font-bold py-2 px-4 rounded hover:bg-orange-700">
+                <Link to="/" className="bg-orange-800 text-white font-bold py-2 px-4 rounded hover:bg-orange-700">
                     <button
                         onClick={handleLogout}
+                        aria-label="Logout"
                     >
                         Logout
                     </button>
