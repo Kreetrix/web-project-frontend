@@ -1,3 +1,6 @@
+/* STYLES FOR BURGER */
+
+
 @keyframes spin-slow {
     from {
         transform: rotate(0deg);
@@ -24,4 +27,60 @@
 
 .animate-spin-slow-reverse {
     animation: spin-slow-reverse 8s linear infinite;
+}
+
+
+
+/* STYLES FOR MARQUEE */
+
+
+/* Marquee container for proper overflow control */
+.marquee-container {
+    width: 100%;
+    height: 3rem;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Content wrapper with animation */
+.marquee-content {
+    display: flex;
+    width: fit-content;
+    animation: continuous-scroll 14s linear infinite;
+}
+
+/* Individual text styling */
+.marquee-text {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #facc15;
+    /* Yellow color */
+    text-shadow: 2px 2px 4px #000;
+    white-space: nowrap;
+}
+
+/* Continuous scroll animation */
+@keyframes continuous-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 1s ease-in;
 }
