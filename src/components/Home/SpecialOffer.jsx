@@ -68,7 +68,9 @@ const SpecialOffer = () => {
 
               <div className="ml-4 flex-1">
                 <h3 className="font-bold text-lg text-gray-900 dark:text-white">{product.name}</h3>
-                <p className="text-gray-700 dark:text-gray-200 mb-2">{product.description}</p>
+                <p className="text-amber-900 dark:text-amber-200 mb-2 drop-shadow-sm">
+                  {product.description}
+                </p>
                 <div className="flex items-center gap-2">
                   <p className="text-gray-600 dark:text-gray-400 line-through">{product.price.toFixed(2)}€</p>
                   <p className="text-green-700 dark:text-green-300 font-bold">{discountedPrice}€</p>

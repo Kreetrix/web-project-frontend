@@ -44,13 +44,20 @@ const Palaute = () => {
     };
 
     return (
-        <div className="max-w-xl mx-auto p-6 bg-white dark:bg-gray-500 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out">
+        <div className="relative max-w-xl mx-auto p-6 bg-amber-100 dark:bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out">
+
+            <div className="absolute -left-3 top-10 h-40 w-1 bg-gradient-to-b from-yellow-400 to-amber-600 rounded-full shadow-lg" />
+
+            <div className="absolute -right-3 top-10 h-40 w-1 bg-gradient-to-b from-yellow-400 to-amber-600 rounded-full shadow-lg" />
+
+            <div className="hidden md:block absolute -left-16 top-12 text-6xl">💬</div>
+
             <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">Palaute</h2>
 
             <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <div>
-                        <label htmlFor="firstName" className="block text-lg font-medium text-gray-700 dark:text-gray-200 mb-2">
+                        <label htmlFor="firstName" className="block text-lg font-medium text-gray-700 dark:text-amber-200 mb-2">
                             Etunimi *
                         </label>
                         <input
@@ -63,7 +70,7 @@ const Palaute = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="lastName" className="block text-lg font-medium text-gray-700 dark:text-gray-200 mb-2">
+                        <label htmlFor="lastName" className="block text-lg font-medium text-gray-700 dark:text-amber-200 mb-2">
                             Sukunimi *
                         </label>
                         <input
@@ -76,7 +83,7 @@ const Palaute = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="lastName" className="block text-lg font-medium text-gray-700 dark:text-gray-200 mb-2">
+                        <label htmlFor="lastName" className="block text-lg font-medium text-gray-700 dark:text-amber-200 mb-2">
                             Email *
                         </label>
                         <input
@@ -91,7 +98,7 @@ const Palaute = () => {
                 </div>
 
                 <div className="mb-6">
-                    <label htmlFor="category" className="block text-lg font-medium text-gray-700 dark:text-gray-200 mb-2">
+                    <label htmlFor="category" className="block text-lg font-medium text-gray-700 dark:text-amber-200 mb-2">
                         Mitä asianne koskee:
                     </label>
                     <select
@@ -108,7 +115,7 @@ const Palaute = () => {
                 </div>
 
                 <div className="mb-6">
-                    <label className="block text-lg font-medium text-gray-700 dark:text-gray-200 mb-2">
+                    <label className="block text-lg font-medium text-gray-700 dark:text-amber-200 mb-2">
                         Arvio:
                     </label>
                     <div className="flex justify-center space-x-2">
@@ -130,7 +137,7 @@ const Palaute = () => {
                 </div>
 
                 <div className="mb-6">
-                    <label htmlFor="feedback" className="block text-lg font-medium text-gray-700 dark:text-gray-200 mb-2">
+                    <label htmlFor="feedback" className="block text-lg font-medium text-gray-700 dark:text-amber-200 mb-2">
                         Kommentti:
                     </label>
                     <textarea
