@@ -7,10 +7,8 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const accessToken = localStorage.getItem("accessToken");
-        const storedUser = localStorage.getItem("user");
-        if (accessToken && storedUser) {
+        if (accessToken) {
             setIsLoggedIn(true);
-            setUser(JSON.parse(storedUser));
         }
     }, []);
 

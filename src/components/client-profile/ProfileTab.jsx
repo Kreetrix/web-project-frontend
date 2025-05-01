@@ -1,11 +1,13 @@
-import { useUser } from "../../contexts/UserContext";
 import { useState, useEffect } from "react";
+import {useUser} from "../../hooks/apiHooks.js"
 
 export default function ProfileTab() {                  /* TODO - add data from db with context */
-
+    const [user, setUser] = useState(undefined);
 
     // Get user data and update function
-    const { user, updateProfile } = useUser();
+    const { getUser } = useUser();
+
+    
 
     // Initialize local states for user data
     const [username, setUsername] = useState(user?.username || "");
@@ -27,23 +29,27 @@ export default function ProfileTab() {                  /* TODO - add data from 
         }
 
         // Update profile data through context
-        updateProfile({
-            username,
-            email,
-            firstName,
-            lastName,
-            address,
-            phone,
-            password
-        });
+        // updateProfile({
+        //     username,
+        //     email,
+        //     firstName,
+        //     lastName,
+        //     address,
+        //     phone,
+        //     password
+        // });
 
         alert("Profile updated successfully! ✅");
     };
 
     useEffect(() => {
-        if (!user) {
-            return;
+        async function fetchUser() {
+            if (!user) {
+                const userData = await getUser();
+                setUser(userData);
+            }
         }
+        fetchUser();
     }, [user]);
 
     return (
