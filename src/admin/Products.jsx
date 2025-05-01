@@ -22,7 +22,7 @@ export default function AdminProductList() {
     const [productOfTheDay, setProductOfTheDay] = useState(null);
     const [deleteModal, setDeleteModal] = useState(false);
     const [oneProduct, setOneProduct] = useState(null);
-    const {deleteProduct} = useProducts();
+    const {deleteProduct, updateProduct} = useProducts();
 
 
     useEffect(() => {
@@ -62,24 +62,31 @@ export default function AdminProductList() {
         setEditingProduct({ ...product });
     };
 
-    const saveEditedProduct = () => {
-        const updatedProducts = products.map(p =>
-            p.ID === editingProduct.ID || p._id === editingProduct._id ? editingProduct : p
-        );
+    const saveEditedProduct = async () => {
+        try {
+            await updateProduct(editingProduct);
+            
+            const updatedProducts = products.map(p =>
+                p.ID === editingProduct.ID ? editingProduct : p
+            );
+            setProducts(updatedProducts);
+            
+            // Update product of the day if needed
+            if (editingProduct.isProductOfTheDay) {
+                setProductOfTheDay(editingProduct);
+                // Ensure only one product of the day exists
+                setProducts(updatedProducts.map(p => ({
+                    ...p,
+                    isProductOfTheDay: p.ID === editingProduct.ID || p._id === editingProduct._id
+                })));
+            } else if (productOfTheDay &&
+                (productOfTheDay.ID === editingProduct.ID || productOfTheDay._id === editingProduct._id)) {
+                setProductOfTheDay(null);
+            }
+            
 
-        setProducts(updatedProducts);
-
-        // Update product of the day if needed
-        if (editingProduct.isProductOfTheDay) {
-            setProductOfTheDay(editingProduct);
-            // Ensure only one product of the day exists
-            setProducts(updatedProducts.map(p => ({
-                ...p,
-                isProductOfTheDay: p.ID === editingProduct.ID || p._id === editingProduct._id
-            })));
-        } else if (productOfTheDay &&
-            (productOfTheDay.ID === editingProduct.ID || productOfTheDay._id === editingProduct._id)) {
-            setProductOfTheDay(null);
+        } catch (error) {
+            console.error("Error updatingz product:", error);
         }
 
         setEditingProduct(null);
@@ -224,6 +231,7 @@ export default function AdminProductList() {
                 <div className="mb-6 p-4 border border-blue-300 rounded-lg bg-blue-50">
                     <h3 className="text-xl font-semibold  mb-3">Edit Product</h3>
                     <div className="space-y-3">
+                    {console.log(editingProduct)}
                         <input
                             type="text"
                             name="name"
@@ -243,6 +251,13 @@ export default function AdminProductList() {
                             required
                         />
                         <textarea
+                            name="allergies"
+                            value={editingProduct.allergies || ''}
+                            onChange={handleEditChange}
+                            placeholder="allergies"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        <textarea
                             name="description"
                             value={editingProduct.description || ''}
                             onChange={handleEditChange}
@@ -250,6 +265,7 @@ export default function AdminProductList() {
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             rows="3"
                         />
+                        
                         <div className="flex items-center">
                             <input
                                 type="checkbox"

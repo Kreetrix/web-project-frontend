@@ -48,5 +48,18 @@ export function useProducts() {
     };
     return await fetchData(`${API}/admin/products/${product.ID}`, fetchOptions);
   };
-  return { deleteProduct };
+  const updateProduct = async (product) => {
+    console.log("product to update -> ", product);
+    const token = localStorage.getItem("accessToken");
+    const fetchOptions = {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(product)
+    };
+    return await fetchData(`${API}/admin/products/${product.ID}`, fetchOptions);
+  }
+  return { deleteProduct, updateProduct };
 }
