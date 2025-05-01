@@ -1,28 +1,35 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 const AuthContext = createContext();
-
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);  // added this    NEED FIX
 
     useEffect(() => {
-        // Check if the user is logged in on app load
         const accessToken = localStorage.getItem("accessToken");
-        setIsLoggedIn(!!accessToken);
+        const storedUser = localStorage.getItem("user");
+        if (accessToken && storedUser) {
+            setIsLoggedIn(true);
+            setUser(JSON.parse(storedUser));
+        }
     }, []);
 
-    const login = (accessToken) => {
+    const login = (accessToken, userData) => {
         localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("user", JSON.stringify(userData));
         setIsLoggedIn(true);
+        setUser(userData);
     };
 
     const logout = () => {
         localStorage.removeItem("accessToken");
+        localStorage.removeItem("user");
         setIsLoggedIn(false);
+        setUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+        <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

@@ -13,25 +13,22 @@ const Cart = ({ isFormValid }) => {
 
   const handleOrder = async () => {
     const orderData = {
-      //TODO : ADD USER ID TO THE ORDER
-      user_id: 1, // Replace with the actual user ID if available
+      user_id: 1, // Replace with actual user ID
       items: cartItems.map((item) => ({
         product_id: item.ID,
         quantity: item.quantity,
       })),
-      price: parseFloat(calculateTotal()) + 5.9, // Add delivery fee
+      price: parseFloat(calculateTotal()) + 5.9,
       status: "completed",
     };
-    console.log("Order data:", orderData); // Log the order data for debugging
-    ("Order data:", orderData); // Log the order data for debugging
-
+    console.log("Order data:", orderData);
 
     try {
       const response = await sendOrder(orderData);
       console.log("Order sent successfully:", response);
       alert("Tilaus lähetetty onnistuneesti!");
     } catch (error) {
-      console.log("Error sending order:", error);
+      console.error("Error sending order:", error);
       alert("Tilausta ei voitu lähettää. Yritä uudelleen.");
     }
   };
@@ -42,17 +39,19 @@ const Cart = ({ isFormValid }) => {
         Ostoskori
       </h3>
 
-      <div className="space-y-4 mb-6">
+      <div className="space-y-4 mb-6" role="list" aria-label="Ostoskori tuotteet">
         {cartItems.length === 0 ? (
-          <p className="text-gray-600 dark:text-gray-400">Ostoskori on tyhjä</p>
+          <p className="text-gray-600 dark:text-gray-300">Ostoskori on tyhjä</p>
         ) : (
           cartItems.map((item) => (
-            <div key={item.id} className="flex justify-between border-b pb-2">
+            <div key={item.id} role="listitem" className="flex justify-between border-b pb-2">
               <div>
                 <p className="font-medium text-gray-800 dark:text-gray-200">
                   {item.name}
                 </p>
-                <p className="text-sm text-gray-500">{item.quantity} kpl</p>
+                <p className="text-sm text-gray-500 dark:text-gray-300">
+                  {item.quantity} kpl
+                </p>
               </div>
               <div className="text-right">
                 <p className="font-medium text-gray-800 dark:text-gray-200">
@@ -61,6 +60,7 @@ const Cart = ({ isFormValid }) => {
                 <button
                   onClick={() => removeFromCart(item.id)}
                   className="text-red-500 dark:text-red-400 text-sm hover:underline mt-2"
+                  aria-label={`Poista ${item.name} ostoskorista`}
                 >
                   Poista
                 </button>
@@ -69,16 +69,17 @@ const Cart = ({ isFormValid }) => {
           ))
         )}
       </div>
+
       {cartItems.length > 0 && (
         <div className="border-t pt-4 border-gray-200 dark:border-gray-700">
           <div className="flex justify-between mb-2">
-            <span className="text-gray-600 dark:text-white">Tuotteet</span>
+            <span className="text-gray-600 dark:text-gray-300">Tuotteet</span>
             <span className="text-gray-800 dark:text-gray-200">
               {calculateTotal()}€
             </span>
           </div>
           <div className="flex justify-between mb-4">
-            <span className="text-gray-600 dark:text-white">Toimitus</span>
+            <span className="text-gray-600 dark:text-gray-300">Toimitus</span>
             <span className="text-gray-800 dark:text-gray-200">5.90€</span>
           </div>
           <div className="flex justify-between font-bold text-lg mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
@@ -91,10 +92,11 @@ const Cart = ({ isFormValid }) => {
           <button
             onClick={handleOrder}
             className={`w-full bg-gradient-to-r from-orange-300 via-orange-400 to-yellow-500 text-white font-bold py-3 px-4 rounded-lg mt-6 shadow-md transition-all duration-300 ${!isFormValid
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:from-yellow-500 hover:to-yellow-700"
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:from-yellow-500 hover:to-yellow-700"
               }`}
             disabled={!isFormValid}
+            aria-label="Lähetä tilaus"
           >
             Maksa tilaus
           </button>

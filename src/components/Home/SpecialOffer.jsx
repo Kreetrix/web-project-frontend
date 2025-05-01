@@ -54,23 +54,24 @@ const SpecialOffer = () => {
           return (
             <div
               key={product.id}
-              className="relative border-2 border-yellow-400 dark:border-yellow-500 rounded-lg p-4 flex custom-card
-                          hover:border-yellow-500 dark:hover:border-yellow-400 transition-colors duration-300
-                          shadow-md hover:shadow-lg group overflow-hidden"
+              className="relative border-2 border-yellow-600 dark:border-yellow-300 rounded-lg p-4 flex custom-card
+              hover:border-yellow-700 dark:hover:border-yellow-400 transition-colors duration-300
+              shadow-md hover:shadow-lg group overflow-hidden"
             >
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600"></div>
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-600 to-yellow-700"></div>
 
               <img
                 src={product.imageUrl || "https://via.placeholder.com/150"}
                 alt={product.name}
-                className="w-32 h-32 object-cover rounded-lg border border-gray-200 dark:border-gray-600"
+                className="w-32 h-32 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
               />
+
               <div className="ml-4 flex-1">
-                <h3 className="font-bold text-lg text-gray-800 dark:text-white">{product.name}</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-2">{product.description}</p>
+                <h3 className="font-bold text-lg text-gray-900 dark:text-white">{product.name}</h3>
+                <p className="text-gray-700 dark:text-gray-200 mb-2">{product.description}</p>
                 <div className="flex items-center gap-2">
-                  <p className="text-gray-400 dark:text-gray-500 line-through">{product.price.toFixed(2)}€</p>
-                  <p className="text-red-500 font-bold">{discountedPrice}€</p>
+                  <p className="text-gray-600 dark:text-gray-400 line-through">{product.price.toFixed(2)}€</p>
+                  <p className="text-green-700 dark:text-green-300 font-bold">{discountedPrice}€</p>
                 </div>
               </div>
             </div>

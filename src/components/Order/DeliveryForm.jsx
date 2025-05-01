@@ -1,5 +1,5 @@
-// DeliveryForm.jsx
 import React, { useEffect } from "react";
+import { useAuth } from "/src/contexts/AuthContext";
 
 const DeliveryForm = ({
   firstName,
@@ -16,8 +16,19 @@ const DeliveryForm = ({
   setDeliveryTime,
   setIsFormValid,
 }) => {
+  // TODO NEED TO REMAKE THIS  
+  const { user } = useAuth();
+
   useEffect(() => {
-    // Check if all fields are filled
+    if (user) {
+      user.firstName && setFirstName(user.firstName);
+      user.lastName && setLastName(user.lastName);
+      user.email && setEmail(user.email);
+      user.phone && setPhone(user.phone);
+    }
+  }, [user, setFirstName, setLastName, setEmail, setPhone]);
+
+  useEffect(() => {
     const isValid =
       firstName.trim() &&
       lastName.trim() &&
@@ -70,7 +81,7 @@ const DeliveryForm = ({
         </div>
         <div>
           <label className="block text-gray-800 dark:text-gray-100 mb-2">
-            puhelin
+            Puhelin
           </label>
           <input
             type="text"
@@ -81,7 +92,7 @@ const DeliveryForm = ({
         </div>
         <div>
           <label className="block text-gray-800 dark:text-gray-100 mb-2">
-            email
+            Email
           </label>
           <input
             type="text"
