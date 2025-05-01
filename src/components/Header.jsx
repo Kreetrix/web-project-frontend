@@ -35,18 +35,15 @@ export default function Header() {
   return (
     <header className="bg-yellow-700 text-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-5 py-4 flex flex-col md:flex-row items-center justify-between">
-        {/* Логотип с анимацией */}
         <h1 className="text-2xl font-bold cursor-pointer hover:scale-110 transition-all duration-300">
           <NavLink to="/">
             🍔 Burger Palace
           </NavLink>
         </h1>
 
-        {/* Навигация */}
         <nav className="ml-auto py-2">
           <div className="navbar-strip inline-flex">
             <ul className="flex flex-wrap gap-4 mt-3 md:mt-0 text-sm font-medium">
-              {/* Кнопка Home */}
               <li>
                 <NavLink to="/" className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105">
                   <Home size={14} />
@@ -54,7 +51,6 @@ export default function Header() {
                 </NavLink>
               </li>
 
-              {/* Кнопка Menu */}
               <li>
                 <NavLink to="/menu" className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105">
                   <Utensils size={14} />
@@ -62,7 +58,6 @@ export default function Header() {
                 </NavLink>
               </li>
 
-              {/* Кнопка Kieli */}
               <li>
                 <NavLink to="/" className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105">
                   <Languages size={14} />
@@ -70,7 +65,6 @@ export default function Header() {
                 </NavLink>
               </li>
 
-              {/* Кнопка Palaute */}
               <li>
                 <NavLink to="/palaute" className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105">
                   <MessageSquare size={14} />
@@ -78,7 +72,6 @@ export default function Header() {
                 </NavLink>
               </li>
 
-              {/* Корзина с анимацией */}
               <li className="relative">
                 <NavLink to="/order" className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105">
                   <ShoppingCart size={14} />
@@ -91,7 +84,6 @@ export default function Header() {
                 )}
               </li>
 
-              {/* Кнопка для логина/выхода */}
               <li>
                 {isLoggedIn ? (
                   <button
@@ -112,7 +104,6 @@ export default function Header() {
                 )}
               </li>
 
-              {/* О нас */}
               <li>
                 <NavLink
                   to="/about"
@@ -123,7 +114,6 @@ export default function Header() {
                 </NavLink>
               </li>
 
-              {/* Профиль */}
               <li>
                 <NavLink
                   to="/dashboard"

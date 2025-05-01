@@ -171,3 +171,51 @@ select:focus {
     border-color: #3490dc;
     box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.2);
 }
+
+
+
+
+/* MEADIA BLOCK */
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .burger-bg {
+        padding: 2rem 1rem;
+        background-position: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .navbar-strip {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-button {
+        flex: 1 1 auto;
+        text-align: center;
+    }
+
+    .custom-card {
+        width: 100%;
+        max-width: 500px;
+        margin: 1rem auto;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
