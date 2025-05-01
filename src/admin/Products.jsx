@@ -22,7 +22,7 @@ export default function AdminProductList() {
     const [productOfTheDay, setProductOfTheDay] = useState(null);
     const [deleteModal, setDeleteModal] = useState(false);
     const [oneProduct, setOneProduct] = useState(null);
-    const {deleteProduct, updateProduct} = useProducts();
+    const {deleteProduct, updateProduct, addProduct} = useProducts();
 
 
     useEffect(() => {
@@ -108,26 +108,38 @@ export default function AdminProductList() {
         }));
     };
 
-    const addNewProduct = () => {
+    const addNewProduct = async () => {
         if (!newProduct.name || !newProduct.price) {
             alert("Please fill all required fields!");
             return;
         }
 
-        const newProductWithId = {
-            ...newProduct,
-            id: Date.now(),
-        };
+        try {
+            await addProduct(newProduct);
+            
+            const newProductWithId = {
+                ...newProduct,
+                id: Date.now(),
+            };
 
-        // If new product is set as product of the day, update all products
-        if (newProductWithId.isProductOfTheDay) {
-            setProducts([...products.map(p => ({ ...p, isProductOfTheDay: false })), newProductWithId]);
-            setProductOfTheDay(newProductWithId);
-        } else {
-            setProducts([...products, newProductWithId]);
+            const updatedProducts = products.map(p =>
+                p.ID === newProduct.ID ? newProduct : p
+            );
+            setProducts(updatedProducts);
+    
+            // If new product is set as product of the day, update all products
+            if (newProductWithId.isProductOfTheDay) {
+                setProducts([...products.map(p => ({ ...p, isProductOfTheDay: false })), newProductWithId]);
+                setProductOfTheDay(newProductWithId);
+            } else {
+                setProducts([...products, newProductWithId]);
+            }
+    
+            setNewProduct({ name: "", price: "", description: "", isProductOfTheDay: false });
+            
+        } catch (error) {
+            console.error("Error updatingz product:", error);
         }
-
-        setNewProduct({ name: "", price: "", description: "", isProductOfTheDay: false });
     };
 
     const setAsProductOfTheDay = (product) => {
@@ -193,6 +205,15 @@ export default function AdminProductList() {
                         value={newProduct.price}
                         onChange={handleNewProductChange}
                         placeholder="Price*"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                        required
+                    />
+                    <input
+                        type="text"
+                        name="category"
+                        value={newProduct.category}
+                        onChange={handleNewProductChange}
+                        placeholder="category*"
                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                         required
                     />
