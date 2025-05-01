@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useAuth } from "/src/contexts/AuthContext";
 
 const DeliveryForm = ({
   firstName,
@@ -15,6 +16,18 @@ const DeliveryForm = ({
   setDeliveryTime,
   setIsFormValid,
 }) => {
+  // TODO NEED TO REMAKE THIS  
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      user.firstName && setFirstName(user.firstName);
+      user.lastName && setLastName(user.lastName);
+      user.email && setEmail(user.email);
+      user.phone && setPhone(user.phone);
+    }
+  }, [user, setFirstName, setLastName, setEmail, setPhone]);
+
   useEffect(() => {
     const isValid =
       firstName.trim() &&
@@ -34,90 +47,68 @@ const DeliveryForm = ({
 
       <div className="grid md:grid-cols-2 gap-4 mb-4">
         <div>
-          <label htmlFor="firstName" className="block text-gray-800 dark:text-gray-100 mb-2">
+          <label className="block text-gray-800 dark:text-gray-100 mb-2">
             Etunimi
           </label>
           <input
-            id="firstName"
-            name="firstName"
             type="text"
-            autoComplete="given-name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
           />
         </div>
-
         <div>
-          <label htmlFor="lastName" className="block text-gray-800 dark:text-gray-100 mb-2">
+          <label className="block text-gray-800 dark:text-gray-100 mb-2">
             Sukunimi
           </label>
           <input
-            id="lastName"
-            name="lastName"
             type="text"
-            autoComplete="family-name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
           />
         </div>
-
         <div>
-          <label htmlFor="address" className="block text-gray-800 dark:text-gray-100 mb-2">
+          <label className="block text-gray-800 dark:text-gray-100 mb-2">
             Osoite
           </label>
           <input
-            id="address"
-            name="address"
             type="text"
-            autoComplete="street-address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
           />
         </div>
-
         <div>
-          <label htmlFor="phone" className="block text-gray-800 dark:text-gray-100 mb-2">
+          <label className="block text-gray-800 dark:text-gray-100 mb-2">
             Puhelin
           </label>
           <input
-            id="phone"
-            name="phone"
-            type="tel"
-            autoComplete="tel"
+            type="text"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
           />
         </div>
-
         <div>
-          <label htmlFor="email" className="block text-gray-800 dark:text-gray-100 mb-2">
+          <label className="block text-gray-800 dark:text-gray-100 mb-2">
             Email
           </label>
           <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
+            type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
           />
         </div>
-
         <div>
-          <label htmlFor="deliveryTime" className="block text-gray-800 dark:text-gray-100 mb-2">
+          <label className="block text-gray-800 dark:text-gray-100 mb-2">
             Toimitusaika
           </label>
           <select
-            id="deliveryTime"
-            name="deliveryTime"
             value={deliveryTime}
             onChange={(e) => setDeliveryTime(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:bg-gray-700 dark:border-gray-500 dark:text-white"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
           >
             <option value="">Valitse toimitusaika</option>
             <option value="ASAP">Mahdollisimman pian</option>

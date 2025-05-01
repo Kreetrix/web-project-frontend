@@ -14,14 +14,14 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
 
     <BrowserRouter>
-    <ThemeProvider>
-    <AuthProvider>
-      <UserProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </UserProvider>
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <UserProvider>
+            <CartProvider>
+              <App />
+            </CartProvider>
+          </UserProvider>
+        </AuthProvider>
       </ ThemeProvider>
     </BrowserRouter>
   </StrictMode >
