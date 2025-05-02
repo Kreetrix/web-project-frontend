@@ -6,7 +6,6 @@ import ProductList from "./ProductList";
 import ModalDelete from "../../components/modals/ModalDelete";
 import { useProducts } from "../../hooks/apiHooks";
 
-
 export default function AdminProductList() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -21,6 +20,9 @@ export default function AdminProductList() {
     const [deleteModal, setDeleteModal] = useState(false);
     const [oneProduct, setOneProduct] = useState(null);
     const { deleteProduct, updateProduct, addProduct } = useProducts();
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [productsPerPage] = useState(5); // pagination
 
     useEffect(() => {
         fetch("http://localhost:3000/api/v1/products")
@@ -37,6 +39,12 @@ export default function AdminProductList() {
                 setLoading(false);
             });
     }, []);
+
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+    const totalPages = Math.ceil(products.length / productsPerPage);
 
     const handleDeleteProduct = async (product) => {
         try {
@@ -68,10 +76,8 @@ export default function AdminProductList() {
             );
             setProducts(updatedProducts);
 
-            // Update product of the day if needed
             if (editingProduct.isProductOfTheDay) {
                 setProductOfTheDay(editingProduct);
-                // Ensure only one product of the day exists
                 setProducts(updatedProducts.map(p => ({
                     ...p,
                     isProductOfTheDay: p.ID === editingProduct.ID || p._id === editingProduct._id
@@ -118,7 +124,6 @@ export default function AdminProductList() {
                 id: Date.now(),
             };
 
-            // If new product is set as product of the day, update all products
             if (newProduct.isProductOfTheDay) {
                 const updatedProducts = products.map(p => ({ ...p, isProductOfTheDay: false }));
                 setProducts([...updatedProducts, newProductWithId]);
@@ -134,13 +139,11 @@ export default function AdminProductList() {
     };
 
     const setAsProductOfTheDay = (product) => {
-        // Update all products to remove product of the day flag
         const updatedProducts = products.map(p => ({
             ...p,
             isProductOfTheDay: false
         }));
 
-        // Set the selected product as product of the day
         const productToUpdate = updatedProducts.find(p =>
             p.ID === product.ID || p._id === product._id
         );
@@ -150,7 +153,6 @@ export default function AdminProductList() {
             setProductOfTheDay(productToUpdate);
             setProducts(updatedProducts);
 
-            // If editing this product, update the editing form
             if (editingProduct &&
                 (editingProduct.ID === product.ID || editingProduct._id === product._id)) {
                 setEditingProduct({ ...productToUpdate });
@@ -158,11 +160,17 @@ export default function AdminProductList() {
         }
     };
 
+    const handlePageChange = (pageNumber) => {
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+            setCurrentPage(pageNumber);
+        }
+    };
+
     if (loading) return <div className="text-center py-8">Loading products...</div>;
 
     return (
-        <div className="container mx-auto p-4 max-w-6xl">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Product Management</h2>
+        <div className="container mx-auto p-4 max-w-6xl dark:bg-gray-800 dark:text-gray-100">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">Product Management</h2>
 
             {/* Product of the Day Banner */}
             {productOfTheDay && (
@@ -187,9 +195,40 @@ export default function AdminProductList() {
                 />
             )}
 
+            <div className="flex justify-center items-center mt-6 mb-4">
+                <div className="flex items-center space-x-2">
+                    <button
+                        className="px-4 py-2 text-sm font-semibold text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-100 disabled:bg-gray-200 disabled:text-gray-400"
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                    >
+                        Previous
+                    </button>
+
+                    {[...Array(totalPages)].map((_, index) => (
+                        <button
+                            key={index}
+                            className={`px-4 py-2 text-sm font-semibold ${currentPage === index + 1 ? 'bg-blue-600 text-white' : 'bg-white text-blue-600 border border-blue-600'} rounded-md hover:bg-blue-100`}
+                            onClick={() => handlePageChange(index + 1)}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+
+                    {/* Next */}
+                    <button
+                        className="px-4 py-2 text-sm font-semibold text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-100 disabled:bg-gray-200 disabled:text-gray-400"
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                    >
+                        Next
+                    </button>
+                </div>
+            </div>
+
             {/* Products List */}
             <ProductList
-                products={products}
+                products={currentProducts}
                 onEdit={startEditProduct}
                 onDelete={(product) => {
                     setOneProduct(product);

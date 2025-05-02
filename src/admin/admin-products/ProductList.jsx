@@ -3,7 +3,7 @@ import ProductItem from "./ProductItem.jsx";
 
 const ProductList = ({ products, onEdit, onDelete, onSetProductOfDay }) => {
     return (
-        <div className="space-y-4 grid [grid-template-areas:'header_header_header'_'footer_footer_footer']">
+        <div className="grid grid-cols-1 gap-4 [grid-template-areas:'header_header_header'_'footer_footer_footer']">
             {products.length === 0 ? (
                 <p className="text-gray-500 text-center py-4">No products found</p>
             ) : (
