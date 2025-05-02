@@ -22,7 +22,9 @@ export default function AdminProductList() {
     const [productOfTheDay, setProductOfTheDay] = useState(null);
     const [deleteModal, setDeleteModal] = useState(false);
     const [oneProduct, setOneProduct] = useState(null);
-    const {deleteProduct, updateProduct, addProduct} = useProducts();
+    const { deleteProduct, updateProduct, addProduct } = useProducts();
+    const categories = ["burger", "starters", "desserts", "drinks", "sets", "vege", "salad"];
+
 
 
     useEffect(() => {
@@ -44,14 +46,14 @@ export default function AdminProductList() {
     const handleDeleteProduct = async (product) => {
         try {
             await deleteProduct(product);
-            
+
             const updatedProducts = products.filter(p => p.ID !== product.ID);
             setProducts(updatedProducts);
-            
+
             if (productOfTheDay && productOfTheDay.ID === product.ID) {
                 setProductOfTheDay(null);
             }
-            
+
             setDeleteModal(false);
         } catch (error) {
             console.error("Error deleting product:", error);
@@ -65,12 +67,12 @@ export default function AdminProductList() {
     const saveEditedProduct = async () => {
         try {
             await updateProduct(editingProduct);
-            
+
             const updatedProducts = products.map(p =>
                 p.ID === editingProduct.ID ? editingProduct : p
             );
             setProducts(updatedProducts);
-            
+
             // Update product of the day if needed
             if (editingProduct.isProductOfTheDay) {
                 setProductOfTheDay(editingProduct);
@@ -83,7 +85,7 @@ export default function AdminProductList() {
                 (productOfTheDay.ID === editingProduct.ID || productOfTheDay._id === editingProduct._id)) {
                 setProductOfTheDay(null);
             }
-            
+
 
         } catch (error) {
             console.error("Error updatingz product:", error);
@@ -116,7 +118,7 @@ export default function AdminProductList() {
 
         try {
             await addProduct(newProduct);
-            
+
             const newProductWithId = {
                 ...newProduct,
                 id: Date.now(),
@@ -126,7 +128,7 @@ export default function AdminProductList() {
                 p.ID === newProduct.ID ? newProduct : p
             );
             setProducts(updatedProducts);
-    
+
             // If new product is set as product of the day, update all products
             if (newProductWithId.isProductOfTheDay) {
                 setProducts([...products.map(p => ({ ...p, isProductOfTheDay: false })), newProductWithId]);
@@ -134,9 +136,9 @@ export default function AdminProductList() {
             } else {
                 setProducts([...products, newProductWithId]);
             }
-    
+
             setNewProduct({ name: "", price: "", description: "", isProductOfTheDay: false });
-            
+
         } catch (error) {
             console.error("Error updatingz product:", error);
         }
@@ -208,15 +210,23 @@ export default function AdminProductList() {
                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                         required
                     />
-                    <input
-                        type="text"
+                    <select
                         name="category"
                         value={newProduct.category}
                         onChange={handleNewProductChange}
-                        placeholder="category*"
                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                         required
-                    />
+                    >
+                        <option value="">Select category</option>
+                        {categories.map((cat) => (
+                            <option key={cat} value={cat}>
+                                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                            </option>
+                        ))}
+                    </select>
+
+
+
                     <textarea
                         name="description"
                         value={newProduct.description}
@@ -252,7 +262,7 @@ export default function AdminProductList() {
                 <div className="mb-6 p-4 border border-blue-300 rounded-lg bg-blue-50">
                     <h3 className="text-xl font-semibold  mb-3">Edit Product</h3>
                     <div className="space-y-3">
-                    {console.log(editingProduct)}
+                        {console.log(editingProduct)}
                         <input
                             type="text"
                             name="name"
@@ -286,7 +296,7 @@ export default function AdminProductList() {
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             rows="3"
                         />
-                        
+
                         <div className="flex items-center">
                             <input
                                 type="checkbox"
@@ -376,12 +386,12 @@ export default function AdminProductList() {
                                 </button>
 
 
-                                
+
                             </div>
                         </div>
                     ))
                 )}
-                {deleteModal && <ModalDelete item={oneProduct} setSelectedItem={setDeleteModal} onConfirm={handleDeleteProduct}/>}
+                {deleteModal && <ModalDelete item={oneProduct} setSelectedItem={setDeleteModal} onConfirm={handleDeleteProduct} />}
             </div>
         </div>
     );

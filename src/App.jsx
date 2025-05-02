@@ -15,6 +15,9 @@ import AdminFeedbacks from "./admin/Feedbacks";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AdminRoute from "./components/admin/AdminRoute";
+import AdminProductList from "./admin/admin-products/AdminProductList";
+
+
 
 function App() {
   return (
@@ -42,7 +45,7 @@ function App() {
         <Route index element={<AdminDashboard />} />
         <Route path="admindashboard" element={<AdminDashboard />} />
 
-        <Route path="products" element={<Products />} />
+        <Route path="products" element={<AdminProductList />} />
         <Route path="orders" element={<OrdersPage />} />
         <Route path="feedbacks" element={<AdminFeedbacks />} />
       </Route>
