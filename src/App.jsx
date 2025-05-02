@@ -8,7 +8,6 @@ import AboutUs from "./pages/AboutUs";
 import ProductPage from "./pages/ProductPage";
 import Palaute from "./pages/Palaute";
 import AdminLayout from "./admin/AdminLayout";
-import Products from "./admin/Products";
 import AdminDashboard from "./admin/AdminDashboard";
 import OrdersPage from "./admin/OrdersPage";
 import AdminFeedbacks from "./admin/Feedbacks";
