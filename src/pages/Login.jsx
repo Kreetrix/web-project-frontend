@@ -2,6 +2,7 @@ import { Mail, KeyRound, LogIn } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import Text from "../components/locales/Text";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -9,19 +10,6 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { login } = useAuth();
-
-  /*  JUST TEST   
-    const fakeUser = {                                      
-        email: "user@burger.com",
-        password: "1234",
-    };
-
-
-    const fakeAdmin = {
-        email: "admin@burger.com",
-        password: "1234",
-    };
- */
 
   const HandleLogin = async (e) => {
     e.preventDefault();
@@ -71,7 +59,7 @@ export default function LoginPage() {
       <div className="flex items-center justify-center min-h-screen relative z-10">
         <div className="bg-white bg-opacity-90 p-8 rounded-2xl shadow-2xl w-full max-w-md animate-fadeIn">
           <h2 className="text-3xl font-bold text-center mb-6 text-yellow-700">
-            Kirjaudu sisään 🍔
+            <Text id="app.login.title" /> 🍔
           </h2>
 
           <form onSubmit={HandleLogin} className="space-y-5">
@@ -79,7 +67,10 @@ export default function LoginPage() {
               <Mail className="text-gray-500 mr-2" size={18} />
               <input
                 type="email"
-                placeholder="Sähköposti"
+                placeholder={Text({
+                  id: "app.login.email",
+                  asString: true,
+                })}
                 className="w-full outline-none bg-transparent text-sm"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -91,7 +82,10 @@ export default function LoginPage() {
               <KeyRound className="text-gray-500 mr-2" size={18} />
               <input
                 type="password"
-                placeholder="Salasana"
+                placeholder={Text({
+                  id: "app.login.password",
+                  asString: true,
+                })}
                 className="w-full outline-none bg-transparent text-sm"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -110,22 +104,22 @@ export default function LoginPage() {
               className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 rounded-md flex items-center justify-center gap-2"
             >
               <LogIn size={18} />
-              Kirjaudu
+              <Text id="app.login.input" />
             </button>
 
             <div className="text-sm text-center text-gray-700 mt-2">
-              Unohtuiko salasana?
+              <Text id="app.login.forgot" />
               <a href="/reset" className="text-yellow-600 hover:underline ml-1">
-                Palauta
+                <Text id="app.login.reset" />
               </a>
             </div>
             <div className="text-sm text-center text-gray-700 mt-2">
-              Ei ole tiliä? Rekisteröidy tästä.
+              <Text id="app.login.create" />
               <a
                 href="/register"
                 className="text-yellow-600 hover:underline ml-1"
               >
-                rekisteröidy
+                <Text id="app.login.register" />
               </a>
             </div>
           </form>

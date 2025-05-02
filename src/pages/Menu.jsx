@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TabComponent from "../components/Menu/TabComponent";
 import MenuItemCard from "../components/Menu/MenuItemCard";
 import { useCart } from "../contexts/CartContext";
+import Text from "../components/locales/Text";
 
 const Menu = () => {
   const [menuData, setMenuData] = useState([]);
@@ -45,7 +46,11 @@ const Menu = () => {
   );
 
   if (loading)
-    return <p className="text-center text-xl font-semibold">Loading menu...</p>;
+    return (
+      <p className="text-center text-xl font-semibold">
+        <Text id="app.loading"></Text>
+      </p>
+    );
   if (error)
     return (
       <p className="text-center text-xl font-semibold text-red-500">{error}</p>

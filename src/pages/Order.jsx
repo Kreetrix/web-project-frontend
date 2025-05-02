@@ -2,6 +2,7 @@ import { useState } from "react";
 import DeliveryForm from "../components/Order/DeliveryForm";
 import PaymentMethod from "../components/Order/PaymentMethod";
 import Cart from "../components/Order/Cart";
+import Text from "../components/locales/Text";
 
 function Order() {
   const [firstName, setFirstName] = useState("");
@@ -18,7 +19,7 @@ function Order() {
       <div className="grid md:grid-cols-3 gap-8">
         <div className="md:col-span-2">
           <h2 className="text-3xl font-bold mb-6 text-yellow-600">
-            Tee tilaus
+            <Text id="app.order.create" />
           </h2>
 
           <DeliveryForm

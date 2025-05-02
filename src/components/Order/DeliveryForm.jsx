@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useAuth } from "/src/contexts/AuthContext";
+import Text from "../locales/Text";
 
 const DeliveryForm = ({
   firstName,
@@ -16,7 +17,7 @@ const DeliveryForm = ({
   setDeliveryTime,
   setIsFormValid,
 }) => {
-  // TODO NEED TO REMAKE THIS  
+  // TODO NEED TO REMAKE THIS
   const { user } = useAuth();
 
   useEffect(() => {
@@ -37,18 +38,26 @@ const DeliveryForm = ({
       email.trim() &&
       deliveryTime;
     setIsFormValid(isValid);
-  }, [firstName, lastName, address, phone, email, deliveryTime, setIsFormValid]);
+  }, [
+    firstName,
+    lastName,
+    address,
+    phone,
+    email,
+    deliveryTime,
+    setIsFormValid,
+  ]);
 
   return (
     <div className="bg-white dark:bg-gray-600 rounded-xl shadow-md p-6 mb-6">
       <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">
-        Toimitustiedot
+        <Text id="app.order.info" />
       </h3>
 
       <div className="grid md:grid-cols-2 gap-4 mb-4">
         <div>
           <label className="block text-gray-800 dark:text-gray-100 mb-2">
-            Etunimi
+            <Text id="app.order.name" />
           </label>
           <input
             type="text"
@@ -59,7 +68,7 @@ const DeliveryForm = ({
         </div>
         <div>
           <label className="block text-gray-800 dark:text-gray-100 mb-2">
-            Sukunimi
+            <Text id="app.order.surname" />
           </label>
           <input
             type="text"
@@ -70,7 +79,7 @@ const DeliveryForm = ({
         </div>
         <div>
           <label className="block text-gray-800 dark:text-gray-100 mb-2">
-            Osoite
+            <Text id="app.order.address" />
           </label>
           <input
             type="text"
@@ -81,7 +90,7 @@ const DeliveryForm = ({
         </div>
         <div>
           <label className="block text-gray-800 dark:text-gray-100 mb-2">
-            Puhelin
+            <Text id="app.order.phone" />
           </label>
           <input
             type="text"
@@ -92,7 +101,7 @@ const DeliveryForm = ({
         </div>
         <div>
           <label className="block text-gray-800 dark:text-gray-100 mb-2">
-            Email
+            <Text id="app.order.email" />
           </label>
           <input
             type="text"
@@ -103,17 +112,25 @@ const DeliveryForm = ({
         </div>
         <div>
           <label className="block text-gray-800 dark:text-gray-100 mb-2">
-            Toimitusaika
+            <Text id="app.order.time" />
           </label>
           <select
             value={deliveryTime}
             onChange={(e) => setDeliveryTime(e.target.value)}
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
           >
-            <option value="">Valitse toimitusaika</option>
-            <option value="ASAP">Mahdollisimman pian</option>
-            <option value="30min">30 minuutin päästä</option>
-            <option value="1h">1 tunnin päästä</option>
+            <option value="">
+              <Text id="app.order.choice.time" />
+            </option>
+            <option value="ASAP">
+              <Text id="app.order.choice.fast" />
+            </option>
+            <option value="30min">
+              <Text id="app.order.choice.half" />
+            </option>
+            <option value="1h">
+              <Text id="app.order.choice.hour" />
+            </option>
           </select>
         </div>
       </div>
