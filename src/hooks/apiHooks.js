@@ -77,14 +77,7 @@ export function useProducts() {
 
 export function useOrders() {
   const getOrders = async () => {
-    const token = localStorage.getItem("accessToken");
-    const fetchOptions = {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    return await fetchData(`${API}/order/orders`, fetchOptions);
+    return await fetchData(`${API}/order/orders`);
   };
 
   const addOrder = async (orderData) => {

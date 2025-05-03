@@ -50,7 +50,7 @@ const Palaute = () => {
     }
 
     const reviewData = {
-      reservation_id: parseInt(selectedOrder, 10), // Convert selected order ID to integer
+      reservation_id: parseInt(selectedOrder, 10),
       opinion: feedback,
       stars: rating,
     };
@@ -103,7 +103,7 @@ const Palaute = () => {
           >
             <option value="">{t("app.feedback.selectOrder")}</option>
             {userOrders.map((order) => (
-              <option key={order.id} value={order.id}>
+              <option key={order.ID} value={order.ID}>
                 {new Date(order.timestamp).toLocaleDateString()} -{" "}
                 {order.status} -{" "}
                 {order.products
