@@ -30,6 +30,12 @@ const Menu = () => {
           throw new Error(`Failed to fetch menu data: ${response.status}`);
         }
         const data = await response.json();
+        
+        // Validate response structure
+        if (!Array.isArray(data)) {
+          throw new Error('Invalid menu data format');
+        }
+        
         setMenuData(data);
       } catch (err) {
         setError(err.message);
@@ -41,9 +47,9 @@ const Menu = () => {
     fetchMenuData();
   }, []);
 
-  const filteredItems = menuData.filter(
+  const filteredItems = menuData?.filter(
     (item) => item.category === selectedCategory
-  );
+  ) || [];
 
   if (loading)
     return (
@@ -66,9 +72,9 @@ const Menu = () => {
       <div className="grid md:grid-cols-2 gap-6">
         {filteredItems.length > 0 ? (
           filteredItems.map((item) => {
-            const isSpecial = dailySpecials.some(
+            const isSpecial = dailySpecials.products?.some(
               (special) => special.id === item.ID
-            );
+            ) || false;
             const discountedPrice = isSpecial
               ? (item.price * 0.85).toFixed(2)
               : null;
@@ -94,4 +100,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default Menu

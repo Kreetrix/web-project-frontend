@@ -6,31 +6,29 @@ export default function MenuItemCard({ item }) {
   const { addToCart, dailySpecials } = useCart();
   const navigate = useNavigate();
 
-  const isSpecial = dailySpecials.some((special) => special.id === item.ID);
+  const isSpecial = dailySpecials.products?.some(
+    (special) => special.id === item.ID
+  ) || false;
+  
   const discountedPrice = isSpecial ? (item.price * 0.85).toFixed(2) : null;
-
 
   const handleAddToCart = () => {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
-      // If no access token, prompt the user to log in
       const confirmLogin = window.confirm(
         "Sinun täytyy kirjautua sisään lisätäksesi tuotteen koriin. Haluatko kirjautua sisään nyt?"
       );
       if (confirmLogin) {
-        navigate("/login"); // Redirect to the login page
+        navigate("/login");
       }
       return;
     }
 
-    // Add the product to the cart if the user is logged in
     addToCart({
       ...item,
-      price: isSpecial ? parseFloat(discountedPrice) : item.price,
+      price: isSpecial ? Number(discountedPrice) : item.price,
     });
   };
-
-  
 
   return (
     <div className="bg-white dark:bg-gray-500 rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transition-all duration-300 hover:scale-105 hover:shadow-xl">
@@ -50,7 +48,7 @@ export default function MenuItemCard({ item }) {
           {isSpecial ? (
             <>
               <p className="text-gray-400 line-through">
-                {item.price.toFixed(2)}€
+                {item.price?.toFixed(2)}€
               </p>
               <p className="text-rose-600 dark:text-rose-400 font-bold text-lg">
                 {discountedPrice}€
@@ -58,7 +56,7 @@ export default function MenuItemCard({ item }) {
             </>
           ) : (
             <p className="text-rose-600 dark:text-rose-400 font-bold text-lg">
-              {item.price.toFixed(2)}€
+              {item.price?.toFixed(2)}€
             </p>
           )}
         </div>

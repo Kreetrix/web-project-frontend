@@ -51,6 +51,8 @@ export default {
       },
     },
     feedback: {
+      commentPlaceholder: "Write a comment...",
+      selectOrder: "Select order",
       title: "Feedback",
       name: "First name",
       surname: "Last name",

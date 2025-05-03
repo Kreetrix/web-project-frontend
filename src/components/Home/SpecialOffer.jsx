@@ -2,40 +2,43 @@ import { useEffect, useState } from "react";
 import { useCart } from "../../contexts/CartContext";
 import fetchProducts from "../../data/fetchProducts";
 
+const shuffleArray = (array, seed) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const seededRand = () => {
+      const x = Math.sin(seed++) * 10000;
+      return x - Math.floor(x);
+    };
+    const j = Math.floor(seededRand() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 const SpecialOffer = () => {
   const [specialOffers, setSpecialOffers] = useState([]);
   const { dailySpecials, setDailySpecials } = useCart();
 
   useEffect(() => {
     const getSpecialOffers = async () => {
-      if (dailySpecials.length > 0) {
-        // If daily specials are already set, use them
-        setSpecialOffers(dailySpecials);
+      const today = new Date().toISOString().split("T")[0];
+      
+      // Use cached specials if valid
+      if (dailySpecials.date === today) {
+        setSpecialOffers(dailySpecials.products);
         return;
       }
 
+      // Generate new specials
       const products = await fetchProducts();
-
-      // Use the current day as a seed for consistent randomization
-      const today = new Date().toISOString().split("T")[0];
-      const seed = today
-        .split("-")
-        .reduce((acc, val) => acc + parseInt(val), 0);
-
-      const seededRandom = (seed) => {
-        let x = Math.sin(seed) * 10000;
-        return x - Math.floor(x);
-      };
-
-      // Shuffle products using the seeded random function
-      const shuffledProducts = [...products].sort(
-        () => seededRandom(seed) - 0.5
-      );
-
-      // Select the first two products as special offers
+      const seed = today.split("-").reduce((acc, val) => acc + parseInt(val), 0);
+      
+      const shuffledProducts = shuffleArray(products, seed);
       const specials = shuffledProducts.slice(0, 2);
+
+      // Update state and storage
       setSpecialOffers(specials);
-      setDailySpecials(specials); // Save specials to context and local storage
+      setDailySpecials({ date: today, products: specials });
     };
 
     getSpecialOffers();

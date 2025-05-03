@@ -1,9 +1,10 @@
-import React from "react";
 import { useCart } from "../../contexts/CartContext";
 import { sendOrder } from "../../data/sendOrder";
+import {useUser} from "../../hooks/apiHooks.js"
 
 const Cart = ({ isFormValid }) => {
   const { cartItems, removeFromCart } = useCart();
+  const { getUser } = useUser();
 
   const calculateTotal = () => {
     return cartItems
@@ -12,8 +13,10 @@ const Cart = ({ isFormValid }) => {
   };
 
   const handleOrder = async () => {
+    const userData = await getUser();
+    
     const orderData = {
-      user_id: 1, // Replace with actual user ID
+      user_id: userData.user.id,
       items: cartItems.map((item) => ({
         product_id: item.ID,
         quantity: item.quantity,

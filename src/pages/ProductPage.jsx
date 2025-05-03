@@ -38,7 +38,7 @@ function ProductPage() {
     );
   }
 
-  const isSpecial = dailySpecials.some((special) => special.id === product.id);
+  const isSpecial = dailySpecials.products?.some((special) => special.id === product.id);
   const discountedPrice = isSpecial ? (product.price * 0.85).toFixed(2) : null;
 
   const handleAddToCart = () => {

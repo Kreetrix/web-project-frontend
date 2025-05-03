@@ -5,19 +5,25 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [dailySpecials, setDailySpecials] = useState(() => {
-    // Load daily specials from local storage on initialization
-    const savedSpecials = localStorage.getItem("dailySpecials");
-    return savedSpecials ? JSON.parse(savedSpecials) : [];
+    const saved = localStorage.getItem("dailySpecials");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      const today = new Date().toISOString().split("T")[0];
+      if (parsed.date === today) return parsed;
+    }
+    return { date: null, products: [] }; // Ensure products array exists
   });
 
   const addToCart = (product) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
-      const isSpecial = dailySpecials.some(
+      
+      // Updated to use dailySpecials.products
+      const isSpecial = dailySpecials.products?.some(
         (special) => special.id === product.id
-      );
+      ) ?? false;
 
-      const price = isSpecial ? product.price * 0.85 : product.price; // Apply discount if special
+      const price = isSpecial ? product.price * 0.85 : product.price;
 
       if (existingItem) {
         return prevItems.map((item) =>
@@ -64,5 +70,4 @@ export const CartProvider = ({ children }) => {
     </CartContext.Provider>
   );
 };
-
 export const useCart = () => useContext(CartContext);
