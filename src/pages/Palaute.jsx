@@ -9,6 +9,7 @@ const Palaute = () => {
   const [category, setCategory] = useState("product");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleRatingChange = (value) => {
     setRating(value);
@@ -30,6 +31,10 @@ const Palaute = () => {
     setLastName(e.target.value);
   };
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({
@@ -38,11 +43,13 @@ const Palaute = () => {
       rating,
       category,
       feedback,
+      email
     });
     setRating(0);
     setFeedback("");
     setFirstName("");
     setLastName("");
+    setEmail("");
     alert("Palaute lähetetty! Kiitos!");
   };
 
@@ -104,8 +111,8 @@ const Palaute = () => {
             <input
               id="lastName"
               type="text"
-              value={lastName}
-              onChange={handleLastNameChange}
+              value={email}
+              onChange={handleEmailChange}
               required
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-yellow-500 focus:outline-none transition duration-200 ease-in-out dark:bg-gray-800 dark:text-white"
             />
