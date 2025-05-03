@@ -132,7 +132,7 @@ export default function AdminProductList() {
                 setProducts([...products, newProductWithId]);
             }
 
-            setNewProduct({ name: "", price: "", description: "", isProductOfTheDay: false });
+            setNewProduct({ name: "", price: "", description: "", description_en: "", name_en: "", isProductOfTheDay: false });
         } catch (error) {
             console.error("Error adding product:", error);
         }

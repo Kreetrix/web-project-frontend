@@ -5,9 +5,6 @@ export default {
       button: "Lähetä",
       cancel: "Peruuta",
     },
-    main: {
-      welcome: "Tervetuloa Burger Palaceen!",
-    },
     header: {
       home: "Home",
       menu: "Menu",
@@ -92,6 +89,55 @@ export default {
           info2: "Ilmainen toimitus yli 20€ tilauksista!",
         },
       },
+      burgerSection: {
+        order: "Tilaa nyt",
+        welcome: "Tervetuloa Burger Palaceen!",
+        goofy: `MAISTUVIMMAT BURGERIT KAUPUNGISSA 🔥 
+          SYÖ KUIN KUNINGAS – VAIN BURGER PALACEISSA!`,
+      },
     },
+    dashboard: {
+      welcome: "Tervetuloa takaisin!",
+      info: "Omat tiedot",
+      orders: "Tilaukseni",
+      favorite: "Suosikit",
+    },
+    about: {
+      title: "Meidän tarina",
+      info1: `Burger Palace perustettiin vuonna 2020 intohimosta laadukkaisiin burgereihin. Alussa olimme pieni katukeittiö, 
+        mutta rakkautemme ruokaan ja asiakaspalveluun kasvatti meistä yhden Suomen rakastetuimmista burgeribrändeistä.
+        Tänään meillä on ravintoloita ympäri Suomea, ja jokainen niistä tarjoaa käsintehtyjä, mehukkaita burgereita parhaista raaka-aineista.`,
+      contacts: "Yhteystiedot",
+      email: "Sähköposti:",
+      phone: "Puhelin:",
+      key: "Avainhenkilöt",
+    },
+    cart: {
+      cart: "Ostoskori",
+      empty: "Ostoskori on tyhjä",
+      piece: "kpl",
+      delete: "Poista",
+      products: "Tuotteet",
+      delivery: "Toimitus",
+      total: "Yhteensä",
+      pay: "Maksa tilaus",
+    },
+    register: {
+      register: "Rekisteröidy",
+      question: "Onko sinulla jo tili?",
+      login: "Kirjaudu sisään",
+    },
+    products: {
+      allergy: "Allergiat",
+      add: "Lisää koriin",
+      empty: "Tuotetta ei löytynyt.",
+      loading: "Ladataan tuotetta...",
+    },
+    menu: {
+      card: {
+        noToken: "Sinun täytyy kirjautua sisään lisätäksesi tuotteen koriin. Haluatko kirjautua sisään nyt?",
+        add: "Lisää ostoskoriin",
+      }
+    }
   },
 };

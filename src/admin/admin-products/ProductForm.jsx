@@ -20,7 +20,21 @@ const ProductForm = ({ product, onChange, onSubmit, isNew }) => {
                     name="name"
                     value={product.name}
                     onChange={onChange}
-                    placeholder="Product name*"
+                    placeholder="Product name fi*"
+                    className={`w-full px-4 py-2 border rounded-md bg-white dark:bg-gray-800 
+                        text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400
+                        border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 
+                        ${isNew ? 'focus:ring-green-500' : 'focus:ring-blue-500'}
+                    `}
+                    required
+                />
+
+                <input
+                    type="text"
+                    name="name_en"
+                    value={product.name_en}
+                    onChange={onChange}
+                    placeholder="Product name en*"
                     className={`w-full px-4 py-2 border rounded-md bg-white dark:bg-gray-800 
                         text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400
                         border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 
@@ -88,7 +102,20 @@ const ProductForm = ({ product, onChange, onSubmit, isNew }) => {
                     name="description"
                     value={product.description || ''}
                     onChange={onChange}
-                    placeholder="Product description"
+                    placeholder="Product description fi"
+                    className={`w-full px-4 py-2 border rounded-md bg-white dark:bg-gray-800 
+                        text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400
+                        border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 
+                        ${isNew ? 'focus:ring-green-500' : 'focus:ring-blue-500'}
+                    `}
+                    rows="3"
+                />
+
+                <textarea
+                    name="description_en"
+                    value={product.description_en || ''}
+                    onChange={onChange}
+                    placeholder="Product description en"
                     className={`w-full px-4 py-2 border rounded-md bg-white dark:bg-gray-800 
                         text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400
                         border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 

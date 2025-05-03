@@ -92,6 +92,55 @@ export default {
           info2: "Free delivery for orders over 20€!",
         },
       },
+      burgerSection: {
+        order: "Order Now",
+        welcome: "Welcome to Burger Palace!",
+        goofy: `THE TASTIEST BURGERS IN TOWN 🔥  
+          EAT LIKE A KING – ONLY AT BURGER PALACE!`,
+      },
     },
+    dashboard: {
+      welcome: "Welcome back!",
+      info: "My Info",
+      orders: "My Orders",
+      favorite: "Favorites",
+    },
+    about: {
+      title: "Our Story",
+      info1: `Burger Palace was founded in 2020 out of a passion for quality burgers. We started as a small street food stall,  
+        but our love for food and customer service grew us into one of Finland's most beloved burger brands.  
+        Today we have restaurants across Finland, each serving handcrafted, juicy burgers made from the finest ingredients.`,
+      contacts: "Contact Information",
+      email: "Email:",
+      phone: "Phone:",
+      key: "Key Personnel",
+    },
+    cart: {
+      cart: "Shopping Cart",
+      empty: "Your cart is empty",
+      piece: "pcs",
+      delete: "Remove",
+      products: "Products",
+      delivery: "Delivery",
+      total: "Total",
+      pay: "Checkout",
+    },
+    register: {
+      register: "Register",
+      question: "Already have an account?",
+      login: "Log in",
+    },
+    products: {
+      allergy: "Allergies",
+      add: "Add to cart",
+      empty: "No products found.",
+      loading: "Loading product...",
+    },
+    menu: {
+      card: {
+        noToken: "You need to log in to add a product to your cart. Would you like to log in now?",
+        add: "Add to cart",
+      }
+    }
   },
 };
