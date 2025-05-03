@@ -87,13 +87,28 @@ export default function Header() {
               </li>
 
               <li>
-                <NavLink
-                  to="/palaute"
-                  className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105"
-                >
-                  <MessageSquare size={14} />
-                  <Text id="app.header.feedback" />
-                </NavLink>
+                {isLoggedIn ? (
+                  <NavLink
+                    to="/palaute"
+                    className="nav-button flex items-center gap-1 hover:text-yellow-300 transition-all duration-300 transform hover:scale-105"
+                  >
+                    <MessageSquare size={14} />
+                    <Text id="app.header.feedback" />
+                  </NavLink>
+                ) : (
+                  <button
+                    onClick={() =>
+                      alert(
+                        "Sinun täytyy kirjautua sisään lähettääksesi palautetta."
+                      )
+                    }
+                    className="nav-button flex items-center gap-1 text-gray-400 cursor-not-allowed"
+                    disabled
+                  >
+                    <MessageSquare size={14} />
+                    <Text id="app.header.feedback" />
+                  </button>
+                )}
               </li>
 
               <li className="relative">

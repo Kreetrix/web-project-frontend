@@ -1,15 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Text from "../components/locales/Text";
 import { useTranslation } from "../components/I18nProvider";
+import { useOrders } from "../hooks/apiHooks";
+import { useUser } from "../hooks/apiHooks";
 
 const Palaute = () => {
+  const { getOrders } = useOrders();
+  const { getUser } = useUser();
   const { t } = useTranslation();
+  const [userData, setUserData] = useState(null); // State for user data
+  const [orders, setOrders] = useState([]); // State for orders
   const [rating, setRating] = useState(0);
   const [feedback, setFeedback] = useState("");
-  const [category, setCategory] = useState("product");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [selectedOrder, setSelectedOrder] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = await getUser(); // Await the promise to get user data
+      const userOrders = await getOrders(); // Await the promise to get orders
+      setUserData(user); // Store user data in state
+      setOrders(userOrders); // Store orders in state
+    };
+
+    fetchData();
+  }, []);
+
+  const userOrders = userData?.user?.id
+    ? orders.filter((order) => order.user_id === userData.user.id)
+    : [];
+
+  const handleOrderChange = (e) => {
+    setSelectedOrder(e.target.value);
+  };
 
   const handleRatingChange = (value) => {
     setRating(value);
@@ -19,134 +41,104 @@ const Palaute = () => {
     setFeedback(e.target.value);
   };
 
-  const handleCategoryChange = (e) => {
-    setCategory(e.target.value);
-  };
-
-  const handleFirstNameChange = (e) => {
-    setFirstName(e.target.value);
-  };
-
-  const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({
-      firstName,
-      lastName,
-      rating,
-      category,
-      feedback,
-      email
-    });
-    setRating(0);
-    setFeedback("");
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    alert("Palaute lähetetty! Kiitos!");
+
+    if (!selectedOrder || !feedback || rating === 0) {
+      alert("Täytä kaikki kentät ennen palautteen lähettämistä.");
+      return;
+    }
+
+    const reviewData = {
+      reservation_id: parseInt(selectedOrder, 10), // Convert selected order ID to integer
+      opinion: feedback,
+      stars: rating,
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reviewData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit review");
+      }
+
+      console.log("Review submitted successfully:", reviewData);
+      alert("Palaute lähetetty onnistuneesti!");
+      setSelectedOrder("");
+      setFeedback("");
+      setRating(0);
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      alert("Palauteen lähettäminen epäonnistui. Yritä uudelleen.");
+    }
   };
 
   return (
     <div className="relative max-w-xl mx-auto p-6 bg-amber-100 dark:bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out">
-      <div className="absolute -left-3 top-10 h-40 w-1 bg-gradient-to-b from-yellow-400 to-amber-600 rounded-full shadow-lg" />
-
-      <div className="absolute -right-3 top-10 h-40 w-1 bg-gradient-to-b from-yellow-400 to-amber-600 rounded-full shadow-lg" />
-
-      <div className="hidden md:block absolute -left-16 top-12 text-6xl">
-        💬
-      </div>
-
       <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">
         <Text id="app.feedback.title" />
       </h2>
 
       <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div>
-            <label
-              htmlFor="firstName"
-              className="block text-lg font-medium text-gray-700 dark:text-amber-200 mb-2"
-            >
-              <Text id="app.feedback.name" /> *
-            </label>
-            <input
-              id="firstName"
-              type="text"
-              value={firstName}
-              onChange={handleFirstNameChange}
-              required
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-yellow-500 focus:outline-none transition duration-200 ease-in-out dark:bg-gray-800 dark:text-white"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="lastName"
-              className="block text-lg font-medium text-gray-700 dark:text-amber-200 mb-2"
-            >
-              <Text id="app.feedback.surname" /> *
-            </label>
-            <input
-              id="lastName"
-              type="text"
-              value={lastName}
-              onChange={handleLastNameChange}
-              required
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-yellow-500 focus:outline-none transition duration-200 ease-in-out dark:bg-gray-800 dark:text-white"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="lastName"
-              className="block text-lg font-medium text-gray-700 dark:text-amber-200 mb-2"
-            >
-              <Text id="app.feedback.email" /> *
-            </label>
-            <input
-              id="lastName"
-              type="text"
-              value={email}
-              onChange={handleEmailChange}
-              required
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-yellow-500 focus:outline-none transition duration-200 ease-in-out dark:bg-gray-800 dark:text-white"
-            />
-          </div>
-        </div>
-
+        {/* Order Selector */}
         <div className="mb-6">
           <label
-            htmlFor="category"
+            htmlFor="order"
             className="block text-lg font-medium text-gray-700 dark:text-amber-200 mb-2"
           >
-            <Text id="app.feedback.topic" />
+            <Text id="app.feedback.selectOrder" />
           </label>
           <select
-            id="category"
-            value={category}
-            onChange={handleCategoryChange}
+            id="order"
+            value={selectedOrder}
+            onChange={handleOrderChange}
+            required
             className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-yellow-500 focus:outline-none transition duration-200 ease-in-out dark:bg-gray-800 dark:text-white"
           >
-            <option value="product">
-              {t("app.feedback.dropdown.product")}
-            </option>
-            <option value="order">
-              {t("app.feedback.dropdown.reservation")}
-            </option>
-            <option value="general">
-              {t("app.feedback.dropdown.general")}
-            </option>
-            <option value="service">
-              {t("app.feedback.dropdown.service")}
-            </option>
+            <option value="">{t("app.feedback.selectOrder")}</option>
+            {userOrders.map((order) => (
+              <option key={order.id} value={order.id}>
+                {new Date(order.timestamp).toLocaleDateString()} -{" "}
+                {order.status} -{" "}
+                {order.products
+                  .map(
+                    (product) =>
+                      `${product.price.toFixed(2)}€ (${product.quantity}x) ${
+                        product.name
+                      }`
+                  )
+                  .join(", ")}
+              </option>
+            ))}
           </select>
         </div>
 
+        {/* Feedback Input */}
+        <div className="mb-6">
+          <label
+            htmlFor="feedback"
+            className="block text-lg font-medium text-gray-700 dark:text-amber-200 mb-2"
+          >
+            <Text id="app.feedback.comment" />
+          </label>
+          <textarea
+            id="feedback"
+            value={feedback}
+            onChange={handleFeedbackChange}
+            required
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-yellow-500 focus:outline-none transition duration-200 ease-in-out dark:bg-gray-800 dark:text-white"
+            rows="5"
+            placeholder={t("app.feedback.commentPlaceholder")}
+          ></textarea>
+        </div>
+
+        {/* Star Rating */}
         <div className="mb-6">
           <label className="block text-lg font-medium text-gray-700 dark:text-amber-200 mb-2">
             <Text id="app.feedback.rating" />
@@ -170,26 +162,7 @@ const Palaute = () => {
           </div>
         </div>
 
-        <div className="mb-6">
-          <label
-            htmlFor="feedback"
-            className="block text-lg font-medium text-gray-700 dark:text-amber-200 mb-2"
-          >
-            <Text id="app.feedback.comment" />
-          </label>
-          <textarea
-            id="feedback"
-            className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-yellow-500 focus:outline-none transition duration-200 ease-in-out dark:bg-gray-800 dark:text-white"
-            placeholder={Text({
-              id: "app.feedback.commentInfo",
-              asString: true,
-            })}
-            value={feedback}
-            onChange={handleFeedbackChange}
-            rows="5"
-          ></textarea>
-        </div>
-
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-full py-3 bg-yellow-500 hover:bg-yellow-600 text-white dark:text-gray-900 font-semibold rounded-md transition-all duration-300 ease-in-out transform hover:scale-[1.02] shadow-md"

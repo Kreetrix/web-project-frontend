@@ -51,6 +51,8 @@ export default {
       },
     },
     feedback: {
+      commentPlaceholder: "Kirjoita kommentti...",
+      selectOrder: "valitse tilaus",
       title: "Palaute",
       name: "Etunimi",
       surname: "Sukunimi",
