@@ -1,10 +1,17 @@
 import { useCart } from "../../contexts/CartContext";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Text from "../locales/Text";
+import { useTranslation } from "../I18nProvider";
 
 export default function MenuItemCard({ item }) {
   const { addToCart, dailySpecials } = useCart();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const lang = localStorage.getItem("userLanguage");
+
+  console.log(lang === "fi" ? item.name : item.name_en);
+
 
   const isSpecial = dailySpecials.products?.some(
     (special) => special.id === item.ID
@@ -16,7 +23,7 @@ export default function MenuItemCard({ item }) {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       const confirmLogin = window.confirm(
-        "Sinun täytyy kirjautua sisään lisätäksesi tuotteen koriin. Haluatko kirjautua sisään nyt?"
+        t("app.menu.card.noToken")
       );
       if (confirmLogin) {
         navigate("/login");
@@ -35,14 +42,14 @@ export default function MenuItemCard({ item }) {
       <Link to={`/product/${item.ID}`} className="block w-full">
         <img
           src={item.imageUrl || "/placeholder.png"}
-          alt={item.name}
+          alt={lang === "fi" ? item.name : item.name_en}
           className="w-36 h-36 object-cover rounded-full shadow-md mb-4 border-4 border-gray-100 dark:border-gray-700"
         />
         <h3 className="font-bold text-xl text-gray-800 dark:text-white">
-          {item.name}
+          {lang === "fi" ? item.name : item.name_en}
         </h3>
         <p className="text-gray-500 dark:text-gray-300 text-sm mt-1">
-          {item.description}
+          {lang === "fi" ? item.description : item.description}
         </p>
         <div className="mt-3">
           {isSpecial ? (
@@ -65,7 +72,7 @@ export default function MenuItemCard({ item }) {
         onClick={handleAddToCart}
         className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300"
       >
-        Lisää ostoskoriin
+        <Text id="app.menu.card.add"/>
       </button>
     </div>
   );

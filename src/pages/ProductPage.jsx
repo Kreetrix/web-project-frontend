@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import fetchProducts from "../data/fetchProducts";
 import { useCart } from "../contexts/CartContext";
+import Text from "../components/locales/Text";
 
 function ProductPage() {
   const { id } = useParams();
@@ -22,23 +23,27 @@ function ProductPage() {
     loadProduct();
   }, [id]);
 
+  //TODO: Make this a component
   if (loading) {
     return (
       <div className="text-center text-xl font-semibold text-gray-500">
-        Ladataan tuotetta...
+        <Text id="app.product.loading" />
       </div>
     );
   }
 
+  //TODO: Make this a component
   if (!product) {
     return (
       <div className="text-center text-xl font-semibold text-red-500">
-        Tuotetta ei löytynyt.
+        <Text id="app.product.empty" />
       </div>
     );
   }
 
-  const isSpecial = dailySpecials.products?.some((special) => special.id === product.id);
+  const isSpecial = dailySpecials.products?.some(
+    (special) => special.id === product.id
+  );
   const discountedPrice = isSpecial ? (product.price * 0.85).toFixed(2) : null;
 
   const handleAddToCart = () => {
@@ -78,7 +83,7 @@ function ProductPage() {
           {product.allergies && product.allergies.length > 0 && (
             <div className="border-t border-gray-300 pt-4">
               <h3 className="text-xl font-bold text-gray-800 text-center">
-                Allergiat
+                <Text id="app.product.allergy" />
               </h3>
               <ul className="list-disc list-inside text-gray-700 text-center">
                 {product.allergies.map((allergy, index) => (
@@ -109,7 +114,7 @@ function ProductPage() {
             onClick={handleAddToCart}
             className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition-colors"
           >
-            Lisää koriin
+            <Text id="app.product.add" />
           </button>
         </div>
       </div>

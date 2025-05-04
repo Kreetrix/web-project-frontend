@@ -1,6 +1,7 @@
 import { useCart } from "../../contexts/CartContext";
 import { sendOrder } from "../../data/sendOrder";
-import {useUser} from "../../hooks/apiHooks.js"
+import { useUser } from "../../hooks/apiHooks.js";
+import Text from "../locales/Text.jsx";
 
 const Cart = ({ isFormValid }) => {
   const { cartItems, removeFromCart } = useCart();
@@ -14,7 +15,7 @@ const Cart = ({ isFormValid }) => {
 
   const handleOrder = async () => {
     const userData = await getUser();
-    
+
     const orderData = {
       user_id: userData.user.id,
       items: cartItems.map((item) => ({
@@ -39,21 +40,31 @@ const Cart = ({ isFormValid }) => {
   return (
     <div className="bg-white dark:bg-gray-600 rounded-xl shadow-md p-6 sticky top-4 max-h-[90vh] overflow-y-auto">
       <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">
-        Ostoskori
+        <Text id="app.cart.cart" />
       </h3>
 
-      <div className="space-y-4 mb-6" role="list" aria-label="Ostoskori tuotteet">
+      <div
+        className="space-y-4 mb-6"
+        role="list"
+        aria-label="Ostoskori tuotteet"
+      >
         {cartItems.length === 0 ? (
-          <p className="text-gray-600 dark:text-gray-300">Ostoskori on tyhjä</p>
+          <p className="text-gray-600 dark:text-gray-300">
+            <Text id="app.cart.empty" />
+          </p>
         ) : (
           cartItems.map((item) => (
-            <div key={item.id} role="listitem" className="flex justify-between border-b pb-2">
+            <div
+              key={item.id}
+              role="listitem"
+              className="flex justify-between border-b pb-2"
+            >
               <div>
                 <p className="font-medium text-gray-800 dark:text-gray-200">
                   {item.name}
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-300">
-                  {item.quantity} kpl
+                  {item.quantity} <Text id="app.cart.piece" />
                 </p>
               </div>
               <div className="text-right">
@@ -65,7 +76,7 @@ const Cart = ({ isFormValid }) => {
                   className="text-red-500 dark:text-red-400 text-sm hover:underline mt-2"
                   aria-label={`Poista ${item.name} ostoskorista`}
                 >
-                  Poista
+                  <Text id="app.cart.delete" />
                 </button>
               </div>
             </div>
@@ -76,17 +87,23 @@ const Cart = ({ isFormValid }) => {
       {cartItems.length > 0 && (
         <div className="border-t pt-4 border-gray-200 dark:border-gray-700">
           <div className="flex justify-between mb-2">
-            <span className="text-gray-600 dark:text-gray-300">Tuotteet</span>
+            <span className="text-gray-600 dark:text-gray-300">
+              <Text id="app.cart.products" />
+            </span>
             <span className="text-gray-800 dark:text-gray-200">
               {calculateTotal()}€
             </span>
           </div>
           <div className="flex justify-between mb-4">
-            <span className="text-gray-600 dark:text-gray-300">Toimitus</span>
+            <span className="text-gray-600 dark:text-gray-300">
+              <Text id="app.cart.delivery" />
+            </span>
             <span className="text-gray-800 dark:text-gray-200">5.90€</span>
           </div>
           <div className="flex justify-between font-bold text-lg mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-            <span className="text-gray-800 dark:text-gray-200">Yhteensä</span>
+            <span className="text-gray-800 dark:text-gray-200">
+              <Text id="app.cart.total" />
+            </span>
             <span className="text-gray-800 dark:text-gray-200">
               {(parseFloat(calculateTotal()) + 5.9).toFixed(2)}€
             </span>
@@ -94,14 +111,15 @@ const Cart = ({ isFormValid }) => {
 
           <button
             onClick={handleOrder}
-            className={`w-full bg-gradient-to-r from-orange-300 via-orange-400 to-yellow-500 text-white font-bold py-3 px-4 rounded-lg mt-6 shadow-md transition-all duration-300 ${!isFormValid
-              ? "opacity-50 cursor-not-allowed"
-              : "hover:from-yellow-500 hover:to-yellow-700"
-              }`}
+            className={`w-full bg-gradient-to-r from-orange-300 via-orange-400 to-yellow-500 text-white font-bold py-3 px-4 rounded-lg mt-6 shadow-md transition-all duration-300 ${
+              !isFormValid
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:from-yellow-500 hover:to-yellow-700"
+            }`}
             disabled={!isFormValid}
             aria-label="Lähetä tilaus"
           >
-            Maksa tilaus
+            <Text id="app.cart.pay" />
           </button>
         </div>
       )}

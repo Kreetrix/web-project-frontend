@@ -60,7 +60,7 @@ export default function Register() {
       <div className="flex items-center justify-center min-h-screen relative z-10">
         <div className="bg-white bg-opacity-90 p-8 rounded-2xl shadow-2xl w-full max-w-md animate-fadeIn">
           <h2 className="text-3xl font-bold text-center mb-6 text-yellow-700">
-            Rekisteröidy 🍟
+            <Text id="app.register.register" /> 🍟
           </h2>
 
           <form onSubmit={handleRegister} className="space-y-5">
@@ -119,13 +119,13 @@ export default function Register() {
               className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 rounded-md flex items-center justify-center gap-2"
             >
               <UserPlus size={18} />
-              Rekisteröidy
+              <Text id="app.register.register" />
             </button>
 
             <div className="text-sm text-center text-gray-700 mt-2">
-              Onko sinulla jo tili?{" "}
+              <Text id="app.register.question" />{" "}
               <Link to="/login" className="text-yellow-600 hover:underline">
-                Kirjaudu sisään
+                <Text id="app.register.login" />
               </Link>
             </div>
           </form>
