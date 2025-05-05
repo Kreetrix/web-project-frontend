@@ -71,11 +71,15 @@ function ProductPage() {
         </h1>
         <div className="flex justify-center">
           <img
-            src="/placeholder.png"
+            src={product.image || '/placeholder-product.png'}
             alt={product.name}
-            className="w-full max-w-xl h-auto object-cover rounded-xl shadow-lg mb-6"
+            className="w-full max-w-xl h-auto max-h-96 object-contain rounded-xl shadow-lg mb-6"
+            onError={(e) => {
+              e.target.src = '/placeholder-product.png';
+            }}
           />
         </div>
+
         <div className="border-t border-gray-300 pt-4">
           <p className="text-lg text-gray-700 text-center">
             {product.description}
