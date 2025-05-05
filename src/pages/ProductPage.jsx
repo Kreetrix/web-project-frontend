@@ -71,7 +71,7 @@ function ProductPage() {
         </h1>
         <div className="flex justify-center">
           <img
-            src={product.image || '/placeholder-product.png'}
+            src={product.image || ''}
             alt={product.name}
             className="w-full max-w-xl h-auto max-h-96 object-contain rounded-xl shadow-lg mb-6"
             onError={(e) => {
