@@ -250,7 +250,7 @@ const AdminDashboard = () => {
                         {item.name}
                       </span>
                       <span className="text-sm font-medium text-gray-700">
-                        {item.count} kpl ($
+                        {item.count} kpl (
                         {((item.count / totalOrdered) * 100).toFixed(1)}%)
                       </span>
                     </div>

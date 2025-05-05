@@ -8,25 +8,42 @@ const Palaute = () => {
   const { getOrders } = useOrders();
   const { getUser } = useUser();
   const { t } = useTranslation();
-  const [userData, setUserData] = useState(null); // State for user data
-  const [orders, setOrders] = useState([]); // State for orders
+  const [userData, setUserData] = useState(null);
+  const [orders, setOrders] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
   const [feedback, setFeedback] = useState("");
   const [selectedOrder, setSelectedOrder] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
-      const user = await getUser(); // Await the promise to get user data
-      const userOrders = await getOrders(); // Await the promise to get orders
-      setUserData(user); // Store user data in state
-      setOrders(userOrders); // Store orders in state
+      try {
+        const [user, userOrders, allReviews] = await Promise.all([
+          getUser(),
+          getOrders(),
+          fetch("http://localhost:3000/api/v1/reviews").then(res => res.json())
+        ]);
+        
+        setUserData(user);
+        setOrders(userOrders);
+        setReviews(allReviews);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
     fetchData();
   }, []);
 
+  // Get orders with products that belong to the current user and don't have reviews
   const userOrders = userData?.user?.id
-    ? orders.filter((order) => order.user_id === userData.user.id)
+    ? orders.filter(order => {
+        // Filter out orders without products
+        if (!order.products || order.products.length === 0) return false;
+        
+        // Filter out orders that already have reviews
+        return !reviews.some(review => review.reservation_id === order.ID);
+      })
     : [];
 
   const handleOrderChange = (e) => {
@@ -73,6 +90,10 @@ const Palaute = () => {
       setSelectedOrder("");
       setFeedback("");
       setRating(0);
+      
+      // Refresh reviews after submission
+      const updatedReviews = await fetch("http://localhost:3000/api/v1/reviews").then(res => res.json());
+      setReviews(updatedReviews);
     } catch (error) {
       console.error("Error submitting review:", error);
       alert("Palauteen lähettäminen epäonnistui. Yritä uudelleen.");
