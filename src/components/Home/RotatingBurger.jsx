@@ -47,7 +47,7 @@ const RotatingBurger = () => {
                 <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-32 h-32 animate-spin-slow">
                         <img
-                            srcSet="public/burger.png"
+                            srcSet="/burger.png"
                             sizes="(max-width: 600px) 160px, 512px"
                             alt="Burger"
                             className="w-full h-full object-contain"

@@ -6,18 +6,19 @@ export const fetchProducts = async () => {
         }
         const products = await response.json();
 
-        
         return products.map(product => ({
             id: product.ID,
             name: product.name,
             price: product.price,
             description: product.description,
             category: product.category,
-            allergies: product.allergies.map(allergy => allergy.name),
+            image: product.image || null,
+            allergies: product.allergies?.map(allergy => allergy.name) || [],
         }));
     } catch (error) {
         console.error('Error fetching products:', error);
         return [];
     }
 };
- export default fetchProducts;
+
+export default fetchProducts;

@@ -10,8 +10,6 @@ export default function MenuItemCard({ item }) {
   const { t } = useTranslation();
   const lang = localStorage.getItem("userLanguage");
 
-  console.log(lang === "fi" ? item.name : item.name_fi);
-
   const isSpecial =
     dailySpecials.products?.some((special) => special.id === item.ID) || false;
 
@@ -37,9 +35,12 @@ export default function MenuItemCard({ item }) {
     <div className="bg-white dark:bg-gray-500 rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transition-all duration-300 hover:scale-105 hover:shadow-xl">
       <Link to={`/product/${item.ID}`} className="block w-full">
         <img
-          src={item.imageUrl || "/placeholder.png"}
+          src={item.image || "/placeholder.png"}
           alt={lang === "fi" ? item.name : item.name_fi}
           className="w-36 h-36 object-cover rounded-full shadow-md mb-4 border-4 border-gray-100 dark:border-gray-700"
+          onError={(e) => {
+            e.target.src = "/placeholder.png";
+          }}
         />
         <h3 className="font-bold text-xl text-gray-800 dark:text-white">
           {lang === "fi" ? item.name : item.name_fi}
