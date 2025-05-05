@@ -129,7 +129,7 @@ const AdminFeedbacks = () => {
           >
             <div className="flex justify-between items-center mb-2">
               <div className="text-sm text-gray-500 dark:text-gray-300">
-                <span>{f.date}</span> at <span>{f.time}</span>
+                <span>tilattu {f.date}</span><span>{f.time}</span>
               </div>
               <div className="text-sm text-gray-500 dark:text-gray-300">
                 {f.username}
