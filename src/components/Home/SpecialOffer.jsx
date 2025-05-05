@@ -22,17 +22,18 @@ const SpecialOffer = () => {
   useEffect(() => {
     const getSpecialOffers = async () => {
       const today = new Date().toISOString().split("T")[0];
-      
-      // Use cached specials if valid
-      if (dailySpecials.date === today) {
+
+      if (dailySpecials.date === today && dailySpecials.products?.length > 0) {
         setSpecialOffers(dailySpecials.products);
         return;
       }
 
       // Generate new specials
       const products = await fetchProducts();
-      const seed = today.split("-").reduce((acc, val) => acc + parseInt(val), 0);
-      
+      const seed = today
+        .split("-")
+        .reduce((acc, val) => acc + parseInt(val), 0);
+
       const shuffledProducts = shuffleArray(products, seed);
       const specials = shuffledProducts.slice(0, 2);
 
@@ -43,7 +44,6 @@ const SpecialOffer = () => {
 
     getSpecialOffers();
   }, [dailySpecials, setDailySpecials]);
-
 
   return (
     <section className="p-8 rounded-xl shadow-lg">
@@ -70,13 +70,19 @@ const SpecialOffer = () => {
               />
 
               <div className="ml-4 flex-1">
-                <h3 className="font-bold text-lg text-gray-900 dark:text-white">{product.name}</h3>
+                <h3 className="font-bold text-lg text-gray-900 dark:text-white">
+                  {product.name}
+                </h3>
                 <p className="text-amber-900 dark:text-amber-200 mb-2 drop-shadow-sm">
                   {product.description}
                 </p>
                 <div className="flex items-center gap-2">
-                  <p className="text-gray-600 dark:text-gray-400 line-through">{product.price.toFixed(2)}€</p>
-                  <p className="text-green-700 dark:text-green-300 font-bold">{discountedPrice}€</p>
+                  <p className="text-gray-600 dark:text-gray-400 line-through">
+                    {product.price.toFixed(2)}€
+                  </p>
+                  <p className="text-green-700 dark:text-green-300 font-bold">
+                    {discountedPrice}€
+                  </p>
                 </div>
               </div>
             </div>

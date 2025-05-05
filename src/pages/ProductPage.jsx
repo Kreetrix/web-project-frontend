@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import fetchProducts from "../data/fetchProducts";
 import { useCart } from "../contexts/CartContext";
 import Text from "../components/locales/Text";
+import { useTranslation } from "../components/I18nProvider";
 
 function ProductPage() {
   const { id } = useParams();
@@ -10,6 +11,7 @@ function ProductPage() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const { addToCart, dailySpecials } = useCart();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -27,7 +29,7 @@ function ProductPage() {
   if (loading) {
     return (
       <div className="text-center text-xl font-semibold text-gray-500">
-        <Text id="app.product.loading" />
+        <Text id="app.loading"></Text>
       </div>
     );
   }
@@ -50,9 +52,7 @@ function ProductPage() {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       // If no access token, prompt the user to log in
-      const confirmLogin = window.confirm(
-        "Sinun täytyy kirjautua sisään lisätäksesi tuotteen koriin. Haluatko kirjautua sisään nyt?"
-      );
+      const confirmLogin = window.confirm(t("app.menu.card.noToken"));
       if (confirmLogin) {
         navigate("/login"); // Redirect to the login page
       }
@@ -114,7 +114,7 @@ function ProductPage() {
             onClick={handleAddToCart}
             className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition-colors"
           >
-            <Text id="app.product.add" />
+            <Text id="app.menu.card.add" />
           </button>
         </div>
       </div>

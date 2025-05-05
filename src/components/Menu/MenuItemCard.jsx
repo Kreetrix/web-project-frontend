@@ -10,21 +10,17 @@ export default function MenuItemCard({ item }) {
   const { t } = useTranslation();
   const lang = localStorage.getItem("userLanguage");
 
-  console.log(lang === "fi" ? item.name : item.name_en);
+  console.log(lang === "fi" ? item.name : item.name_fi);
 
+  const isSpecial =
+    dailySpecials.products?.some((special) => special.id === item.ID) || false;
 
-  const isSpecial = dailySpecials.products?.some(
-    (special) => special.id === item.ID
-  ) || false;
-  
   const discountedPrice = isSpecial ? (item.price * 0.85).toFixed(2) : null;
 
   const handleAddToCart = () => {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
-      const confirmLogin = window.confirm(
-        t("app.menu.card.noToken")
-      );
+      const confirmLogin = window.confirm(t("app.menu.card.noToken"));
       if (confirmLogin) {
         navigate("/login");
       }
@@ -42,11 +38,11 @@ export default function MenuItemCard({ item }) {
       <Link to={`/product/${item.ID}`} className="block w-full">
         <img
           src={item.imageUrl || "/placeholder.png"}
-          alt={lang === "fi" ? item.name : item.name_en}
+          alt={lang === "fi" ? item.name : item.name_fi}
           className="w-36 h-36 object-cover rounded-full shadow-md mb-4 border-4 border-gray-100 dark:border-gray-700"
         />
         <h3 className="font-bold text-xl text-gray-800 dark:text-white">
-          {lang === "fi" ? item.name : item.name_en}
+          {lang === "fi" ? item.name : item.name_fi}
         </h3>
         <p className="text-gray-500 dark:text-gray-300 text-sm mt-1">
           {lang === "fi" ? item.description : item.description}
@@ -72,7 +68,7 @@ export default function MenuItemCard({ item }) {
         onClick={handleAddToCart}
         className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300"
       >
-        <Text id="app.menu.card.add"/>
+        <Text id="app.menu.card.add" />
       </button>
     </div>
   );
