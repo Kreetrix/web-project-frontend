@@ -45,7 +45,7 @@ export default function MenuItemCard({ item }) {
           {lang === "fi" ? item.name : item.name_fi}
         </h3>
         <p className="text-gray-500 dark:text-gray-300 text-sm mt-1">
-          {lang === "fi" ? item.description : item.description}
+          {lang === "fi" ? item.description : item.description_fi}
         </p>
         <div className="mt-3">
           {isSpecial ? (
