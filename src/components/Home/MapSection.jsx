@@ -4,6 +4,10 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import "../../styles/MapSection.css";
 
+
+
+const DIGITRANSIT_API_KEY = import.meta.env.VITE_DIGITRANSIT_API_KEY;
+
 const RESTAURANT_COORDS = [60.1695, 24.9354];
 
 const fetchStopsByRadius = async (lat, lon, radius = 700) => {
@@ -32,7 +36,8 @@ const fetchStopsByRadius = async (lat, lon, radius = 700) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "digitransit-subscription-key": "ba6aa23c85144f7c984cec91a194a782"
+                "digitransit-subscription-key": DIGITRANSIT_API_KEY,
+
             },
             body: JSON.stringify(query)
         });
