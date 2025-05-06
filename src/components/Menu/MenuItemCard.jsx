@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Text from "../locales/Text";
 import { useTranslation } from "../I18nProvider";
+import { useState } from "react";
 
 export default function MenuItemCard({ item }) {
   const { addToCart, dailySpecials } = useCart();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const lang = localStorage.getItem("userLanguage");
+  const [imgError, setImgError] = useState(false);
 
   const isSpecial =
     dailySpecials.products?.some((special) => special.id === item.ID) || false;
@@ -35,11 +37,12 @@ export default function MenuItemCard({ item }) {
     <div className="bg-white dark:bg-gray-500 rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transition-all duration-300 hover:scale-105 hover:shadow-xl">
       <Link to={`/product/${item.ID}`} className="block w-full">
         <img
-          src={item.image || "/placeholder.png"}
+          src={!imgError ? (item.image || "/placeholder.png") : "/placeholder.png"}
           alt={lang === "fi" ? item.name : item.name_fi}
           className="w-36 h-36 object-cover rounded-full shadow-md mb-4 border-4 border-gray-100 dark:border-gray-700"
           onError={(e) => {
-            e.target.src = "/placeholder.png";
+            setImgError(true);
+            e.target.onerror = null;
           }}
         />
         <h3 className="font-bold text-xl text-gray-800 dark:text-white">
