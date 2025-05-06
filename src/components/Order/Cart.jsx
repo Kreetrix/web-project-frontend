@@ -23,7 +23,7 @@ const Cart = ({ isFormValid }) => {
         quantity: item.quantity,
       })),
       price: parseFloat(calculateTotal()) + 5.9,
-      status: "completed",
+      status: "preparing",
     };
     console.log("Order data:", orderData);
 

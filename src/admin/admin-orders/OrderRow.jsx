@@ -1,10 +1,6 @@
 const statusOptions = {
-  new: "Uusi tilaus",
   preparing: "Valmistumassa",
-  ready: "Valmis",
-  delivering: "Toimitettavana",
   completed: "Valmis/Noudettu",
-  cancelled: "Peruutettu",
 };
 
 export default function OrderRow({ order, onStatusChange, users }) {
