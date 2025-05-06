@@ -1,11 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProfileTab from "../components/client-profile/ProfileTab";
 import OrdersTab from "../components/client-profile/OrdersTab";
 import FavoritesTab from "../components/client-profile/FavoritesTab";
 import Text from "../components/locales/Text";
+import { useUser } from "../hooks/apiHooks";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("profile");
+  const [user, setUser] = useState(undefined);
+  const { getUser } = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchUser() {
+      if (!user) {
+        try {
+          const userData = await getUser();
+          setUser(userData.user);
+        } catch (e) {
+          navigate("/login");
+        }
+      }
+    }
+    fetchUser();
+  }, [user]);
 
   const renderTab = () => {
     switch (activeTab) {
@@ -36,6 +55,16 @@ export default function Dashboard() {
         >
           <Text id="app.dashboard.orders" />
         </button>
+        {user?.role <= 2 ? (
+          <button
+            onClick={() => navigate("/admin")}
+            className="px-6 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-bold rounded-md transition-all duration-200"
+          >
+            Admin panel
+          </button>
+        ) : (
+          ""
+        )}
       </div>
 
       <section className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-lg">

@@ -2,13 +2,12 @@ import { useCart } from "../../contexts/CartContext";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Text from "../locales/Text";
-import { useTranslation } from "../I18nProvider";
+import { useI18n, useTranslation } from "../I18nProvider";
 
 export default function MenuItemCard({ item }) {
   const { addToCart, dailySpecials } = useCart();
   const navigate = useNavigate();
-  const { t } = useTranslation();
-  const lang = localStorage.getItem("userLanguage");
+  const { t, locale } = useI18n();
 
   const isSpecial =
     dailySpecials.products?.some((special) => special.id === item.ID) || false;
@@ -36,17 +35,19 @@ export default function MenuItemCard({ item }) {
       <Link to={`/product/${item.ID}`} className="block w-full">
         <img
           src={item.image || "/placeholder.png"}
-          alt={lang === "fi" ? item.name : item.name_fi}
+          alt={locale === "en" ? item.name : item.name_fi}
           className="w-36 h-36 object-cover rounded-full shadow-md mb-4 border-4 border-gray-100 dark:border-gray-700"
           onError={(e) => {
             e.target.src = "/placeholder.png";
           }}
         />
         <h3 className="font-bold text-xl text-gray-800 dark:text-white">
-          {lang === "fi" ? item.name : item.name_fi}
+          {locale === "en" ? item.name : item.name_fi}{" "}
+          {/* Use locale from context */}
         </h3>
         <p className="text-gray-500 dark:text-gray-300 text-sm mt-1">
-          {lang === "fi" ? item.description : item.description_fi}
+          {locale === "en" ? item.description : item.description_fi}{" "}
+          {/* Use locale from context */}
         </p>
         <div className="mt-3">
           {isSpecial ? (

@@ -15,12 +15,9 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AdminRoute from "./components/admin/AdminRoute";
 import AdminProductList from "./admin/admin-products/AdminProductList";
-import 'leaflet/dist/leaflet.css';
-
-
+import "leaflet/dist/leaflet.css";
 
 function App() {
-  console.log("Environment Variables:", import.meta.env);
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
