@@ -25,7 +25,7 @@ function ProductPage() {
     loadProduct();
   }, [id]);
 
-  //TODO: Make this a component
+  
   if (loading) {
     return (
       <div className="text-center text-xl font-semibold text-gray-500">
@@ -34,7 +34,7 @@ function ProductPage() {
     );
   }
 
-  //TODO: Make this a component
+  
   if (!product) {
     return (
       <div className="text-center text-xl font-semibold text-red-500">
