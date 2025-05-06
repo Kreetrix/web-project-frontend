@@ -64,7 +64,7 @@ const SpecialOffer = () => {
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-600 to-yellow-700"></div>
 
               <img
-                src={product.image || "https://via.placeholder.com/150"} // 👈 здесь
+                src={product.image || "https://placehold.co/150x150?text=No+Image"}
                 alt={product.name}
                 className="w-32 h-32 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
               />
