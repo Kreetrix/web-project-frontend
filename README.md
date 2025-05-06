@@ -14,20 +14,20 @@ If you are developing a production application, we recommend using TypeScript an
 # Restaurant App  
   
 
-## Ryhmän jäsenet (Team Members)  
+## Ryhmän jäsenet  
 - **Axel Nokireki**  
 - **Georgi**  
 - **Kreetz**  
 
-## Sovelluksen idea ja kohderyhmä (Application Idea & Target Audience)  
-**Kohderyhmä (Target Audience):**  
+## Sovelluksen idea ja kohderyhmä  
+**Kohderyhmä:**  
 - Nuoret aikuiset, mutta sovellus soveltuu kaikille ruoan tilaajille.  
 
-**Sovelluksen tarkoitus (Purpose):**  
+**Sovelluksen tarkoitus:**  
 - Tarjoaa käyttäjille mahdollisuuden tilata ruokaa, jättää arvosteluja ja seurata tilaushistoriaa.  
 - Antaa ylläpitäjille (admin) työkalut ruokalistan hallintaan, tilausten käsittelyyn ja allergiatietojen asettamiseen.  
 
-**Pääominaisuudet (Key Features):**  
+**Pääominaisuudet:**  
 ✅ **Asiakas:**  
 - Rekisteröityminen & kirjautuminen  
 - Ruokien selaus ja ostoskoriin lisäys  
@@ -43,8 +43,8 @@ If you are developing a production application, we recommend using TypeScript an
 - Allergiatietojen asettaminen  
 - Tilauksien hyväksyntä ja seuranta  
 
-## Sovelluksen toiminnallisuudet (Application Functionalities)  
-### Core Features (Perustoiminnot)  
+## Sovelluksen toiminnallisuudet  
+### Core Features  
 - **Käyttäjähallinta**  
   - Rekisteröityminen, kirjautuminen ja profiilin hallinta.  
 - **Ruokalistan selaus**  
@@ -55,7 +55,7 @@ If you are developing a production application, we recommend using TypeScript an
   - Vaihda sovelluksen kieltä (suomi/englanti)  
   - Vaihda väriteemaa (vaalea/tumma)  
 
-### Advanced Features (Lisätoiminnot)  
+### Advanced Features  
 - **Arvostelut & rating-järjestelmä**  
   - Käyttäjät voivat antaa palautetta ja tähti-arvosanoja.  
 - **Tilaushistoria**  
@@ -64,11 +64,11 @@ If you are developing a production application, we recommend using TypeScript an
   - Ylläpitäjä voi hallita ruokia, tilauksia.  
 
 
-### Kuvakaappaukset (Screenshots) *(Valinnainen)*  
+### Kuvakaappaukset  
 ![Kirjautumissivu](/public/login.png)  
 ![Ruokalistasivu](/public/menu.png)  
 
-## Ohjeistus miten sovellus testataan (Testing Instructions)  
+## Ohjeistus miten sovellus testataan  
 
 ### 1. VPN-yhteys vaaditaan!  
 🔌 **Koulun VPN pitää olla päällä ennen testaamista:**  
