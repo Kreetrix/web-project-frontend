@@ -1,0 +1,7 @@
+POST https://api.digitransit.fi/routing/v2/hsl/gtfs/v1 HTTP/1.1
+Content-Type: application/json
+digitransit-subscription-key: ba6aa23c85144f7c984cec91a194a782
+
+{
+    "query": "{\n  stopsByRadius(lat: 60.1695, lon: 24.9354, radius: 300, first: 10) {\n    edges {\n      node {\n        stop {\n          name\n          lat\n          lon\n        }\n        distance\n      }\n    }\n  }\n}"
+}
