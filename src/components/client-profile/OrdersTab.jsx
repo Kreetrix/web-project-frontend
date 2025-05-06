@@ -3,6 +3,8 @@ import { useUser } from "../../hooks/apiHooks.js";
 import { useEffect, useState } from "react";
 import { useTranslation } from "../../components/I18nProvider";
 
+const API = import.meta.env.VITE_API;
+
 export default function OrdersTab() {
   const { getUser } = useUser();
   const [orders, setOrders] = useState([]);
@@ -20,9 +22,9 @@ export default function OrdersTab() {
         // Fetch orders, products, and reservation products in parallel
         const [ordersResponse, productsResponse, reservationProductsResponse] =
           await Promise.all([
-            fetch("http://localhost:3000/api/v1/order/orders"),
-            fetch("http://localhost:3000/api/v1/products"),
-            fetch("http://localhost:3000/api/v1/order/reservation-products"),
+            fetch(`${API}/order/orders`),
+            fetch(`${API}/products`),
+            fetch(`${API}/order/reservation-products`),
           ]);
 
         if (!ordersResponse.ok) throw new Error(t("app.order.failedFetch"));

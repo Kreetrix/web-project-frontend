@@ -1,6 +1,7 @@
+const API = import.meta.env.VITE_API;
 export const sendOrder = async (orderData) => {
     try {
-      const response = await fetch("http://localhost:3000/api/v1/order/orders", {
+      const response = await fetch(`${API}/order/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

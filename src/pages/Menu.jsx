@@ -4,6 +4,8 @@ import MenuItemCard from "../components/Menu/MenuItemCard";
 import { useCart } from "../contexts/CartContext";
 import Text from "../components/locales/Text";
 
+const API = import.meta.env.VITE_API;
+
 const Menu = () => {
   const [menuData, setMenuData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,7 +27,7 @@ const Menu = () => {
   useEffect(() => {
     const fetchMenuData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/v1/products");
+        const response = await fetch(`${API}/products`);
         if (!response.ok) {
           throw new Error(`Failed to fetch menu data: ${response.status}`);
         }

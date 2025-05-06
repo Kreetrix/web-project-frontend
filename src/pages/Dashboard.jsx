@@ -11,8 +11,6 @@ export default function Dashboard() {
     switch (activeTab) {
       case "orders":
         return <OrdersTab />;
-      case "favorites":
-        return <FavoritesTab />;
       case "profile":
       default:
         return <ProfileTab />;
@@ -37,12 +35,6 @@ export default function Dashboard() {
           className="px-6 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-bold rounded-md transition-all duration-200"
         >
           <Text id="app.dashboard.orders" />
-        </button>
-        <button
-          onClick={() => setActiveTab("favorites")}
-          className="px-6 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-bold rounded-md transition-all duration-200"
-        >
-          <Text id="app.dashboard.favorite" />
         </button>
       </div>
 
