@@ -28,6 +28,17 @@ export default {
       phone: "Phone",
       email: "Email",
       time: "Delivery time",
+      open: "Open Orders",
+      none: "No Orders",
+      failedFetch: "Failed to fetch orders",
+      failedReservationFetch: "Failed to fetch reservation products",
+      removedProduct: "Removed product",
+      status: "Status",
+      history: "History",
+      moreItems: "+${count} more",
+      delivered: "Delivered",
+      noHistory: "No order history",
+
       choice: {
         time: "Choose delivery time",
         fast: "As soon as possible",
@@ -135,12 +146,14 @@ export default {
       add: "Add to cart",
       empty: "No products found.",
       loading: "Loading product...",
+      failedFetch: "Failed to fetch products"
     },
     menu: {
       card: {
-        noToken: "You need to log in to add a product to your cart. Would you like to log in now?",
+        noToken:
+          "You need to log in to add a product to your cart. Would you like to log in now?",
         add: "Add to cart",
-      }
-    }
+      },
+    },
   },
 };
