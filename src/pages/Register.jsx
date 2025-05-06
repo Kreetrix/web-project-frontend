@@ -39,7 +39,7 @@ export default function Register() {
         throw new Error(status || "Registration failed");
       }
 
-      //TODO: redirect!
+      
       alert("Registration successful! TODO: REDIRECT");
     } catch (error) {
       console.error("Registration error:", error.message);

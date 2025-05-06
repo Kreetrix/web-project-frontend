@@ -17,7 +17,7 @@ If you are developing a production application, we recommend using TypeScript an
 ## Ryhmän jäsenet  
 - **Axel Nokireki**  
 - **Georgii Afanasev/GeorgiiAf**  
-- **Kreetz**  
+- **Vladimir Karpenko**  
 
 ## Sovelluksen idea ja kohderyhmä  
 **Kohderyhmä:**  
