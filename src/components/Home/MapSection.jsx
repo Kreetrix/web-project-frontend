@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import "../../styles/MapSection.css";
+import { useTranslation } from "../I18nProvider";
+
 
 
 
@@ -53,7 +55,7 @@ const fetchStopsByRadius = async (lat, lon, radius = 700) => {
 const createSvgIcon = (type) => {
     const icons = {
         restaurant: `
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
         <filter id="shadow" x="-20%" y="0%" width="140%" height="130%">
           <feDropShadow dx="0" dy="1" stdDeviation="1" flood-opacity="0.3"/>
         </filter>
@@ -90,6 +92,7 @@ const createSvgIcon = (type) => {
     `,
     };
 
+
     return L.divIcon({
         html: icons[type],
         className: '',
@@ -99,6 +102,10 @@ const createSvgIcon = (type) => {
     });
 };
 const MapSection = () => {
+
+    const { t } = useTranslation();
+
+
     const [userCoords, setUserCoords] = useState(null);
     const [userStops, setUserStops] = useState([]);
     const [restaurantStops, setRestaurantStops] = useState([]);
@@ -204,34 +211,30 @@ const MapSection = () => {
     return (
         <div className="w-full my-8">
             <div className="mb-6 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg shadow-md">
-                <h2 className="text-3xl font-bold text-white mb-2">Transport Map</h2>
+                <h2 className="text-3xl font-bold text-white mb-2">{t('app.map.title')}</h2>
+
                 <div className="flex flex-wrap items-center gap-4 text-base font-medium text-blue-100">
                     <div className="flex items-center">
                         <div className="w-4 h-4 rounded-full bg-red-400 mr-2 shadow-sm border border-white"></div>
-                        <span>Restaurant</span>
+                        <span>{t('app.map.legend.restaurant')}</span>
                     </div>
                     <div className="flex items-center">
                         <div className="w-4 h-4 rounded-full bg-blue-300 mr-2 shadow-sm border border-white"></div>
-                        <span>You</span>
+                        <span>{t('app.map.legend.you')}</span>
                     </div>
                     <div className="flex items-center">
                         <div className="w-4 h-4 rounded-full bg-green-300 mr-2 shadow-sm border border-white"></div>
-                        <span>Stops near you</span>
+                        <span>{t('app.map.legend.nearYou')}</span>
                     </div>
                     <div className="flex items-center">
                         <div className="w-4 h-4 rounded-full bg-purple-300 mr-2 shadow-sm border border-white"></div>
-                        <span>Stops near restaurant</span>
+                        <span>{t('app.map.legend.nearRestaurant')}</span>
                     </div>
                 </div>
             </div>
 
             <div className="relative overflow-hidden rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-                <MapContainer
-                    center={mapCenter}
-                    zoom={13}
-                    className={`w-full ${getMapHeight()} z-0`}
-                    zoomControl={false}
-                >
+                <MapContainer center={mapCenter} zoom={13} className={`w-full ${getMapHeight()} z-0`} zoomControl={false}>
                     <TileLayer
                         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
@@ -242,16 +245,16 @@ const MapSection = () => {
 
                     <Marker position={RESTAURANT_COORDS} icon={restaurantIcon}>
                         <Popup className="custom-popup">
-                            <div className="font-medium text-red-600">Restaurant</div>
-                            <div className="text-gray-600 dark:text-gray-300">Helsinki City Center</div>
+                            <div className="font-medium text-red-600">{t('app.map.restaurant')}</div>
+                            <div className="text-gray-600 dark:text-gray-300">{t('app.map.restaurantLocation')}</div>
                         </Popup>
                     </Marker>
 
                     {userCoords && (
                         <Marker position={userCoords} icon={userIcon}>
                             <Popup className="custom-popup">
-                                <div className="font-medium text-blue-600">Your location</div>
-                                <div className="text-gray-600 dark:text-gray-300">Current position</div>
+                                <div className="font-medium text-blue-600">{t('app.map.you')}</div>
+                                <div className="text-gray-600 dark:text-gray-300">{t('app.map.yourLocation')}</div>
                             </Popup>
                         </Marker>
                     )}
@@ -260,7 +263,9 @@ const MapSection = () => {
                         <Marker key={`user-${stop.id}`} position={[stop.lat, stop.lon]} icon={userStopIcon}>
                             <Popup className="custom-popup">
                                 <div className="font-medium text-green-600">{stop.name}</div>
-                                <div className="text-gray-600 dark:text-gray-300">Distance: {Math.round(stop.distance)} m</div>
+                                <div className="text-gray-600 dark:text-gray-300">
+                                    {t('app.map.distance')}: {Math.round(stop.distance)} m
+                                </div>
                             </Popup>
                         </Marker>
                     ))}
@@ -269,7 +274,9 @@ const MapSection = () => {
                         <Marker key={`restaurant-${stop.id}`} position={[stop.lat, stop.lon]} icon={restaurantStopIcon}>
                             <Popup className="custom-popup">
                                 <div className="font-medium text-purple-600">{stop.name}</div>
-                                <div className="text-gray-600 dark:text-gray-300">Distance from restaurant: {Math.round(stop.distance)} m</div>
+                                <div className="text-gray-600 dark:text-gray-300">
+                                    {t('app.map.distanceFromRestaurant')}: {Math.round(stop.distance)} m
+                                </div>
                             </Popup>
                         </Marker>
                     ))}
@@ -282,19 +289,22 @@ const MapSection = () => {
                         <h3 className="font-bold text-green-800 dark:text-green-300 flex items-center">
                             <svg viewBox="0 0 24 24" className="w-5 h-5 mr-2" fill="currentColor">
                                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+
                             </svg>
-                            Stops near you ({userStops.length})
+                            {t('app.map.stopsNearYou')} ({userStops.length})
                         </h3>
                         <ul className="mt-2 text-sm text-gray-700 dark:text-gray-200">
                             {userStops.slice(0, 3).map(stop => (
                                 <li key={stop.id} className="mb-1 flex justify-between">
                                     <span>{stop.name}</span>
-                                    <span className="font-medium text-green-700 dark:text-green-400">{Math.round(stop.distance)} m</span>
+                                    <span className="font-medium text-green-700 dark:text-green-400">
+                                        {Math.round(stop.distance)} m
+                                    </span>
                                 </li>
                             ))}
                             {userStops.length > 3 && (
                                 <li className="text-green-600 dark:text-green-400 font-medium text-right">
-                                    + {userStops.length - 3} more
+                                    + {userStops.length - 3} {t('app.map.more')}
                                 </li>
                             )}
                         </ul>
@@ -304,19 +314,22 @@ const MapSection = () => {
                         <h3 className="font-bold text-purple-800 dark:text-purple-300 flex items-center">
                             <svg viewBox="0 0 24 24" className="w-5 h-5 mr-2" fill="currentColor">
                                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+
                             </svg>
-                            Stops near restaurant ({restaurantStops.length})
+                            {t('app.map.stopsNearRestaurant')} ({restaurantStops.length})
                         </h3>
                         <ul className="mt-2 text-sm text-gray-700 dark:text-gray-200">
                             {restaurantStops.slice(0, 3).map(stop => (
                                 <li key={stop.id} className="mb-1 flex justify-between">
                                     <span>{stop.name}</span>
-                                    <span className="font-medium text-purple-700 dark:text-purple-400">{Math.round(stop.distance)} m</span>
+                                    <span className="font-medium text-purple-700 dark:text-purple-400">
+                                        {Math.round(stop.distance)} m
+                                    </span>
                                 </li>
                             ))}
                             {restaurantStops.length > 3 && (
                                 <li className="text-purple-600 dark:text-purple-400 font-medium text-right">
-                                    + {restaurantStops.length - 3} more
+                                    + {restaurantStops.length - 3} {t('app.map.more')}
                                 </li>
                             )}
                         </ul>

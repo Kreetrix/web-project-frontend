@@ -154,5 +154,30 @@ export default {
         add: "Lisää ostoskoriin",
       },
     },
+
+    map: {
+      title: "Liikennekartta",
+      legend: {
+        restaurant: "Ravintola",
+        you: "Sinä",
+        nearYou: "Pysäkit lähellä sinua",
+        nearRestaurant: "Pysäkit lähellä ravintolaa"
+      },
+      restaurant: "Ravintola",
+      restaurantLocation: "Helsingin keskusta",
+      you: "Sijaintisi",
+      yourLocation: "Nykyinen sijainti",
+      distance: "Etäisyys",
+      distanceFromRestaurant: "Etäisyys ravintolasta",
+      stopsNearYou: "Pysäkit lähellä sinua",
+      stopsNearRestaurant: "Pysäkit lähellä ravintolaa",
+      more: "lisää",
+      loading: "Ladataan karttaa ja tietoja...",
+      error: "Tietojen hakeminen epäonnistui"
+    },
+
+
+
+
   },
 };

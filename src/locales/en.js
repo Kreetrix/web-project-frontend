@@ -155,5 +155,27 @@ export default {
         add: "Add to cart",
       },
     },
+
+    map: {
+      title: "Transport Map",
+      legend: {
+        restaurant: "Restaurant",
+        you: "You",
+        nearYou: "Stops near you",
+        nearRestaurant: "Stops near restaurant"
+      },
+      restaurant: "Restaurant",
+      restaurantLocation: "Helsinki City Center",
+      you: "Your location",
+      yourLocation: "Current position",
+      distance: "Distance",
+      distanceFromRestaurant: "Distance from restaurant",
+      stopsNearYou: "Stops near you",
+      stopsNearRestaurant: "Stops near restaurant",
+      more: "more",
+      loading: "Loading map and data...",
+      error: "Failed to fetch data"
+    }
+
   },
 };
