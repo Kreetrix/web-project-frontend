@@ -1,6 +1,7 @@
 import BurgerSection from '../components/Home/BurgerSection';
 import InfoSection from '../components/Home/InfoSection';
 import SpecialOffer from '../components/Home/SpecialOffer';
+import MapSection from '../components/Home/MapSection';
 
 function Home() {
     return (
@@ -8,7 +9,7 @@ function Home() {
             <BurgerSection />
             <InfoSection />
             <SpecialOffer />
-
+            <MapSection />
         </>
     );
 }
