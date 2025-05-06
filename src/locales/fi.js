@@ -25,6 +25,19 @@ export default {
       phone: "Puhelin",
       email: "Sähköposti",
       time: "Toimitusaika",
+      id: "Tilausnumero",
+      open: "Avoimet tilaukset",
+      completed: "Valmistuneet tilaukset",
+      noPrice: "ei hintaa",
+      none: "Ei tilauksia",
+      failedFetch: "Tilausten hakeminen epäonnistui",
+      failedReservationFetch: "Varaus tuotteiden hakeminen epäonnistui",
+      removedProduct: "Poistettu tuote",
+      status: "Tila",
+      history: "Historia",
+      moreItems: "+${count} muuta",
+      delivered: "Toimitettu",
+      noHistory: "Ei tilaushistoriaa",
       choice: {
         time: "Valitse toimitusaika",
         fast: "Mahdollisimman pian",
@@ -132,12 +145,14 @@ export default {
       add: "Lisää koriin",
       empty: "Tuotetta ei löytynyt.",
       loading: "Ladataan tuotetta...",
+      failedFetch: "Tuotteiden hakeminen epäonnistui"
     },
     menu: {
       card: {
-        noToken: "Sinun täytyy kirjautua sisään lisätäksesi tuotteen koriin. Haluatko kirjautua sisään nyt?",
+        noToken:
+          "Sinun täytyy kirjautua sisään lisätäksesi tuotteen koriin. Haluatko kirjautua sisään nyt?",
         add: "Lisää ostoskoriin",
-      }
-    }
+      },
+    },
   },
 };

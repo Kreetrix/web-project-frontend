@@ -4,7 +4,7 @@ import { useUser } from "../../hooks/apiHooks.js";
 import Text from "../locales/Text.jsx";
 
 const Cart = ({ isFormValid }) => {
-  const { cartItems, removeFromCart } = useCart();
+  const { cartItems, removeFromCart, clearCart } = useCart();
   const { getUser } = useUser();
 
   const calculateTotal = () => {
@@ -31,6 +31,7 @@ const Cart = ({ isFormValid }) => {
       const response = await sendOrder(orderData);
       console.log("Order sent successfully:", response);
       alert("Tilaus lähetetty onnistuneesti!");
+      clearCart();
     } catch (error) {
       console.error("Error sending order:", error);
       alert("Tilausta ei voitu lähettää. Yritä uudelleen.");
