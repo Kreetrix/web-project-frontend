@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useUser } from "../../hooks/apiHooks.js"
 
-export default function ProfileTab() {                  /* TODO - add data from db with context */
+export default function ProfileTab() {                  
     const [user, setUser] = useState(undefined);
 
     // Get user data and update function
