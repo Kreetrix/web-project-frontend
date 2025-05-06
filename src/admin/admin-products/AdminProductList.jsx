@@ -6,6 +6,8 @@ import ProductList from "./ProductList";
 import ModalDelete from "../../components/modals/ModalDelete";
 import { useProducts } from "../../hooks/apiHooks";
 
+const API = import.meta.env.VITE_API;
+
 export default function AdminProductList() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -25,7 +27,7 @@ export default function AdminProductList() {
     const [productsPerPage] = useState(5); // pagination
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/v1/products")
+        fetch(`${API}/products`)
             .then((res) => res.json())
             .then((data) => {
                 setProducts(data);

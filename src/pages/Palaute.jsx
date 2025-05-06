@@ -4,6 +4,8 @@ import { useTranslation } from "../components/I18nProvider";
 import { useOrders } from "../hooks/apiHooks";
 import { useUser } from "../hooks/apiHooks";
 
+const API = import.meta.env.VITE_API;
+
 const Palaute = () => {
   const { getOrders } = useOrders();
   const { getUser } = useUser();
@@ -21,7 +23,7 @@ const Palaute = () => {
         const [user, userOrders, allReviews] = await Promise.all([
           getUser(),
           getOrders(),
-          fetch("http://localhost:3000/api/v1/reviews").then(res => res.json())
+          fetch(`${API}/reviews`).then(res => res.json())
         ]);
         
         setUserData(user);
@@ -73,7 +75,7 @@ const Palaute = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/reviews", {
+      const response = await fetch(`${API}/reviews`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +94,7 @@ const Palaute = () => {
       setRating(0);
       
       // Refresh reviews after submission
-      const updatedReviews = await fetch("http://localhost:3000/api/v1/reviews").then(res => res.json());
+      const updatedReviews = await fetch(`${API}/reviews`).then(res => res.json());
       setReviews(updatedReviews);
     } catch (error) {
       console.error("Error submitting review:", error);

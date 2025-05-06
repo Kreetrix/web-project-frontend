@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+const API = import.meta.env.VITE_API;
+
 const AdminFeedbacks = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +18,7 @@ const AdminFeedbacks = () => {
 
         // Fetch users
         const usersResponse = await fetch(
-          "http://localhost:3000/api/v1/account/all",
+          `${API}/account/all`,
           {
             method: "GET",
             headers: {
@@ -33,7 +35,7 @@ const AdminFeedbacks = () => {
 
         // Fetch reviews
         const reviewsResponse = await fetch(
-          "http://localhost:3000/api/v1/reviews",
+          `${API}/reviews`,
           {
             method: "GET",
             headers: {
@@ -50,7 +52,7 @@ const AdminFeedbacks = () => {
 
         // Fetch orders
         const ordersResponse = await fetch(
-          "http://localhost:3000/api/v1/order/orders",
+          `${API}/order/orders`,
           {
             method: "GET",
             headers: {

@@ -1,6 +1,7 @@
+const API = import.meta.env.VITE_API;
 export const fetchProducts = async () => {
     try {
-        const response = await fetch("http://localhost:3000/api/v1/products");
+        const response = await fetch(`${API}/products`);
         if (!response.ok) {
             throw new Error('Failed to fetch products');
         }

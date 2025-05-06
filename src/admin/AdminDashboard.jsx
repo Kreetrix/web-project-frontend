@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+const API = import.meta.env.VITE_API;
+
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
     productsCount: 0,
@@ -23,7 +25,7 @@ const AdminDashboard = () => {
 
         // Fetch products
         const productsResponse = await fetch(
-          "http://localhost:3000/api/v1/products",
+          `${API}/products`,
           {
             method: "GET",
             headers: {
@@ -39,7 +41,7 @@ const AdminDashboard = () => {
 
         // Fetch orders
         const ordersResponse = await fetch(
-          "http://localhost:3000/api/v1/order/orders",
+          `${API}/order/orders`,
           {
             method: "GET",
             headers: {
@@ -55,7 +57,7 @@ const AdminDashboard = () => {
 
         // Fetch reservation products
         const reservationProductsResponse = await fetch(
-          "http://localhost:3000/api/v1/order/reservation-products",
+          `${API}/order/reservation-products`,
           {
             method: "GET",
             headers: {

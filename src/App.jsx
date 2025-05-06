@@ -20,6 +20,7 @@ import 'leaflet/dist/leaflet.css';
 
 
 function App() {
+  console.log("Environment Variables:", import.meta.env);
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import OrderRow from "./OrderRow";
 
+const API = import.meta.env.VITE_API;
+
 export default function OrderTable({ onStatusChange }) {
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
@@ -15,10 +17,10 @@ export default function OrderTable({ onStatusChange }) {
       if (!token) throw new Error("User is not authenticated.");
 
       const [ordersRes, usersRes] = await Promise.all([
-        fetch("http://localhost:3000/api/v1/order/orders", {
+        fetch(`${API}/order/orders`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        fetch("http://localhost:3000/api/v1/account/all", {
+        fetch(`${API}/account/all`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -47,7 +49,7 @@ export default function OrderTable({ onStatusChange }) {
     try {
       const token = localStorage.getItem("accessToken");
       const response = await fetch(
-        `http://localhost:3000/api/v1/order/orders/${orderId}`,
+        `${API}/order/orders/${orderId}`,
         {
           method: "PATCH",
           headers: {

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import MenuItemCard from "./MenuItemCard";
 
+const API = import.meta.env.VITE_API;
+
 export default function ProductList() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/products")
+    fetch(`${API}/products`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
