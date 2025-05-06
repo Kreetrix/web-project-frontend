@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {useUser} from "../../hooks/apiHooks.js"
+import { useUser } from "../../hooks/apiHooks.js"
 
 export default function ProfileTab() {                  /* TODO - add data from db with context */
     const [user, setUser] = useState(undefined);
@@ -7,7 +7,7 @@ export default function ProfileTab() {                  /* TODO - add data from 
     // Get user data and update function
     const { getUser } = useUser();
 
-    
+
 
     // Initialize local states for user data
     const [username, setUsername] = useState(user?.username || "");

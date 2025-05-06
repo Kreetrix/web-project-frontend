@@ -3,7 +3,7 @@ import { createContext, useState } from 'react';
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
-    const [user, setUser] = useState(null);                     /* TODO - add data from db with context */
+    const [user, setUser] = useState(null);
 
 
     const updateProfile = (updatedUser) => {
