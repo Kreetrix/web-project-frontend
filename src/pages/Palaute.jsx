@@ -39,14 +39,15 @@ const Palaute = () => {
 
   // Get orders with products that belong to the current user and don't have reviews
   const userOrders = userData?.user?.id
-    ? orders.filter(order => {
-        // Filter out orders without products
-        if (!order.products || order.products.length === 0) return false;
-        
-        // Filter out orders that already have reviews
-        return !reviews.some(review => review.reservation_id === order.ID);
-      })
-    : [];
+  ? orders.filter(order => {
+  if (
+  order.user_id !== userData.user.id ||
+  !order.products ||
+  order.products.length === 0
+  ) return false;
+  return !reviews.some(review => review.reservation_id === order.ID);
+  })
+  : [];
 
   const handleOrderChange = (e) => {
     setSelectedOrder(e.target.value);
