@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Text from "../components/locales/Text";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const API = import.meta.env.VITE_API;
 
@@ -13,6 +14,7 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -34,15 +36,15 @@ export default function Register() {
         body: JSON.stringify(formData),
       });
 
-      const status = await response.json();
+      const { accessToken, user } = await response.json();
 
-      if (!response.ok) {
-        throw new Error(status || "Registration failed");
-      }
+      localStorage.setItem("accessToken", accessToken);
+      login(accessToken);
 
       navigate("/dashboard");
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
+      alert("Error: " + (error.message || "Unknown error"));
     }
   };
 

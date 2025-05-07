@@ -98,6 +98,11 @@ If you are developing a production application, we recommend using TypeScript an
 
 #### Admin-toiminnot:
 
+Testaamista varten voit kirjautua sisään seuraavilla admin-oikeuksilla varustetuilla tunnuksilla:
+
+- **Sähköposti:** `admin@gmail.com`
+- **Salasana:** `12345678`
+
 1. **Ruokalistan hallinta**
    - Admin Paneeli löytyy profiilista
    - Lisää uusi ruoka
