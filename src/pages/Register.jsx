@@ -2,6 +2,9 @@ import { Mail, KeyRound, UserPlus } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Text from "../components/locales/Text";
+import { useNavigate } from "react-router-dom";
+
+const API = import.meta.env.VITE_API;
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -9,6 +12,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -22,16 +26,13 @@ export default function Register() {
     console.log(formData);
 
     try {
-      const response = await fetch(
-        "http://127.0.0.1:3000/api/v1/auth/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${API}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const status = await response.json();
 
@@ -39,11 +40,9 @@ export default function Register() {
         throw new Error(status || "Registration failed");
       }
 
-      
-      alert("Registration successful! TODO: REDIRECT");
+      navigate("/dashboard");
     } catch (error) {
-      console.error("Registration error:", error.message);
-      alert(error);
+      alert(error.message);
     }
   };
 
