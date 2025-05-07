@@ -107,3 +107,5 @@ Testaamista varten voit kirjautua sisään seuraavilla admin-oikeuksilla varuste
    - Admin Paneeli löytyy profiilista
    - Lisää uusi ruoka
    - Muokkaa olemassa olevaa ruokaa
+   - hallitse tilauksia ja merkkaa ne tehdyiksi
+   - tarkista dashboard tietojen muutuuminen
