@@ -28,7 +28,7 @@ If you are developing a production application, we recommend using TypeScript an
 **Sovelluksen tarkoitus:**
 
 - Tarjoaa käyttäjille mahdollisuuden tilata ruokaa, jättää arvosteluja ja seurata tilaushistoriaa.
-- Antaa ylläpitäjille (admin) työkalut ruokalistan hallintaan, tilausten käsittelyyn ja allergiatietojen asettamiseen.
+- Antaa ylläpitäjille (admin) työkalut ruokalistan hallintaan, tilausten käsittelyyn.
 
 **Pääominaisuudet:**  
 ✅ **Asiakas:**
@@ -45,7 +45,6 @@ If you are developing a production application, we recommend using TypeScript an
 
 - Ruokalistan hallinta (lisäys/muokkaus/poisto)
 - Ruokien kuvien lisääminen
-- Allergiatietojen asettaminen
 - Tilauksien hyväksyntä ja seuranta
 
 ## Sovelluksen toiminnallisuudet
@@ -101,5 +100,5 @@ If you are developing a production application, we recommend using TypeScript an
 
 1. **Ruokalistan hallinta**
    - Admin Paneeli löytyy profiilista
-   - Lisää uusi ruoka kuvineen
+   - Lisää uusi ruoka
    - Muokkaa olemassa olevaa ruokaa
