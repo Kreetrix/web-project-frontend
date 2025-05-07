@@ -102,3 +102,5 @@ If you are developing a production application, we recommend using TypeScript an
    - Admin Paneeli löytyy profiilista
    - Lisää uusi ruoka
    - Muokkaa olemassa olevaa ruokaa
+   - hallitse tilauksia ja merkkaa ne tehdyiksi
+   - tarkista dashboard tietojen muutuuminen
